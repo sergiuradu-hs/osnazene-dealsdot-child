@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/osnazene/public_html/staging.osnazene.com/wp-content/themes/dealsdot-child/
+    - /usr/bin/rsync -a --delete --exclude='.git' --exclude='.cpanel.yml' ./ $DEPLOYPATH
