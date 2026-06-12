@@ -1,0 +1,206 @@
+<?php
+
+/**s
+ * functions.php
+ * @package WordPress
+ * @subpackage Dealsdot
+ * @since Dealsdot 1.0
+ * 
+ */
+
+add_action( 'wp_enqueue_scripts', 'dealsdot_enqueue_styles', 99 );
+function dealsdot_enqueue_styles() {
+    wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
+}
+
+// Remove col-lg-6 wrapping added by parent theme for CF7 name/email fields.
+// setTimeout(0) ensures this runs after the parent's nested $(function(){}) wrap code.
+add_action( 'wp_enqueue_scripts', function () {
+    wp_add_inline_script( 'dealsdot-scripts', "
+jQuery(document).ready(function($){
+    setTimeout(function(){
+        var \$form = $('.wpcf7-form');
+        \$form.find('.col-lg-6').removeClass('col-lg-6');
+        \$form.find('.form-group').removeClass('form-group');
+        \$form.find('.row > p').unwrap();
+    }, 0);
+});
+" );
+}, 100 );
+
+// Replace click-to-toggle dropdown with hover-open; click on top-level item follows its link.
+add_action( 'wp_enqueue_scripts', function () {
+    wp_add_inline_script( 'dealsdot-scripts', "
+jQuery(document).ready(function($){
+    setTimeout(function(){
+        var \$nav = $('.navbar-nav');
+
+        // Remove parent theme's click handler that prevents default and toggles submenu.
+        \$nav.find('.dropdown > .dropdown-toggle').off('click').on('click', function(e){
+            var href = \$(this).attr('href');
+            if ( href && href !== '#' && href !== '' ) {
+                window.location.href = href;
+            }
+        });
+
+        // Open / close submenu on hover.
+        \$nav.find('.dropdown').on('mouseenter', function(){
+            \$(this).children('.dropdown-menu').stop(true, true).slideDown(200);
+        }).on('mouseleave', function(){
+            \$(this).children('.dropdown-menu').stop(true, true).slideUp(200);
+        });
+    }, 0);
+});
+" );
+}, 100 );
+
+/* WP Bakery shortcodes / widgets */
+ 
+
+/**
+ * Reusable WPBakery element loader
+ * - Minimal registration in this file
+ * - Element specifics live under wpb_shortcodes/<slug>/element.php
+ * - Templates live under wpb_shortcodes/<slug>/templates/
+ */
+
+if ( ! function_exists( 'wpb_register_element' ) ) {
+  function wpb_register_element( array $config ) {
+    if ( empty( $config['base'] ) ) return;
+    if ( empty( $config['map'] ) || ! is_array( $config['map'] ) ) return;
+    global $wpb_registered_elements;
+    if ( ! is_array( $wpb_registered_elements ) ) $wpb_registered_elements = [];
+    $wpb_registered_elements[ $config['base'] ] = $config;
+  }
+}
+
+// Load element definitions from wpb_shortcodes/*/element.php
+add_action( 'after_setup_theme', function () {
+  $dir = get_stylesheet_directory() . '/wpb_shortcodes';
+  if ( ! is_dir( $dir ) ) return;
+  foreach ( glob( $dir . '/*/element.php' ) as $file ) {
+    require_once $file;
+  }
+}, 20 );
+
+/* -----------------------------------------------------------------------
+ * Shared edukacija card renderer (used by archive and page templates).
+ * ----------------------------------------------------------------------- */
+if ( ! function_exists( 'osn_edu_render_card' ) ) :
+    function osn_edu_render_card( int $post_id, bool $is_featured = false ): void {
+        $title      = get_the_title( $post_id );
+        $img_url    = get_the_post_thumbnail_url( $post_id, 'large' );
+        $post_link  = get_permalink( $post_id );
+        $datum_ts   = (int) get_post_meta( $post_id, 'datum', true );
+        $datum_str  = $datum_ts ? date_i18n( 'd.m.Y.', $datum_ts ) : '';
+        $sponsor_id = get_post_meta( $post_id, 'logo-sponzora', true );
+        $excerpt    = get_post_field( 'post_excerpt', $post_id );
+        $card_class = 'osn-edu-card' . ( $is_featured ? ' osn-edu-card--featured' : '' );
+        ?>
+        <a href="<?php echo esc_url( $post_link ); ?>" class="<?php echo esc_attr( $card_class ); ?>">
+            <?php if ( $img_url ) : ?>
+            <div class="osn-edu-card__img-wrap">
+                <img src="<?php echo esc_url( $img_url ); ?>" alt="<?php echo esc_attr( $title ); ?>" loading="lazy">
+            </div>
+            <?php endif; ?>
+            <div class="osn-edu-card__body">
+                <?php if ( ! $is_featured && $datum_str ) : ?>
+                <div class="osn-edu-card__meta">
+                    <span class="osn-edu-card__date"><?php echo esc_html( $datum_str ); ?></span>
+                </div>
+                <?php endif; ?>
+                <h3 class="osn-edu-card__title"><?php echo esc_html( $title ); ?></h3>
+                <?php if ( $is_featured && $excerpt ) : ?>
+                <p class="osn-edu-card__subtitle"><?php echo esc_html( $excerpt ); ?></p>
+                <?php endif; ?>
+                <?php if ( ! $is_featured && $sponsor_id ) :
+                    $sponsor_img = wp_get_attachment_image( $sponsor_id, [ 137, 50 ], false, [
+                        'class'   => 'osn-edu-card__sponsor-img',
+                        'loading' => 'lazy',
+                    ] );
+                    if ( $sponsor_img ) : ?>
+                <div class="osn-edu-card__sponsor">
+                    <span class="osn-edu-card__sponsor-label"><?php esc_html_e( 'Sponzor edukacije', 'dealsdot-child' ); ?></span>
+                    <?php echo $sponsor_img; ?>
+                </div>
+                    <?php endif;
+                endif; ?>
+            </div>
+        </a>
+        <?php
+    }
+endif;
+
+/* -----------------------------------------------------------------------
+ * AJAX: Load-more handler for the "Besplatne edukacije" page template.
+ * ----------------------------------------------------------------------- */
+add_action( 'wp_ajax_osn_besplatne_loadmore',        'osn_besplatne_loadmore_handler' );
+add_action( 'wp_ajax_nopriv_osn_besplatne_loadmore', 'osn_besplatne_loadmore_handler' );
+
+function osn_besplatne_loadmore_handler(): void {
+    check_ajax_referer( 'osn_besplatne_loadmore', 'nonce' );
+
+    $per_page = 6;
+    $offset   = max( 0, (int) ( $_POST['offset'] ?? 0 ) );
+
+    $query = new WP_Query( [
+        'post_type'      => 'edukacija',
+        'post_status'    => 'publish',
+        'posts_per_page' => $per_page,
+        'offset'         => $offset,
+        'orderby'        => 'meta_value_num',
+        'meta_key'       => 'datum',
+        'order'          => 'DESC',
+        'tax_query'      => [ [
+            'taxonomy' => 'vrsta-edukacije',
+            'field'    => 'slug',
+            'terms'    => 'besplatne-edukacije',
+        ] ],
+        'meta_query'     => [
+            'relation' => 'OR',
+            [
+                'key'     => 'sakri-iz-kategorije',
+                'value'   => 'Da',
+                'compare' => '!=',
+            ],
+            [
+                'key'     => 'sakri-iz-kategorije',
+                'compare' => 'NOT EXISTS',
+            ],
+        ],
+    ] );
+
+    ob_start();
+    while ( $query->have_posts() ) {
+        $query->the_post();
+        osn_edu_render_card( get_the_ID(), false );
+    }
+    wp_reset_postdata();
+    $html = ob_get_clean();
+
+    wp_send_json( [
+        'html'     => $html,
+        'count'    => $query->post_count,
+        'has_more' => ( $offset + $query->post_count ) < $query->found_posts,
+    ] );
+}
+
+// Register elements with WPBakery after it initializes
+add_action( 'vc_after_init', function () {
+  if ( ! function_exists( 'vc_map' ) ) return;
+  global $wpb_registered_elements;
+  if ( empty( $wpb_registered_elements ) || ! is_array( $wpb_registered_elements ) ) return;
+
+  foreach ( $wpb_registered_elements as $base => $config ) {
+    $map = $config['map'];
+    // Ensure base consistency
+    $map['base'] = $base;
+    // Register with WPBakery
+    vc_map( $map );
+
+    // Register shortcode render callback
+    if ( ! empty( $config['render'] ) && is_callable( $config['render'] ) ) {
+      add_shortcode( $base, $config['render'] );
+    }
+  }
+}, 20 );
