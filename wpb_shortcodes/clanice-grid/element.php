@@ -68,7 +68,7 @@ $render = function( $atts, $content = '' ) use ( $template_rel ) {
     if ( is_wp_error( $delatnost_terms ) ) $delatnost_terms = [];
 
     // Initial server-side query
-    $result       = osn_clanice_grid_do_query( '', 0, 0, '', 1, $per_page );
+    $result       = osn_clanice_grid_do_query( '', 0, 0, '', '', 1, $per_page );
     $posts        = $result['posts'];
     $total        = $result['total'];
     $pages        = $result['pages'];
@@ -210,7 +210,7 @@ if ( ! function_exists( 'osn_clanice_grid_parse_city_filter' ) ) {
 // ---------- Shared query helper ---------------------------------
 
 if ( ! function_exists( 'osn_clanice_grid_do_query' ) ) {
-    function osn_clanice_grid_do_query( $filter_ime, $filter_drzava, $filter_delatnost, $filter_mesto, $page, $per_page = 12 ) {
+    function osn_clanice_grid_do_query( $filter_ime, $filter_drzava, $filter_delatnost, $filter_mesto, $filter_bedz, $page, $per_page = 12 ) {
         $args = [
             'post_type'      => 'osnazena',
             'post_status'    => 'publish',
@@ -251,12 +251,34 @@ if ( ! function_exists( 'osn_clanice_grid_do_query' ) ) {
             $args['tax_query'] = $tax_query;
         }
 
+        $meta_query = [];
         if ( ! empty( $filter_ime ) ) {
-            $args['meta_query'] = [ [
+            $meta_query[] = [
                 'key'     => 'ime_i_prezime_vlasnice',
                 'value'   => sanitize_text_field( $filter_ime ),
                 'compare' => 'LIKE',
-            ] ];
+            ];
+        }
+
+        $badge_map    = [
+            'gold'    => [ 'gold', 'zlatna' ],
+            'silver'  => [ 'silver', 'srebrna' ],
+            'starter' => [ 'starter' ],
+        ];
+        $badge_values = $badge_map[ sanitize_key( (string) $filter_bedz ) ] ?? [];
+        if ( ! empty( $badge_values ) ) {
+            $meta_query[] = [
+                'key'     => 'zvezdica',
+                'value'   => $badge_values,
+                'compare' => 'IN',
+            ];
+        }
+
+        if ( count( $meta_query ) > 1 ) {
+            $meta_query['relation'] = 'AND';
+        }
+        if ( ! empty( $meta_query ) ) {
+            $args['meta_query'] = $meta_query;
         }
 
         $query = new WP_Query( $args );
@@ -278,10 +300,11 @@ if ( ! function_exists( 'osn_clanice_grid_ajax_handler' ) ) {
         $filter_drzava    = (int) ( $_POST['drzava']    ?? 0 );
         $filter_delatnost = (int) ( $_POST['delatnost'] ?? 0 );
         $filter_mesto     = sanitize_text_field( wp_unslash( $_POST['mesto']      ?? '' ) );
+        $filter_bedz      = sanitize_key( wp_unslash( $_POST['bedz']       ?? '' ) );
         $page             = max( 1, (int) ( $_POST['paged']    ?? 1 ) );
         $per_page         = max( 1, min( 48, (int) ( $_POST['per_page'] ?? 12 ) ) );
 
-        $result       = osn_clanice_grid_do_query( $filter_ime, $filter_drzava, $filter_delatnost, $filter_mesto, $page, $per_page );
+        $result       = osn_clanice_grid_do_query( $filter_ime, $filter_drzava, $filter_delatnost, $filter_mesto, $filter_bedz, $page, $per_page );
         $posts        = $result['posts'];
         $total        = $result['total'];
         $pages        = $result['pages'];

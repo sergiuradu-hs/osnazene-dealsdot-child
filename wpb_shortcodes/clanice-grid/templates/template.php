@@ -153,6 +153,23 @@
                     </div>
                 </div>
 
+                <div class="osn-clanice-grid__filter-field">
+                    <label for="<?php echo esc_attr( $instance_id ); ?>-bedz" class="osn-clanice-grid__filter-label">
+                        <?php esc_html_e( 'Pretraga po bedžu:', 'dealsdot-child' ); ?>
+                    </label>
+                    <div class="osn-clanice-grid__select-wrap">
+                        <select id="<?php echo esc_attr( $instance_id ); ?>-bedz"
+                                class="osn-clanice-grid__select osn-clanice-grid__select--bedz"
+                                name="bedz">
+                            <option value=""><?php esc_html_e( '— svi bedževi —', 'dealsdot-child' ); ?></option>
+                            <option value="gold"><?php esc_html_e( 'Gold', 'dealsdot-child' ); ?></option>
+                            <option value="silver"><?php esc_html_e( 'Silver', 'dealsdot-child' ); ?></option>
+                            <option value="starter"><?php esc_html_e( 'Starter', 'dealsdot-child' ); ?></option>
+                        </select>
+                        <svg class="osn-clanice-grid__select-arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                </div>
+
             </form>
         </aside>
 
@@ -253,6 +270,23 @@
                                     <?php echo esc_html( $term->name ); ?>
                                 </option>
                             <?php endforeach; ?>
+                        </select>
+                        <svg class="osn-clanice-grid__select-arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                </div>
+
+                <div class="osn-clanice-grid__filter-field">
+                    <label for="<?php echo esc_attr( $instance_id ); ?>-mob-bedz" class="osn-clanice-grid__filter-label">
+                        <?php esc_html_e( 'Pretraga po bedžu:', 'dealsdot-child' ); ?>
+                    </label>
+                    <div class="osn-clanice-grid__select-wrap">
+                        <select id="<?php echo esc_attr( $instance_id ); ?>-mob-bedz"
+                                class="osn-clanice-grid__select osn-clanice-grid__select--bedz"
+                                name="bedz">
+                            <option value=""><?php esc_html_e( '— svi bedževi —', 'dealsdot-child' ); ?></option>
+                            <option value="gold"><?php esc_html_e( 'Gold', 'dealsdot-child' ); ?></option>
+                            <option value="silver"><?php esc_html_e( 'Silver', 'dealsdot-child' ); ?></option>
+                            <option value="starter"><?php esc_html_e( 'Starter', 'dealsdot-child' ); ?></option>
                         </select>
                         <svg class="osn-clanice-grid__select-arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
                     </div>

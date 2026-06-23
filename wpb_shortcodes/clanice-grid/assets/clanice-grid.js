@@ -16,6 +16,7 @@
     this.ime        = "";
     this.drzava     = 0;
     this.delatnost  = 0;
+    this.bedz       = "";
     this.mesto      = "";
     this.mestoText  = "";
     this.loading    = false;
@@ -42,6 +43,7 @@
     body.append("ime",      this.ime);
     body.append("drzava",   this.drzava);
     body.append("delatnost",this.delatnost);
+    body.append("bedz",     this.bedz);
     body.append("mesto",    this.mesto);
     body.append("paged",    page);
     body.append("per_page", this.perPage);
@@ -90,11 +92,13 @@
     var imeInput    = form.querySelector("[name=ime]");
     var drzavaInput = form.querySelector("[name=drzava]");
     var delInput    = form.querySelector("[name=delatnost]");
+    var bedzInput   = form.querySelector("[name=bedz]");
     var mestoInput  = form.querySelector("[name=mesto]");
     var mestoSearch = form.querySelector("[name=mesto_search]");
     if (imeInput)    this.ime        = imeInput.value.trim();
     if (drzavaInput) this.drzava     = parseInt(drzavaInput.value, 10) || 0;
     if (delInput)    this.delatnost  = parseInt(delInput.value,    10) || 0;
+    if (bedzInput)   this.bedz       = bedzInput.value.trim();
     if (mestoInput)  this.mesto      = mestoInput.value.trim();
     if (mestoSearch) this.mestoText  = mestoSearch.value.trim();
   };
@@ -106,11 +110,13 @@
     var imeInput    = form.querySelector("[name=ime]");
     var drzavaInput = form.querySelector("[name=drzava]");
     var delInput    = form.querySelector("[name=delatnost]");
+    var bedzInput   = form.querySelector("[name=bedz]");
     var mestoInput  = form.querySelector("[name=mesto]");
     var mestoSearch = form.querySelector("[name=mesto_search]");
     if (imeInput)    imeInput.value    = this.ime;
     if (drzavaInput) drzavaInput.value = this.drzava  || "";
     if (delInput)    delInput.value    = this.delatnost || "";
+    if (bedzInput)   bedzInput.value   = this.bedz;
     if (mestoInput)  mestoInput.value  = this.mesto;
     if (mestoSearch) mestoSearch.value = this.mestoText;
   };
@@ -122,6 +128,7 @@
     this.ime        = "";
     this.drzava     = 0;
     this.delatnost  = 0;
+    this.bedz       = "";
     this.mesto      = "";
     this.mestoText  = "";
     this.page       = 1;
