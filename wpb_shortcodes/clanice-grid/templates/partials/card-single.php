@@ -18,17 +18,48 @@ if ( ! $img_url ) {
     $img_url = get_the_post_thumbnail_url( $post_id, 'large' );
 }
 
-// --- Taxonomy tags (delatnost + drzava, max 4 combined) ----------
+// --- Taxonomy tags (delatnost + drzava + mesto, max 4 combined) --
 $tag_terms = [];
 $del_terms = wp_get_post_terms( $post_id, 'delatnost' );
 $drz_terms = wp_get_post_terms( $post_id, 'drzava' );
+$mesto_taxonomies = [
+    'mesto',
+    'mesto-austrija',
+    'mesto-bih',
+    'mesto-crna-gora',
+    'mesto-hrvatska',
+    'mesto-madarska',
+    'mesto-makedonija',
+    'mesto-nemacka',
+    'mesto-slovenija',
+    'mesto-svajcarska',
+    'mesto-usa-canada',
+];
+$mesto_terms = [];
+foreach ( $mesto_taxonomies as $mesto_taxonomy ) {
+    if ( ! taxonomy_exists( $mesto_taxonomy ) ) {
+        continue;
+    }
+
+    $terms = wp_get_post_terms( $post_id, $mesto_taxonomy );
+    if ( ! is_wp_error( $terms ) && ! empty( $terms ) ) {
+        $mesto_terms = array_merge( $mesto_terms, $terms );
+    }
+}
 if ( ! is_wp_error( $del_terms ) ) {
-    foreach ( $del_terms as $t ) $tag_terms[] = $t->name;
+    foreach ( $del_terms as $t ) {
+        $tag_terms[] = $t->name;
+    }
 }
 if ( ! is_wp_error( $drz_terms ) ) {
-    foreach ( $drz_terms as $t ) $tag_terms[] = $t->name;
+    foreach ( $drz_terms as $t ) {
+        $tag_terms[] = $t->name;
+    }
 }
-$tag_terms = array_slice( $tag_terms, 0, 4 );
+foreach ( $mesto_terms as $t ) {
+    $tag_terms[] = $t->name;
+}
+$tag_terms = array_slice( array_unique( $tag_terms ), 0, 4 );
 
 // --- Job title fallback -----------------------------------------
 if ( empty( $titula ) && ! is_wp_error( $del_terms ) && ! empty( $del_terms ) ) {
