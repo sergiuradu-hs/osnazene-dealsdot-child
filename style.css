@@ -3135,7 +3135,12 @@ section.vc_section.home-page-second-section .wpb_single_image {
     text-transform: uppercase;
     letter-spacing: 1.92px;
     margin: 0;
-    text-align: left;
+    text-align: center;
+}
+
+/* All education section headings except the first one */
+.osn-edukacija-archive .osn-edu-block:not(:first-of-type) .osn-edu-heading {
+    padding-top: 64px;
 }
 
 /* 3-column grid */
@@ -3173,7 +3178,13 @@ section.vc_section.home-page-second-section .wpb_single_image {
 
 /* Featured card (EDUKACIJE block) – slightly shorter */
 .osn-edu-card--featured {
-    min-height: 562px;
+    height: 100%;
+}
+
+.osn-edu-card--featured .osn-edu-card__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /* Card image */
@@ -3192,11 +3203,10 @@ section.vc_section.home-page-second-section .wpb_single_image {
 /* Card body – text area below the image */
 .osn-edu-card__body {
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
     gap: 24px;
     flex: 1;
-    justify-content: flex-end;
     padding-top: 24px;
 }
 
@@ -3218,6 +3228,7 @@ section.vc_section.home-page-second-section .wpb_single_image {
     font-family: var(--osn-font-main), sans-serif;
     font-size: 32px;
     font-weight: 600;
+    align-self: center;
     margin: 0;
     line-height: 1.25;
 }
@@ -3347,6 +3358,8 @@ section.vc_section.home-page-second-section .wpb_single_image {
 
     /* Text column – 204px wide */
     .osn-edu-card__body {
+        display: flex;
+        flex-direction: column;
         width: 204px;
         min-height: 140px;
         gap: 8px;
@@ -3364,6 +3377,7 @@ section.vc_section.home-page-second-section .wpb_single_image {
     .osn-edu-card__title {
         font-size: 14px;
         font-weight: 600;
+        margin: 0;
     }
 
     .osn-edu-card__subtitle {
