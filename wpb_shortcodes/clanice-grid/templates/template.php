@@ -106,6 +106,23 @@
                 </div>
 
                 <div class="osn-clanice-grid__filter-field">
+                    <label for="<?php echo esc_attr( $instance_id ); ?>-mesto-search" class="osn-clanice-grid__filter-label">
+                        <?php esc_html_e( 'Pretraga po mestu:', 'dealsdot-child' ); ?>
+                    </label>
+                    <div class="osn-clanice-grid__input-wrap osn-clanice-grid__input-wrap--suggestions">
+                        <input type="search"
+                               id="<?php echo esc_attr( $instance_id ); ?>-mesto-search"
+                               class="osn-clanice-grid__input osn-clanice-grid__input--mesto"
+                               name="mesto_search"
+                               placeholder="<?php esc_attr_e( 'Pretraga po mestu…', 'dealsdot-child' ); ?>"
+                               autocomplete="off"
+                               aria-autocomplete="list" />
+                        <input type="hidden" name="mesto" value="" />
+                        <div class="osn-clanice-grid__suggestions osn-clanice-grid__suggestions--mesto" hidden></div>
+                    </div>
+                </div>
+
+                <div class="osn-clanice-grid__filter-field">
                     <label for="<?php echo esc_attr( $instance_id ); ?>-delatnost" class="osn-clanice-grid__filter-label">
                         <?php esc_html_e( 'Pretraga po delatnosti:', 'dealsdot-child' ); ?>
                     </label>
@@ -123,6 +140,7 @@
                         <svg class="osn-clanice-grid__select-arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
                     </div>
                 </div>
+
             </form>
         </aside>
 
@@ -183,6 +201,23 @@
                             <?php endforeach; ?>
                         </select>
                         <svg class="osn-clanice-grid__select-arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                </div>
+
+                <div class="osn-clanice-grid__filter-field">
+                    <label for="<?php echo esc_attr( $instance_id ); ?>-mob-mesto-search" class="osn-clanice-grid__filter-label">
+                        <?php esc_html_e( 'Pretraga po mestu:', 'dealsdot-child' ); ?>
+                    </label>
+                    <div class="osn-clanice-grid__input-wrap osn-clanice-grid__input-wrap--suggestions">
+                        <input type="search"
+                               id="<?php echo esc_attr( $instance_id ); ?>-mob-mesto-search"
+                               class="osn-clanice-grid__input osn-clanice-grid__input--mesto"
+                               name="mesto_search"
+                               placeholder="<?php esc_attr_e( 'Pretraga po mestu…', 'dealsdot-child' ); ?>"
+                               autocomplete="off"
+                               aria-autocomplete="list" />
+                        <input type="hidden" name="mesto" value="" />
+                        <div class="osn-clanice-grid__suggestions osn-clanice-grid__suggestions--mesto" hidden></div>
                     </div>
                 </div>
 

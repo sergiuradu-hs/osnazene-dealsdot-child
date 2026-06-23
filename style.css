@@ -2170,6 +2170,42 @@ section.vc_section.home-page-second-section .wpb_single_image {
     color: #5f6368;
 }
 
+.osn-clanice-grid__input-wrap--suggestions {
+    position: relative;
+}
+
+.osn-clanice-grid__suggestions {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 20;
+    max-height: 220px;
+    overflow-y: auto;
+    background: var(--osn-color-white);
+    border: 1px solid var(--osn-color-text);
+    border-radius: 4px;
+    box-shadow: 0 8px 16px rgba(16, 24, 40, 0.12);
+}
+
+.osn-clanice-grid__suggestion {
+    width: 100%;
+    padding: 10px 14px;
+    border: 0;
+    background: transparent;
+    color: var(--osn-color-text);
+    cursor: pointer;
+    font-family: var(--osn-font-main);
+    font-size: 14px;
+    font-weight: 300;
+    text-align: left;
+}
+
+.osn-clanice-grid__suggestion:hover,
+.osn-clanice-grid__suggestion:focus {
+    background: #f3edd9;
+}
+
 /* ---- Results area -------------------------------------------------------- */
 .osn-clanice-grid__results {
     flex: 1 1 0;

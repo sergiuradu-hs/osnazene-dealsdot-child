@@ -16,6 +16,8 @@
     this.ime        = "";
     this.drzava     = 0;
     this.delatnost  = 0;
+    this.mesto      = "";
+    this.mestoText  = "";
     this.loading    = false;
     this.debounceTimer = null;
     this.view       = "grid"; // 'grid' | 'list'
@@ -40,6 +42,7 @@
     body.append("ime",      this.ime);
     body.append("drzava",   this.drzava);
     body.append("delatnost",this.delatnost);
+    body.append("mesto",    this.mesto);
     body.append("paged",    page);
     body.append("per_page", this.perPage);
 
@@ -87,9 +90,13 @@
     var imeInput    = form.querySelector("[name=ime]");
     var drzavaInput = form.querySelector("[name=drzava]");
     var delInput    = form.querySelector("[name=delatnost]");
+    var mestoInput  = form.querySelector("[name=mesto]");
+    var mestoSearch = form.querySelector("[name=mesto_search]");
     if (imeInput)    this.ime        = imeInput.value.trim();
     if (drzavaInput) this.drzava     = parseInt(drzavaInput.value, 10) || 0;
     if (delInput)    this.delatnost  = parseInt(delInput.value,    10) || 0;
+    if (mestoInput)  this.mesto      = mestoInput.value.trim();
+    if (mestoSearch) this.mestoText  = mestoSearch.value.trim();
   };
 
   // ----------------------------------------------------------------
@@ -99,9 +106,13 @@
     var imeInput    = form.querySelector("[name=ime]");
     var drzavaInput = form.querySelector("[name=drzava]");
     var delInput    = form.querySelector("[name=delatnost]");
+    var mestoInput  = form.querySelector("[name=mesto]");
+    var mestoSearch = form.querySelector("[name=mesto_search]");
     if (imeInput)    imeInput.value    = this.ime;
     if (drzavaInput) drzavaInput.value = this.drzava  || "";
     if (delInput)    delInput.value    = this.delatnost || "";
+    if (mestoInput)  mestoInput.value  = this.mesto;
+    if (mestoSearch) mestoSearch.value = this.mestoText;
   };
 
   // ----------------------------------------------------------------
@@ -111,6 +122,8 @@
     this.ime        = "";
     this.drzava     = 0;
     this.delatnost  = 0;
+    this.mesto      = "";
+    this.mestoText  = "";
     this.page       = 1;
     // Clear all forms
     var forms = this.root.querySelectorAll(".osn-clanice-grid__filter-form");
@@ -118,6 +131,94 @@
       f.reset();
     });
     this.fetch(1);
+  };
+
+  // ----------------------------------------------------------------
+  // City suggestions
+  // ----------------------------------------------------------------
+  WidgetState.prototype.cityOptions = function () {
+    var selectedCountry = this.drzava;
+    var cities = (window.OsnClanice && Array.isArray(OsnClanice.cities)) ? OsnClanice.cities : [];
+
+    if (!selectedCountry) return cities;
+
+    return cities.filter(function (city) {
+      return Array.isArray(city.country_ids) && city.country_ids.indexOf(selectedCountry) !== -1;
+    });
+  };
+
+  WidgetState.prototype.findCity = function (value) {
+    var cities = (window.OsnClanice && Array.isArray(OsnClanice.cities)) ? OsnClanice.cities : [];
+    for (var i = 0; i < cities.length; i += 1) {
+      if (cities[i].value === value) return cities[i];
+    }
+    return null;
+  };
+
+  WidgetState.prototype.cityAllowed = function (value) {
+    var city = this.findCity(value);
+    if (!city) return false;
+    if (!this.drzava) return true;
+    return Array.isArray(city.country_ids) && city.country_ids.indexOf(this.drzava) !== -1;
+  };
+
+  WidgetState.prototype.clearCityForm = function (form) {
+    var mestoInput  = form && form.querySelector("[name=mesto]");
+    var mestoSearch = form && form.querySelector("[name=mesto_search]");
+    if (mestoInput) mestoInput.value = "";
+    if (mestoSearch) mestoSearch.value = "";
+    this.mesto = "";
+    this.mestoText = "";
+  };
+
+  WidgetState.prototype.hideCitySuggestions = function (form) {
+    var list = form && form.querySelector(".osn-clanice-grid__suggestions--mesto");
+    if (!list) return;
+    list.hidden = true;
+    list.innerHTML = "";
+  };
+
+  WidgetState.prototype.renderCitySuggestions = function (form, input, immediate) {
+    var self = this;
+    var list = form && form.querySelector(".osn-clanice-grid__suggestions--mesto");
+    if (!list || !input) return;
+
+    var query = input.value.trim().toLowerCase();
+    var matches = this.cityOptions().filter(function (city) {
+      return !query || city.name.toLowerCase().indexOf(query) !== -1;
+    }).slice(0, 12);
+
+    list.innerHTML = "";
+    if (!matches.length) {
+      list.hidden = true;
+      return;
+    }
+
+    matches.forEach(function (city) {
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "osn-clanice-grid__suggestion";
+      button.textContent = city.name;
+      button.addEventListener("mousedown", function (event) {
+        event.preventDefault();
+      });
+      button.addEventListener("click", function () {
+        var hidden = form.querySelector("[name=mesto]");
+        if (hidden) hidden.value = city.value;
+        input.value = city.name;
+        self.mesto = city.value;
+        self.mestoText = city.name;
+        self.hideCitySuggestions(form);
+
+        if (immediate) {
+          self.page = 1;
+          self.fetch(1);
+        }
+      });
+      list.appendChild(button);
+    });
+
+    list.hidden = false;
   };
 
   // ----------------------------------------------------------------
@@ -182,6 +283,51 @@
   function initWidget(root) {
     var state = new WidgetState(root);
 
+    function bindCitySearch(form, immediate) {
+      var input = form.querySelector("[name=mesto_search]");
+      var hidden = form.querySelector("[name=mesto]");
+      if (!input || !hidden) return;
+
+      input.addEventListener("input", function () {
+        var hadSelection = hidden.value !== "";
+        hidden.value = "";
+        state.mesto = "";
+        state.mestoText = input.value.trim();
+        state.renderCitySuggestions(form, input, immediate);
+
+        if (immediate && hadSelection && input.value.trim() === "") {
+          clearTimeout(state.debounceTimer);
+          state.debounceTimer = setTimeout(function () {
+            state.page = 1;
+            state.fetch(1);
+          }, 400);
+        }
+      });
+
+      input.addEventListener("focus", function () {
+        state.readForm(form);
+        state.renderCitySuggestions(form, input, immediate);
+      });
+
+      input.addEventListener("blur", function () {
+        setTimeout(function () {
+          state.hideCitySuggestions(form);
+        }, 150);
+      });
+
+      input.addEventListener("keydown", function (event) {
+        var list = form.querySelector(".osn-clanice-grid__suggestions--mesto");
+        var first = list && list.querySelector(".osn-clanice-grid__suggestion");
+        if (event.key === "Enter" && first && !list.hidden) {
+          event.preventDefault();
+          first.click();
+        }
+        if (event.key === "Escape") {
+          state.hideCitySuggestions(form);
+        }
+      });
+    }
+
     // --- Desktop sidebar filters (immediate for selects, debounced for text)
     root.querySelectorAll(".osn-clanice-grid__sidebar .osn-clanice-grid__filter-form").forEach(function (form) {
       // Text input — debounced
@@ -200,10 +346,15 @@
       form.querySelectorAll("select").forEach(function (sel) {
         sel.addEventListener("change", function () {
           state.readForm(form);
+          if (state.mesto && !state.cityAllowed(state.mesto)) {
+            state.clearCityForm(form);
+          }
           state.page = 1;
           state.fetch(1);
         });
       });
+
+      bindCitySearch(form, true);
 
       // Prevent accidental form submission
       form.addEventListener("submit", function (e) { e.preventDefault(); });
@@ -240,9 +391,14 @@
     // --- Modal form submit (Primeni filtere)
     var modalForm = root.querySelector(".osn-clanice-grid__filter-form--modal");
     if (modalForm) {
+      bindCitySearch(modalForm, false);
+
       modalForm.addEventListener("submit", function (e) {
         e.preventDefault();
         state.readForm(modalForm);
+        if (state.mesto && !state.cityAllowed(state.mesto)) {
+          state.clearCityForm(modalForm);
+        }
         state.page = 1;
         state.closeModal();
         state.fetch(1);

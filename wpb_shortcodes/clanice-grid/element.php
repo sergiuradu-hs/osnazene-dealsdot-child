@@ -58,6 +58,7 @@ $render = function( $atts, $content = '' ) use ( $template_rel ) {
     wp_localize_script( 'osn-clanice-grid', 'OsnClanice', [
         'ajaxurl' => admin_url( 'admin-ajax.php' ),
         'nonce'   => wp_create_nonce( 'osn_clanice_grid' ),
+        'cities'  => osn_clanice_grid_get_city_options(),
     ] );
 
     // Taxonomy terms for filter dropdowns
@@ -67,7 +68,7 @@ $render = function( $atts, $content = '' ) use ( $template_rel ) {
     if ( is_wp_error( $delatnost_terms ) ) $delatnost_terms = [];
 
     // Initial server-side query
-    $result       = osn_clanice_grid_do_query( '', 0, 0, 1, $per_page );
+    $result       = osn_clanice_grid_do_query( '', 0, 0, '', 1, $per_page );
     $posts        = $result['posts'];
     $total        = $result['total'];
     $pages        = $result['pages'];
@@ -85,10 +86,131 @@ $render = function( $atts, $content = '' ) use ( $template_rel ) {
     return ob_get_clean();
 };
 
+// ---------- City taxonomy helpers -------------------------------
+
+if ( ! function_exists( 'osn_clanice_grid_city_taxonomies' ) ) {
+    function osn_clanice_grid_city_taxonomies() {
+        return [
+            'mesto'              => [ 'srbija', 'serbia' ],
+            'mesto-austrija'     => [ 'austrija', 'austria' ],
+            'mesto-bih'          => [ 'bih', 'bosna-i-hercegovina', 'bosna-hercegovina' ],
+            'mesto-crna-gora'    => [ 'crna-gora', 'montenegro' ],
+            'mesto-hrvatska'     => [ 'hrvatska', 'croatia' ],
+            'mesto-madarska'     => [ 'madarska', 'hungary' ],
+            'mesto-makedonija'   => [ 'makedonija', 'macedonia', 'severna-makedonija' ],
+            'mesto-nemacka'      => [ 'nemacka', 'germany' ],
+            'mesto-slovenija'    => [ 'slovenija', 'slovenia' ],
+            'mesto-svajcarska'   => [ 'svajcarska', 'switzerland' ],
+            'mesto-usa-canada'   => [ 'usa-canada', 'usa-and-canada', 'kanada', 'canada' ],
+        ];
+    }
+}
+
+if ( ! function_exists( 'osn_clanice_grid_normalize_key' ) ) {
+    function osn_clanice_grid_normalize_key( $value ) {
+        return sanitize_title( remove_accents( (string) $value ) );
+    }
+}
+
+if ( ! function_exists( 'osn_clanice_grid_city_country_ids' ) ) {
+    function osn_clanice_grid_city_country_ids() {
+        $country_ids = [];
+        foreach ( osn_clanice_grid_city_taxonomies() as $taxonomy => $aliases ) {
+            $country_ids[ $taxonomy ] = [];
+        }
+
+        $drzava_terms = get_terms( [
+            'taxonomy'   => 'drzava',
+            'hide_empty' => false,
+        ] );
+        if ( is_wp_error( $drzava_terms ) || empty( $drzava_terms ) ) {
+            return $country_ids;
+        }
+
+        foreach ( $drzava_terms as $term ) {
+            $keys = [
+                osn_clanice_grid_normalize_key( $term->name ),
+                osn_clanice_grid_normalize_key( $term->slug ),
+            ];
+
+            foreach ( osn_clanice_grid_city_taxonomies() as $taxonomy => $aliases ) {
+                if ( array_intersect( $keys, $aliases ) ) {
+                    $country_ids[ $taxonomy ][] = (int) $term->term_id;
+                }
+            }
+        }
+
+        return $country_ids;
+    }
+}
+
+if ( ! function_exists( 'osn_clanice_grid_get_city_options' ) ) {
+    function osn_clanice_grid_get_city_options() {
+        $city_options = [];
+        $country_ids  = osn_clanice_grid_city_country_ids();
+
+        foreach ( array_keys( osn_clanice_grid_city_taxonomies() ) as $taxonomy ) {
+            if ( ! taxonomy_exists( $taxonomy ) ) {
+                continue;
+            }
+
+            $terms = get_terms( [
+                'taxonomy'   => $taxonomy,
+                'hide_empty' => true,
+            ] );
+            if ( is_wp_error( $terms ) || empty( $terms ) ) {
+                continue;
+            }
+
+            foreach ( $terms as $term ) {
+                $city_options[] = [
+                    'name'        => $term->name,
+                    'taxonomy'    => $taxonomy,
+                    'term_id'     => (int) $term->term_id,
+                    'value'       => $taxonomy . ':' . (int) $term->term_id,
+                    'country_ids' => $country_ids[ $taxonomy ] ?? [],
+                ];
+            }
+        }
+
+        usort( $city_options, function( $a, $b ) {
+            return strcasecmp( $a['name'], $b['name'] );
+        } );
+
+        return $city_options;
+    }
+}
+
+if ( ! function_exists( 'osn_clanice_grid_parse_city_filter' ) ) {
+    function osn_clanice_grid_parse_city_filter( $filter_mesto ) {
+        $filter_mesto = sanitize_text_field( (string) $filter_mesto );
+        if ( empty( $filter_mesto ) || strpos( $filter_mesto, ':' ) === false ) {
+            return null;
+        }
+
+        list( $taxonomy, $term_id ) = explode( ':', $filter_mesto, 2 );
+        $taxonomy = sanitize_key( $taxonomy );
+        $term_id  = (int) $term_id;
+
+        if ( ! in_array( $taxonomy, array_keys( osn_clanice_grid_city_taxonomies() ), true ) || $term_id <= 0 ) {
+            return null;
+        }
+
+        if ( ! term_exists( $term_id, $taxonomy ) ) {
+            return null;
+        }
+
+        return [
+            'taxonomy' => $taxonomy,
+            'term_id'  => $term_id,
+        ];
+    }
+}
+
 // ---------- Shared query helper ---------------------------------
 
 if ( ! function_exists( 'osn_clanice_grid_do_query' ) ) {
-    function osn_clanice_grid_do_query( $filter_ime, $filter_drzava, $filter_delatnost, $page, $per_page = 12 ) {
+    function osn_clanice_grid_do_query( $filter_ime, $filter_drzava, $filter_delatnost, $filter_mesto, $page, $per_page = 12 ) {
         $args = [
             'post_type'      => 'osnazena',
             'post_status'    => 'publish',
@@ -112,6 +234,14 @@ if ( ! function_exists( 'osn_clanice_grid_do_query' ) ) {
                 'taxonomy' => 'delatnost',
                 'field'    => 'term_id',
                 'terms'    => (int) $filter_delatnost,
+            ];
+        }
+        $city_filter = osn_clanice_grid_parse_city_filter( $filter_mesto );
+        if ( ! empty( $city_filter ) ) {
+            $tax_query[] = [
+                'taxonomy' => $city_filter['taxonomy'],
+                'field'    => 'term_id',
+                'terms'    => $city_filter['term_id'],
             ];
         }
         if ( count( $tax_query ) > 1 ) {
@@ -147,10 +277,11 @@ if ( ! function_exists( 'osn_clanice_grid_ajax_handler' ) ) {
         $filter_ime       = sanitize_text_field( wp_unslash( $_POST['ime']        ?? '' ) );
         $filter_drzava    = (int) ( $_POST['drzava']    ?? 0 );
         $filter_delatnost = (int) ( $_POST['delatnost'] ?? 0 );
+        $filter_mesto     = sanitize_text_field( wp_unslash( $_POST['mesto']      ?? '' ) );
         $page             = max( 1, (int) ( $_POST['paged']    ?? 1 ) );
         $per_page         = max( 1, min( 48, (int) ( $_POST['per_page'] ?? 12 ) ) );
 
-        $result       = osn_clanice_grid_do_query( $filter_ime, $filter_drzava, $filter_delatnost, $page, $per_page );
+        $result       = osn_clanice_grid_do_query( $filter_ime, $filter_drzava, $filter_delatnost, $filter_mesto, $page, $per_page );
         $posts        = $result['posts'];
         $total        = $result['total'];
         $pages        = $result['pages'];
