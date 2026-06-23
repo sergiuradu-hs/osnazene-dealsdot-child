@@ -130,6 +130,30 @@
     forms.forEach(function (f) {
       f.reset();
     });
+    this.updateNameClearButtons();
+    this.fetch(1);
+  };
+
+  WidgetState.prototype.syncNameInputs = function () {
+    var value = this.ime;
+    this.root.querySelectorAll("input[name=ime]").forEach(function (input) {
+      input.value = value;
+    });
+    this.updateNameClearButtons();
+  };
+
+  WidgetState.prototype.updateNameClearButtons = function () {
+    this.root.querySelectorAll(".osn-clanice-grid__input-clear--ime").forEach(function (button) {
+      var wrap = button.closest(".osn-clanice-grid__input-wrap");
+      var input = wrap && wrap.querySelector("input[name=ime]");
+      button.hidden = !input || input.value.trim() === "";
+    });
+  };
+
+  WidgetState.prototype.clearNameSearch = function () {
+    this.ime = "";
+    this.page = 1;
+    this.syncNameInputs();
     this.fetch(1);
   };
 
@@ -263,6 +287,7 @@
     var modalForm = modal && modal.querySelector(".osn-clanice-grid__filter-form--modal");
     if (!modal) return;
     if (modalForm) this.syncForm(modalForm);
+    this.updateNameClearButtons();
     modal.removeAttribute("hidden");
     document.body.style.overflow = "hidden";
     if (toggle) toggle.setAttribute("aria-expanded", "true");
@@ -282,6 +307,12 @@
   // ----------------------------------------------------------------
   function initWidget(root) {
     var state = new WidgetState(root);
+
+    function bindNameClearButton(button) {
+      button.addEventListener("click", function () {
+        state.clearNameSearch();
+      });
+    }
 
     function bindCitySearch(form, immediate) {
       var input = form.querySelector("[name=mesto_search]");
@@ -336,9 +367,11 @@
           clearTimeout(state.debounceTimer);
           state.debounceTimer = setTimeout(function () {
             state.readForm(form);
+            state.updateNameClearButtons();
             state.page = 1;
             state.fetch(1);
           }, 400);
+          state.updateNameClearButtons();
         });
       });
 
@@ -366,11 +399,15 @@
         clearTimeout(state.debounceTimer);
         state.debounceTimer = setTimeout(function () {
           state.ime = input.value.trim();
+          state.updateNameClearButtons();
           state.page = 1;
           state.fetch(1);
         }, 400);
+        state.updateNameClearButtons();
       });
     });
+
+    root.querySelectorAll(".osn-clanice-grid__input-clear--ime").forEach(bindNameClearButton);
 
     // --- Filter toggle button (mobile)
     var toggle = root.querySelector(".osn-clanice-grid__filter-toggle");
@@ -430,6 +467,7 @@
 
     // --- Initial pagination binding (server-rendered first page)
     state.bindPagination();
+    state.updateNameClearButtons();
   }
 
   // ----------------------------------------------------------------

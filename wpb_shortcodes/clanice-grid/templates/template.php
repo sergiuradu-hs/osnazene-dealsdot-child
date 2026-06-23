@@ -32,6 +32,12 @@
                        name="ime"
                        placeholder="<?php esc_attr_e( 'Pretraga po imenu i prezimenu…', 'dealsdot-child' ); ?>"
                        autocomplete="off" />
+                <button type="button"
+                        class="osn-clanice-grid__input-clear osn-clanice-grid__input-clear--ime"
+                        aria-label="<?php esc_attr_e( 'Obriši pretragu po imenu', 'dealsdot-child' ); ?>"
+                        hidden>
+                    &times;
+                </button>
             </div>
         </div>
         <button class="osn-clanice-grid__filter-toggle" aria-expanded="false"
@@ -83,6 +89,12 @@
                                name="ime"
                                placeholder="<?php esc_attr_e( 'Pretraga po imenu i prezimenu…', 'dealsdot-child' ); ?>"
                                autocomplete="off" />
+                        <button type="button"
+                                class="osn-clanice-grid__input-clear osn-clanice-grid__input-clear--ime"
+                                aria-label="<?php esc_attr_e( 'Obriši pretragu po imenu', 'dealsdot-child' ); ?>"
+                                hidden>
+                            &times;
+                        </button>
                     </div>
                 </div>
 
@@ -182,6 +194,12 @@
                                name="ime"
                                placeholder="<?php esc_attr_e( 'Pretraga po imenu i prezimenu…', 'dealsdot-child' ); ?>"
                                autocomplete="off" />
+                        <button type="button"
+                                class="osn-clanice-grid__input-clear osn-clanice-grid__input-clear--ime"
+                                aria-label="<?php esc_attr_e( 'Obriši pretragu po imenu', 'dealsdot-child' ); ?>"
+                                hidden>
+                            &times;
+                        </button>
                     </div>
                 </div>
 

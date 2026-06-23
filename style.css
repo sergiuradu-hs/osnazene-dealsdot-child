@@ -2147,6 +2147,31 @@ section.vc_section.home-page-second-section .wpb_single_image {
     -webkit-appearance: none;
 }
 
+.osn-clanice-grid__input--ime {
+    padding-right: 40px;
+}
+
+.osn-clanice-grid__input-clear {
+    position: absolute;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--osn-color-text);
+    cursor: pointer;
+    font-family: var(--osn-font-main);
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1;
+}
+
+.osn-clanice-grid__input-clear:hover,
+.osn-clanice-grid__input-clear:focus {
+    color: var(--osn-color-primary);
+}
+
 .osn-clanice-grid__input::placeholder {
     color: #ababbb;
     font-weight: 300;
