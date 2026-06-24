@@ -4382,9 +4382,10 @@ section.vc_section.home-page-second-section .wpb_single_image {
 
 .osn-mp-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 60px 20px;
     width: 100%;
+    max-width: 1200px;
 }
 
 .osn-mp-card {
@@ -4397,6 +4398,7 @@ section.vc_section.home-page-second-section .wpb_single_image {
     align-items: center;
     gap: 24px;
     min-height: 530px;
+    max-width: 360px;
 }
 
 .osn-mp-card__photo-wrap {
