@@ -89,7 +89,8 @@ endwhile; endif;
             $name      = get_the_title();
             $link      = get_permalink();
             $uloga     = get_post_meta( $mentor_id, 'uloga',    true );
-            $cv_link   = get_post_meta( $mentor_id, 'cv_link',  true );
+            $cv_link   = get_post_meta( $mentor_id, 'cv',       true );
+            $cv_link   = ! empty( $cv_link ) ? $cv_link : get_post_meta( $mentor_id, 'cv_link', true );
             $img_url   = get_the_post_thumbnail_url( $mentor_id, 'large' );
         ?>
         <div class="osn-mp-card">

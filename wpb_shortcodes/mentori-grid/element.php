@@ -41,12 +41,13 @@ $render = function( $atts, $content = '' ) use ( $template_rel ) {
         while ( $mentor_query->have_posts() ) {
             $mentor_query->the_post();
             $mid      = get_the_ID();
+            $cv_link  = get_post_meta( $mid, 'cv', true );
             $mentors[] = [
                 'id'       => $mid,
                 'name'     => get_the_title(),
                 'link'     => get_permalink(),
                 'uloga'    => get_post_meta( $mid, 'uloga',   true ),
-                'cv_link'  => get_post_meta( $mid, 'cv_link', true ),
+                'cv_link'  => ! empty( $cv_link ) ? $cv_link : get_post_meta( $mid, 'cv_link', true ),
                 'img_url'  => get_the_post_thumbnail_url( $mid, 'large' ),
             ];
         }
