@@ -21,6 +21,7 @@ if ( ! function_exists( 'osn_edu_render_card' ) ) :
         $post_link  = get_permalink( $post_id );
         $datum_ts   = (int) get_post_meta( $post_id, 'datum', true );
         $datum_str  = $datum_ts ? date_i18n( 'd.m.Y.', $datum_ts ) : '';
+        $format     = get_post_meta( $post_id, 'format_edukacije', true );
         $sponsor_id = get_post_meta( $post_id, 'logo-sponzora', true );
         $excerpt    = get_post_field( 'post_excerpt', $post_id );
         $card_class = 'osn-edu-card' . ( $is_featured ? ' osn-edu-card--featured' : '' );
@@ -32,9 +33,10 @@ if ( ! function_exists( 'osn_edu_render_card' ) ) :
             </div>
             <?php endif; ?>
             <div class="osn-edu-card__body">
-                <?php if ( ! $is_featured && $datum_str ) : ?>
+                <?php if ( ! $is_featured && ( $datum_str || $format ) ) : ?>
                 <div class="osn-edu-card__meta">
-                    <span class="osn-edu-card__date"><?php echo esc_html( $datum_str ); ?></span>
+                    <?php echo $datum_str ? '<span class="osn-edu-card__date">' . esc_html( $datum_str ) . '</span>' : ''; ?>
+                    <?php echo $format ? '<span class="osn-edu-card__format">' . esc_html( $format ) . '</span>' : ''; ?>
                 </div>
                 <?php endif; ?>
                 <h3 class="osn-edu-card__title"><?php echo esc_html( $title ); ?></h3>

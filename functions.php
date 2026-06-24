@@ -93,6 +93,7 @@ if ( ! function_exists( 'osn_edu_render_card' ) ) :
         $post_link  = get_permalink( $post_id );
         $datum_ts   = (int) get_post_meta( $post_id, 'datum', true );
         $datum_str  = $datum_ts ? date_i18n( 'd.m.Y.', $datum_ts ) : '';
+        $format     = get_post_meta( $post_id, 'format_edukacije', true );
         $sponsor_id = get_post_meta( $post_id, 'logo-sponzora', true );
         $excerpt    = get_post_field( 'post_excerpt', $post_id );
         $card_class = 'osn-edu-card' . ( $is_featured ? ' osn-edu-card--featured' : '' );
@@ -104,9 +105,10 @@ if ( ! function_exists( 'osn_edu_render_card' ) ) :
             </div>
             <?php endif; ?>
             <div class="osn-edu-card__body">
-                <?php if ( ! $is_featured && $datum_str ) : ?>
+                <?php if ( ! $is_featured && ( $datum_str || $format ) ) : ?>
                 <div class="osn-edu-card__meta">
-                    <span class="osn-edu-card__date"><?php echo esc_html( $datum_str ); ?></span>
+                    <?php echo $datum_str ? '<span class="osn-edu-card__date">' . esc_html( $datum_str ) . '</span>' : ''; ?>
+                    <?php echo $format ? '<span class="osn-edu-card__format">' . esc_html( $format ) . '</span>' : ''; ?>
                 </div>
                 <?php endif; ?>
                 <h3 class="osn-edu-card__title"><?php echo esc_html( $title ); ?></h3>
@@ -130,6 +132,69 @@ if ( ! function_exists( 'osn_edu_render_card' ) ) :
         <?php
     }
 endif;
+
+/* -----------------------------------------------------------------------
+ * Edukacija editor fields.
+ * ----------------------------------------------------------------------- */
+add_action( 'add_meta_boxes', function () {
+    add_meta_box(
+        'osn_edukacija_format',
+        __( 'Format edukacije', 'dealsdot-child' ),
+        'osn_edukacija_format_meta_box',
+        'edukacija',
+        'side',
+        'default'
+    );
+} );
+
+if ( ! function_exists( 'osn_edukacija_format_meta_box' ) ) :
+    function osn_edukacija_format_meta_box( WP_Post $post ): void {
+        $format = get_post_meta( $post->ID, 'format_edukacije', true );
+
+        wp_nonce_field( 'osn_save_edukacija_format', 'osn_edukacija_format_nonce' );
+        ?>
+        <p>
+            <label for="osn-format-edukacije">
+                <?php esc_html_e( 'Primer: Online edukacija', 'dealsdot-child' ); ?>
+            </label>
+        </p>
+        <input
+            type="text"
+            id="osn-format-edukacije"
+            name="format_edukacije"
+            value="<?php echo esc_attr( $format ); ?>"
+            class="widefat"
+        />
+        <?php
+    }
+endif;
+
+add_action( 'save_post_edukacija', function ( int $post_id ) {
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+
+    if (
+        ! isset( $_POST['osn_edukacija_format_nonce'] )
+        || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['osn_edukacija_format_nonce'] ) ), 'osn_save_edukacija_format' )
+    ) {
+        return;
+    }
+
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return;
+    }
+
+    $format = isset( $_POST['format_edukacije'] )
+        ? sanitize_text_field( wp_unslash( $_POST['format_edukacije'] ) )
+        : '';
+
+    if ( $format !== '' ) {
+        update_post_meta( $post_id, 'format_edukacije', $format );
+    } else {
+        delete_post_meta( $post_id, 'format_edukacije' );
+    }
+} );
 
 /* -----------------------------------------------------------------------
  * AJAX: Load-more handler for the "Besplatne edukacije" page template.

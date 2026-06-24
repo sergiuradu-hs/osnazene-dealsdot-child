@@ -3215,10 +3215,17 @@ section.vc_section.home-page-second-section .wpb_single_image {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 16px;
     font-family: var(--osn-font-main), sans-serif;
     font-size: 18px;
     font-weight: 400;
     color: #fff;
+}
+
+.osn-edu-card__format {
+    margin-left: auto;
+    text-align: right;
+    white-space: nowrap;
 }
 
 /* Title */

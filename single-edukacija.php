@@ -21,6 +21,10 @@ if ( have_posts() ) :
     $datum_ts       = (int) get_post_meta( $post_id, 'datum', true );
     $datum_str      = $datum_ts ? date_i18n( 'd.m.Y.', $datum_ts ) : '';
     $platforma      = get_post_meta( $post_id, 'platforma', true );
+    $format         = get_post_meta( $post_id, 'format_edukacije', true );
+    if ( empty( $format ) ) {
+        $format = $platforma;
+    }
     $sponsor_id     = get_post_meta( $post_id, 'logo-sponzora', true );
     $forma          = get_post_meta( $post_id, 'forma-prijave', true );
     $slika_forme_id = (int) get_post_meta( $post_id, 'slika-forme', true );
@@ -43,11 +47,11 @@ if ( have_posts() ) :
                     <?php endif; ?>
 
                     <div class="osn-sed__card-body">
-                        <?php if ( $datum_str || $platforma ) : ?>
+                        <?php if ( $datum_str || $format ) : ?>
                         <div class="osn-sed__card-meta">
                             <span class="osn-sed__card-date"><?php echo esc_html( $datum_str ); ?></span>
-                            <?php if ( $platforma ) : ?>
-                            <span class="osn-sed__card-platform"><?php echo esc_html( $platforma ); ?></span>
+                            <?php if ( $format ) : ?>
+                            <span class="osn-sed__card-platform"><?php echo esc_html( $format ); ?></span>
                             <?php endif; ?>
                         </div>
                         <?php endif; ?>
