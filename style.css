@@ -2258,7 +2258,7 @@ section.vc_section.home-page-second-section .wpb_single_image {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-    align-items: start;
+    align-items: stretch;
 }
 
 /* ---- Individual card ----------------------------------------------------- */
@@ -2269,6 +2269,7 @@ section.vc_section.home-page-second-section .wpb_single_image {
     box-shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.10);
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .osn-clanice-card__inner {
