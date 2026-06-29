@@ -93,6 +93,15 @@ h3 {
    line-height: 120%; /* 38.4px */
 }
 
+h4 {
+    color: var(--osn-color-text);
+    font-family: var(--osn-font-main);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%; /* 38.4px */
+}
+
 .wpb_text_column.gold h2,
 .wpb_text_column.gold h3, 
 .wpb_text_column.gold h4,
