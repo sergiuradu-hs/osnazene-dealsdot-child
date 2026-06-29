@@ -24,6 +24,9 @@ $query = new WP_Query( [
 
 <section class="vc_section osnazene_section osn-arc">
     <div class="container">
+        <div class="osn-arc__header osn-arc__header--dogadjaji">
+            <h1 class="osn-arc__heading"><?php the_title(); ?></h1>
+         </div>
         <?php if ( $query->have_posts() ) : ?>
         <div class="osn-arc__grid">
             <?php while ( $query->have_posts() ) : $query->the_post(); ?>
