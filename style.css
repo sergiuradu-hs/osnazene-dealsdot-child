@@ -338,6 +338,21 @@ div.gold-border {
    padding: 0 !important;
 }
 
+.osn-centered-two-thirds {
+   display: flex;
+   justify-content: center;
+   width: 66.666%;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+@media (max-width: 767px) {
+   .osn-centered-two-thirds {
+      max-width: 100%;
+      width: 100%;
+   }
+}
+
 div.dark-border {
    border-radius: 12px;
    border: 0.5px solid var(--osn-color-text);
