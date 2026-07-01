@@ -383,6 +383,13 @@ div.dark-border {
    margin: 0;
    text-align: center;
 }
+
+.gold .vc_row-o-equal-height.vc_row-flex .wpb_single_image img.vc_single_image-img {
+   border-radius: 12px;
+   max-height: 332px;
+   width: 100%;
+   object-fit: cover;
+}
 /* End of Single rule classes */
 
 /* Containers and stuff */
