@@ -229,6 +229,18 @@ ul li {
    padding-left: 10px;
 }
 
+.wpb_text_column.wpb_content_element ul {
+   padding-left: 24px;
+}
+
+.wpb_text_column.wpb_content_element ul li {
+   padding-left: 18px;
+}
+
+.wpb_text_column.wpb_content_element ul li:last-child {
+   margin-bottom: 24px;
+}
+
 /* End of Default styles */
 
 /* Single rule classes */
@@ -243,8 +255,87 @@ ul li {
 div.gold-border {
    border-radius: 12px;
    border: 3px solid var(--osn-color-secondary);
-   padding: 24px;
    margin-bottom: 24px !important;
+}
+
+.osn-equal-cards-row {
+   display: flex;
+   align-items: stretch;
+   gap: 32px;
+}
+
+.osn-equal-cards-row::before,
+.osn-equal-cards-row::after {
+   display: none;
+}
+
+.osn-equal-cards-row > .gold-border {
+   display: flex;
+   float: none;
+   margin-bottom: 0 !important;
+}
+
+.osn-equal-cards-row > .gold-border > .vc_column-inner,
+.osn-equal-cards-row > .gold-border > .vc_column-inner > .wpb_wrapper {
+   display: flex;
+   flex-direction: column;
+   height: 100%;
+   width: 100%;
+}
+
+.osn-equal-cards-row > .gold-border .wpb_single_image,
+.osn-equal-cards-row > .gold-border .wpb_single_image .wpb_wrapper,
+.osn-equal-cards-row > .gold-border .vc_figure,
+.osn-equal-cards-row > .gold-border .vc_single_image-wrapper {
+   height: 100%;
+   width: 100%;
+}
+
+.osn-equal-cards-row > .gold-border img.vc_single_image-img {
+   height: 100%;
+   width: 100%;
+   object-fit: cover;
+}
+
+.osn-equal-cards-row > .gold-border .wpb_text_column {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 100%;
+   margin-bottom: 0;
+}
+
+.osn-equal-cards-row > .gold-border .wpb_text_column > .wpb_wrapper {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 100%;
+   width: 100%;
+}
+
+.osn-equal-cards-row > .gold-border .wpb_text_column h1,
+.osn-equal-cards-row > .gold-border .wpb_text_column h2,
+.osn-equal-cards-row > .gold-border .wpb_text_column h3,
+.osn-equal-cards-row > .gold-border .wpb_text_column h4,
+.osn-equal-cards-row > .gold-border .wpb_text_column h5,
+.osn-equal-cards-row > .gold-border .wpb_text_column h6 {
+   margin: 0;
+}
+
+@media (max-width: 767px) {
+   .osn-equal-cards-row {
+      flex-direction: column;
+   }
+}
+
+.osn-no-column-margins {
+   margin: 0 !important;
+}
+
+.osn-no-column-margins > .vc_column-inner,
+.osn-no-column-margins > .vc_column-inner > .wpb_wrapper {
+   margin: 0 !important;
+   padding: 0 !important;
 }
 
 div.dark-border {
