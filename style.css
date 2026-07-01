@@ -344,6 +344,45 @@ div.dark-border {
    padding: 24px;
    margin-bottom: 24px !important;
 }
+
+.gold .dark-border {
+   min-height: 332px;
+}
+
+.gold .wpb_column.dark-border {
+   display: flex;
+}
+
+.gold .wpb_column.dark-border > .vc_column-inner,
+.gold .wpb_column.dark-border > .vc_column-inner > .wpb_wrapper {
+   display: flex;
+   flex-direction: column;
+   height: 100%;
+   width: 100%;
+}
+
+.gold .dark-border .wpb_text_column,
+.gold .wpb_text_column.dark-border {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex: 1;
+   margin-bottom: 0;
+}
+
+.gold .dark-border .wpb_text_column > .wpb_wrapper,
+.gold .wpb_text_column.dark-border > .wpb_wrapper {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 100%;
+}
+
+.gold .dark-border .wpb_text_column p,
+.gold .wpb_text_column.dark-border p {
+   margin: 0;
+   text-align: center;
+}
 /* End of Single rule classes */
 
 /* Containers and stuff */
