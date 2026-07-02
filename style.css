@@ -5387,7 +5387,7 @@ section.vc_section.home-page-second-section .wpb_single_image {
    ========================================================= */
 
 .osn-link-list {
-    margin: 24px 0;
+    margin: 24px 0px 32px 0px;
     list-style: none;
     padding: 0;
     display: flex;
@@ -5395,10 +5395,21 @@ section.vc_section.home-page-second-section .wpb_single_image {
     gap: 16px;
 }
 
+.osn-link-subtitle h3 {
+	margin: 8px 0px !important;
+	font-weight: 500;
+}
+
+.osn-link a {
+	color: var(--osn-color-white);
+	text-decoration: none;
+}
+
 .osn-link-list__item {
     display: flex;
     align-items: flex-start;
     gap: 32px;
+	margin: 0px;
 }
 
 /* Chain-link icon */
