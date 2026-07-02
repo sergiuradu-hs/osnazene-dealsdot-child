@@ -5405,6 +5405,12 @@ section.vc_section.home-page-second-section .wpb_single_image {
 	text-decoration: none;
 }
 
+.osn-link a:hover,
+.osn-link a:focus {
+	opacity: 0.8;
+	transition: opacity 0.3s ease;
+}
+
 .osn-link-list__item {
     display: flex;
     align-items: flex-start;
