@@ -324,6 +324,23 @@ div.gold-border {
    border-radius: 9px;
 }
 
+.osn-rounded-right-image,
+.osn-rounded-right-image .wpb_wrapper,
+.osn-rounded-right-image .vc_figure,
+.osn-rounded-right-image .vc_single_image-wrapper {
+   display: block;
+   width: 100%;
+   overflow: hidden;
+   border-radius: 0 9999px 9999px 0;
+}
+
+.osn-rounded-right-image img.vc_single_image-img {
+   display: block;
+   width: 100%;
+   height: auto;
+   border-radius: 0 9999px 9999px 0;
+}
+
 .osn-equal-cards-row {
    display: flex;
    align-items: stretch;
