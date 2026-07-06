@@ -48,6 +48,10 @@ footer.footer div.footer-bottom {
     background-image: unset;
     filter: unset;
 }
+
+.no-padding.vc_column-inner {
+	padding: 0px !important;
+}
 /* End of unsets and resets */
 
 /* Default styles */
@@ -164,6 +168,10 @@ section.osnazene_section.dark,
 .dark li,
 .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
    color: var(--osn-color-white);
+}
+
+.dark-background {
+    background: var(--osn-color-text);
 }
 
 section.gold,
