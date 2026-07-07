@@ -6550,10 +6550,14 @@ a.osn-tim-card--linked:hover {
 }
 
 /* Submit button */
+.wsf-form .wsf-field-wrapper[data-type="submit"] {
+    text-align: center;
+}
+
 .wsf-form .wsf-button-primary,
 .wsf-form button[type="submit"] {
     height: 36px !important;
-    padding: 0 32px !important;
+    padding: 0 64px !important;
     background: #151367 !important;
     border: 1px solid #C6B08A !important;
     border-radius: 0 !important;
@@ -6568,8 +6572,20 @@ a.osn-tim-card--linked:hover {
     align-items: center;
     justify-content: center;
     transition: opacity 0.2s ease;
-    width: auto !important;
+    width: fit-content !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
     box-shadow: none !important;
+}
+
+@media (max-width: 767px) {
+    .wsf-form .wsf-button-primary,
+    .wsf-form button[type="submit"] {
+        width: fit-content !important;
+        max-width: none !important;
+    }
 }
 
 .wsf-form .wsf-button-primary:hover,
