@@ -207,6 +207,14 @@ section.osnazene_section.dark,
     background: var(--osn-color-text);
 }
 
+.gold-background {
+    background: var(--osn-color-secondary);
+}
+
+.font-40-px h3 {
+    font-size: 40px !important;
+}
+
 section.gold,
 .vc_row.gold {
    background: var(--osn-color-secondary);
