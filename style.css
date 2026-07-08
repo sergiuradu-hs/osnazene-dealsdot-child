@@ -22,6 +22,7 @@
    --osn-color-text: #151367;      /* primary text */
    --osn-color-primary: #43528B;   /* primary brand */
    --osn-color-secondary: #C6B08A; /* accent brand */
+   --osn-color-link-accent: #5D5FEF; /* contact/link accent */
    --osn-color-white: #FFFFFF;     /* white */
    --osn-color-overlay: rgba(0,0,0,0.25); /* image overlay */
    --osn-color-light-gray: lightgray;     /* neutral bg */
@@ -826,6 +827,29 @@ header section.osnazene_section {
 .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child),
 .vc_btn3-container.vc_btn3-center.vc_do_btn:not(:first-child) {
    margin-top: 60px;
+}
+
+.vc_btn3-container.osn-contact-button .vc_general.vc_btn3,
+.vc_btn3-container.osn-contact-button .vc_general.vc_btn3:is(:hover, :focus),
+.vc_general.vc_btn3.osn-contact-button,
+.vc_general.vc_btn3.osn-contact-button:is(:hover, :focus) {
+   background: var(--osn-color-secondary) !important;
+   background-color: var(--osn-color-secondary) !important;
+   color: var(--osn-color-link-accent) !important;
+   text-transform: none !important;
+   border: 0 !important;
+   display: inline-flex !important;
+   align-items: center !important;
+   justify-content: center;
+}
+
+.vc_btn3-container.osn-contact-button .vc_general.vc_btn3 .vc_btn3-icon,
+.vc_general.vc_btn3.osn-contact-button .vc_btn3-icon {
+   display: inline-flex;
+   align-items: center !important;
+   font-size: 1.3em;
+   justify-content: center !important;
+   vertical-align: middle;
 }
 /* End of Common elements */
 
