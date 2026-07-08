@@ -214,7 +214,7 @@ section.osnazene_section.dark,
 }
 
 .off-white-background {
-    background: var(sn-color-off-white);
+    background: var(--osn-color-off-white);
 }
 
 .font-40-px h3 {
@@ -6515,6 +6515,73 @@ a.osn-tim-card--linked:hover {
 
 .wpcf7-form .row input[type="submit"]:hover {
     opacity: 0.88;
+}
+
+/* CF7 Contact Form on Contact Page */
+.osn-contact-page-form .row {
+    padding: 0px 15px;
+    border-radius: 0;
+    gap: 28px;
+}
+
+.osn-contact-page-form .row > p {
+    gap: 10px;
+}
+
+.osn-contact-page-form .row label {
+    padding: 0;
+    color: var(--osn-color-text);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.osn-contact-page-form .row input[type="text"],
+.osn-contact-page-form .row input[type="email"],
+.osn-contact-page-form .row textarea {
+    height: 48px;
+    padding: 12px 16px;
+    background: var(--osn-color-off-white);
+    border: 1px solid #EFEFEF;
+    border-radius: 6px;
+    outline: none;
+    color: var(--osn-color-text);
+    box-shadow: none;
+}
+
+.osn-contact-page-form .row textarea {
+    height: 120px;
+}
+
+.osn-contact-page-form .row input[type="submit"] {
+    width: 50%;
+    height: auto;
+    min-height: 56px;
+    padding: 16px 24px;
+    min-width: 320px;
+    background: var(--osn-color-text);
+    border: 1px solid var(--osn-color-secondary);
+    color: var(--osn-color-white);
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.osn-contact-page-form .row input[type="submit"]:hover,
+.osn-contact-page-form .row input[type="submit"]:focus {
+    background: var(--osn-color-text);
+    color: var(--osn-color-white);
+}
+
+@media (max-width: 767px) {
+    .osn-contact-page-form .row input[type="submit"] {
+        width: 100%;
+        min-width: 0;
+    }
 }
 
 /* End of CF7 Contact Form */
