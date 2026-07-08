@@ -26,6 +26,7 @@
    --osn-color-white: #FFFFFF;     /* white */
    --osn-color-overlay: rgba(0,0,0,0.25); /* image overlay */
    --osn-color-light-gray: lightgray;     /* neutral bg */
+   --osn-color-off-white: #F8F8F8; /* off-white */
    --osn-font-main: 'Montserrat', sans-serif; /* main font */
    --osn-font-alt: 'Source Sans 3', sans-serif; /* alt font */
 }
@@ -210,6 +211,10 @@ section.osnazene_section.dark,
 
 .gold-background {
     background: var(--osn-color-secondary);
+}
+
+.off-white-background {
+    background: var(sn-color-off-white);
 }
 
 .font-40-px h3 {
