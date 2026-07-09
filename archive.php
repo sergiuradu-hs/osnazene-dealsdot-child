@@ -48,7 +48,7 @@ get_header();
         * Card grid
         * -------------------------------------------------------------- */
         if ( have_posts() ) : ?>
-        <div class="osn-arc__grid">
+        <div class="osn-arc__grid margin-top-60">
             <?php while ( have_posts() ) : the_post(); ?>
             <a href="<?php the_permalink(); ?>" class="osn-arc__card">
                 <?php if ( has_post_thumbnail() ) : ?>

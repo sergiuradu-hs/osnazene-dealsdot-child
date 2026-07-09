@@ -4557,6 +4557,14 @@ section.vc_section.home-page-second-section .wpb_single_image {
     /* width: 100%; */
 }
 
+.margin-top-60 {
+    margin-top: 60px;
+}
+
+.margin-bottom-60 {
+    margin-bottom: 60px !important;
+}
+
 /* Gold italic heading */
 .osn-arc__heading {
     color: var(--osn-color-secondary);

@@ -20,7 +20,7 @@ while ( have_posts() ) : the_post();
 
 <section class="vc_section osnazene_section osn-sp">
     <div class="container">
-        <h1 class="osn-sp__title"><?php the_title(); ?></h1>
+        <h1 class="osn-sp__title margin-bottom-60"><?php the_title(); ?></h1>
 
         <div class="osn-sp__layout">
 
