@@ -856,6 +856,38 @@ header section.osnazene_section {
    justify-content: center !important;
    vertical-align: middle;
 }
+
+.vc_btn3-container.osn-social-button .vc_general.vc_btn3,
+.vc_btn3-container.osn-social-button .vc_general.vc_btn3:is(:hover, :focus),
+.vc_general.vc_btn3.osn-social-button,
+.vc_general.vc_btn3.osn-social-button:is(:hover, :focus) {
+    font-size: 16px !important;
+    color: var(--osn-color-text) !important;
+    background: var(--osn-color-secondary) !important;
+    border: 0 !important;
+    text-transform: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center;
+    gap: 12px;
+    min-width: 178px;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+}
+
+.vc_btn3-container.osn-social-button .vc_general.vc_btn3 .vc_btn3-icon,
+.vc_general.vc_btn3.osn-social-button .vc_btn3-icon {
+   position: static !important;
+   top: auto !important;
+   left: auto !important;
+   transform: none !important;
+   margin: 0 !important;
+   display: inline-flex;
+   align-items: center !important;
+   font-size: 1.2em;
+   justify-content: center !important;
+   vertical-align: middle;
+}
 /* End of Common elements */
 
 /* Footer (grid layout) */
