@@ -6800,3 +6800,13 @@ a.osn-tim-card--linked:hover {
 }
 
 /* End of WS Form */
+
+
+@media (max-width: 767px) {
+  .osn-archive-osnazene__header {
+    display: none;
+  }
+  .osn-clanice-card__photo {
+    object-position: center center;
+  }
+}
