@@ -50,7 +50,12 @@
     </div>
 
     <div class="osn-clanice-grid__toolbar-bottom">
-        <div class="osn-clanice-grid__result-count-mob"></div>
+        <div class="osn-clanice-grid__result-count-mob">
+             <?php
+                /* translators: %s: number of members */
+                echo esc_html( sprintf( _n( '%s članica', '%s članica', $total, 'dealsdot-child' ), number_format_i18n( $total ) ) );
+            ?>
+        </div>
         <div class="osn-clanice-grid__view-toggle" role="group" aria-label="Prikaz">
             <button class="osn-clanice-grid__view-btn is-active" data-view="grid" aria-pressed="true" aria-label="Mrežni prikaz">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
