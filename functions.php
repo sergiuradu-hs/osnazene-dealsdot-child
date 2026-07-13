@@ -11,6 +11,13 @@
 add_action( 'wp_enqueue_scripts', 'dealsdot_enqueue_styles', 99 );
 function dealsdot_enqueue_styles() {
     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
+    wp_enqueue_script(
+        'osn-mobile-menu',
+        get_stylesheet_directory_uri() . '/assets/js/mobile-menu.js',
+        [],
+        filemtime( get_stylesheet_directory() . '/assets/js/mobile-menu.js' ),
+        true
+    );
 }
 
 // Remove col-lg-6 wrapping added by parent theme for CF7 name/email fields.
@@ -33,6 +40,10 @@ add_action( 'wp_enqueue_scripts', function () {
     wp_add_inline_script( 'dealsdot-scripts', "
 jQuery(document).ready(function($){
     setTimeout(function(){
+        if ( ! window.matchMedia('(min-width: 1025px)').matches ) {
+            return;
+        }
+
         var \$nav = $('.navbar-nav');
 
         // Remove parent theme's click handler that prevents default and toggles submenu.

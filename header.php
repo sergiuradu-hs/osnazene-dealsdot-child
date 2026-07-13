@@ -152,8 +152,67 @@
 							<?php get_template_part( 'includes/header/cart' ); ?>
 						</div>
 					</div>
+					<button class="osn-burger" type="button" aria-controls="osn-mobile-menu" aria-expanded="false">
+						<span class="sr-only"><?php esc_html_e( 'Toggle navigation', 'dealsdot' ); ?></span>
+						<span class="osn-burger__bar"></span>
+						<span class="osn-burger__bar"></span>
+						<span class="osn-burger__bar"></span>
+					</button>
 				</div>
 			</div>
 		</section>
 	</header>
+	<?php
+	$mobile_footer_options = function_exists( 'get_field' ) ? get_field( 'footer_options', 'option' ) : [];
+	$mobile_social_text    = is_array( $mobile_footer_options ) && isset( $mobile_footer_options['footer_social_text'] ) ? $mobile_footer_options['footer_social_text'] : '';
+	$mobile_social_links   = is_array( $mobile_footer_options ) && isset( $mobile_footer_options['footer_social'] ) ? $mobile_footer_options['footer_social'] : [];
+	?>
+	<div class="osn-mobile-menu" id="osn-mobile-menu" aria-hidden="true">
+		<nav class="osn-mobile-menu__nav" aria-label="<?php esc_attr_e( 'Mobile menu', 'dealsdot' ); ?>">
+			<?php
+			wp_nav_menu( [
+				'theme_location' => 'main-menu',
+				'container'      => '',
+				'fallback_cb'    => 'show_top_menu',
+				'menu_id'        => '',
+				'menu_class'     => 'osn-mobile-menu__list',
+				'depth'          => 2,
+			] );
+			?>
+		</nav>
+		<?php if ( ! empty( $mobile_social_text ) || ! empty( $mobile_social_links ) ) : ?>
+		<div class="osn-mobile-menu__social">
+			<?php if ( ! empty( $mobile_social_text ) ) : ?>
+			<div class="osn-mobile-menu__social-text"><?php echo esc_html( $mobile_social_text ); ?></div>
+			<?php endif; ?>
+			<?php if ( ! empty( $mobile_social_links ) ) : ?>
+			<div class="osn-mobile-menu__social-icons">
+				<?php $mobile_social_count = 0; ?>
+				<?php foreach ( $mobile_social_links as $mobile_social_link ) : ?>
+					<?php
+					if ( $mobile_social_count >= 3 ) {
+						break;
+					}
+
+					$mobile_icon_url = '';
+					if ( isset( $mobile_social_link['social_icon'] ) && is_array( $mobile_social_link['social_icon'] ) && ! empty( $mobile_social_link['social_icon']['url'] ) ) {
+						$mobile_icon_url = $mobile_social_link['social_icon']['url'];
+					} elseif ( isset( $mobile_social_link['social_icon'] ) && is_numeric( $mobile_social_link['social_icon'] ) ) {
+						$mobile_icon_url = wp_get_attachment_image_url( (int) $mobile_social_link['social_icon'], 'thumbnail' );
+					} elseif ( isset( $mobile_social_link['social_icon'] ) && is_string( $mobile_social_link['social_icon'] ) ) {
+						$mobile_icon_url = $mobile_social_link['social_icon'];
+					}
+					?>
+					<a href="<?php echo esc_url( $mobile_social_link['social_url'] ?? '#' ); ?>" target="_blank" rel="noopener" aria-label="<?php esc_attr_e( 'Social link', 'dealsdot' ); ?>">
+						<?php if ( ! empty( $mobile_icon_url ) ) : ?>
+						<img src="<?php echo esc_url( $mobile_icon_url ); ?>" alt="" class="osn-mobile-menu__social-icon" />
+						<?php endif; ?>
+					</a>
+					<?php $mobile_social_count++; ?>
+				<?php endforeach; ?>
+			</div>
+			<?php endif; ?>
+		</div>
+		<?php endif; ?>
+	</div>
 <div class="body-content" id="top-banner-and-menu">
