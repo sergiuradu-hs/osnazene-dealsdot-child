@@ -80,6 +80,16 @@ $permalink = get_permalink( $post_id );
 <div class="osn-clanice-card">
     <a class="osn-clanice-card__inner" href="<?php echo esc_url( $permalink ); ?>">
         <div class="osn-clanice-card__image-wrap">
+             <?php if ( $badge_class ) : ?>
+                <span class="osn-clanice-card__badge osn-clanice-card__badge--mobile <?php echo esc_attr( $badge_class ); ?>" aria-hidden="true">
+                    <svg viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg">
+                        <polygon class="osn-clanice-card__badge-ribbon" points="17.77,24.85 22.63,27.53 20,44 13,44"/>
+                        <polygon class="osn-clanice-card__badge-ribbon" points="22.63,27.53 28.04,24.85 33,44 26,44"/>
+                        <circle class="osn-clanice-card__badge-circle" cx="23" cy="18" r="13"/>
+                        <text class="osn-clanice-card__badge-star" x="23" y="23" text-anchor="middle" font-size="14" font-family="serif">★</text>
+                    </svg>
+                </span>
+            <?php endif; ?>
             <?php if ( $img_url ) : ?>
                 <img class="osn-clanice-card__photo"
                      src="<?php echo esc_url( $img_url ); ?>"
