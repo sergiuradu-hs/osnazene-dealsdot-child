@@ -2814,9 +2814,6 @@ section.vc_section.home-page-second-section .wpb_single_image {
   position: relative;
   border-radius: 12px;
   overflow: hidden; /* clips image corners */
-  box-shadow:
-    0 1px 2px rgba(16, 24, 40, 0.06),
-    0 1px 3px rgba(16, 24, 40, 0.1);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -6985,6 +6982,8 @@ a.osn-tim-card--linked:hover {
   }
   .osn-clanice-grid__pagination {
     box-shadow: none;
+    gap: 22px;
+    padding: 16px 0;
   }
   .osn-clanice-pag__num.is-active {
     background-color: #151367;
@@ -6998,5 +6997,22 @@ a.osn-tim-card--linked:hover {
   .osn-clanice-pag__btn--prev,
   .osn-clanice-pag__btn--next {
     color: #151367;
+  }
+  section.vc_section,
+  section.osnazene_section {
+    padding-top: 12px;
+    padding-bottom: 34px;
+  }
+  .osn-clanice-card__body {
+    padding: 8px 16px;
+  }
+  .osn-clanice-card__tags {
+    gap: 4px;
+  }
+  .osn-clanice-card__name {
+    font-size: 16px;
+  }
+  .osn-clanice-grid__toolbar-bottom {
+    margin-bottom: 16px;
   }
 }
