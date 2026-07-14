@@ -7151,3 +7151,10 @@ a.osn-tim-card--linked:hover {
     color: #151367;
   }
 }
+
+/* Helper classes for responsive design */
+@media (max-width: 991px) {
+  .osn-full-under-992 {
+    width: 100% !important;
+  }
+}
