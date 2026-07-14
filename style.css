@@ -1702,6 +1702,7 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
 
 #home-page-hero-section {
    padding-top: 12px;
+   min-height: 686px;
 }
 
 .home-page-2-btn-cta {
