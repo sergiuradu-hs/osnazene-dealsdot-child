@@ -10,7 +10,7 @@
  * - $btn2 (array: url, title, target)
  */
 ?>
-<div class="wpb-cta wpb-osnazene-cta-2bttn-wrapper-outer dark">
+<div class="wpb-cta wpb-osnazene-cta-2bttn-wrapper-outer dark osn-hide-under-992">
     <div class="wpb-cta wpb-osnazene-cta-2bttn-wrapper-inner vc_col-xl-12 vc_col-lg-12 vc_col-md-12 vc_col-sm-12 vc_col-xs-12">
     <?php if ( ! empty( $heading1 ) || ! empty( $heading2 ) || ! empty( $heading3 ) ) : ?>
         <h3 class="wpb-cta__heading wpb-osnazene-cta-2bttn-heading">

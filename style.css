@@ -1779,8 +1779,23 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
 @media (max-width: 991px) {
   #home-page-hero-section-round-image {
     width: 75% !important;
-    transform: translateX(25%) !important;
+	transform: translateX(25%) !important;
   }
+}
+
+
+.home-page-hero-section-trophy-badge {
+   padding: 12px;
+   border: 0;
+   background: transparent;
+   box-sizing: border-box;
+}
+
+.home-page-hero-section-trophy-badge > .vc_column-inner {
+   height: 100%;
+   border: 1px solid var(--osn-color-secondary);
+   border-radius: 4px;
+   background: rgba(255, 255, 255, 0.20);
 }
 
 .home-page-2-btn-cta {
@@ -3202,13 +3217,19 @@ section.vc_section.home-page-second-section .wpb_single_image {
 
 /* ---- Badge --------------------------------------------------------------- */
 .osn-clanice-card__badge {
-  position: absolute;
-  right: 16px;
-  top: 450px; /* = image-height(480) - 30px overlap */
-  width: 46px;
-  height: 46px;
-  display: block;
-  pointer-events: none;
+    position: absolute;
+    right: 16px;
+    top: 450px; /* = image-height(480) - 30px overlap */
+    width: 46px;
+    height: 46px;
+    display: block;
+    pointer-events: none;
+	border-radius: 4px;
+  	backdrop-filter: blur(4px);
+  	display: flex;
+  	align-items: center;
+  	justify-content: center;
+	border: 1px solid #f3edd9;
 }
 
 .osn-clanice-card__badge svg {
@@ -7249,12 +7270,18 @@ a.osn-tim-card--linked:hover {
 @media (max-width: 767px) {
   .osn-clanica-single__mobile-header {
     display: block;
+<<<<<<< HEAD
     background-color: #151367;
     margin: -16px -24px 0px;
   }
   .osn-clanica-single__photo-wrap {
     display: none;
   }
+=======
+	background-color: #151367;
+    margin: -16px -24px 0px;
+  }
+>>>>>>> 4bf2d64 (Add home-page-hero-section-trophy-badge)
   .osn-clanica-single__mobile-header .osn-clanica-single__photo {
     width: 154px;
     height: 154px;
@@ -7262,9 +7289,18 @@ a.osn-tim-card--linked:hover {
     align-items: center;
     justify-content: center;
     margin: 0 auto;
+<<<<<<< HEAD
     border: 2px solid #c6b08a;
     border-radius: 50%;
   }
+=======
+	border: 2px solid #c6b08a;
+    border-radius: 50%;
+  }
+  .osn-clanica-single__photo-wrap {
+    display: none;
+  }
+>>>>>>> 4bf2d64 (Add home-page-hero-section-trophy-badge)
   .osn-clanica-single__info {
     display: none;
   }
@@ -7276,8 +7312,15 @@ a.osn-tim-card--linked:hover {
     color: #fdfdfd;
     padding: 15.5px 0;
     line-height: 120%;
+<<<<<<< HEAD
   }
 }
+=======
+	margin-top: 24px;
+  }
+}
+
+>>>>>>> 4bf2d64 (Add home-page-hero-section-trophy-badge)
 
 /* /clanice mobile */
 @media (max-width: 767px) {
@@ -7295,9 +7338,17 @@ a.osn-tim-card--linked:hover {
     top: auto;
     right: 16px;
     bottom: 16px;
+	border-radius: 4px;
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .osn-clanice-grid__pagination {
     box-shadow: none;
+	padding-left: 0;
+    padding-right: 0;
+    gap: clamp(8px, 2vw, 22px);
   }
   .osn-clanice-pag__num.is-active {
     background-color: #151367;
@@ -7318,5 +7369,9 @@ a.osn-tim-card--linked:hover {
 @media (max-width: 991px) {
   .osn-full-under-992 {
     width: 100% !important;
+  }
+	
+  .osn-hide-under-992 {
+    display: none !important;
   }
 }
