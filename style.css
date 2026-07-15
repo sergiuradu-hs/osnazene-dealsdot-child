@@ -3116,9 +3116,9 @@ section.vc_section.home-page-second-section .wpb_single_image {
 
 .osn-clanice-card__image-wrap {
   height: 480px;
-  overflow: hidden;
   flex-shrink: 0;
   position: relative;
+  overflow: visible;
 }
 
 .osn-clanice-card__photo {
@@ -3202,6 +3202,12 @@ section.vc_section.home-page-second-section .wpb_single_image {
   height: 46px;
   display: block;
   pointer-events: none;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid white;
 }
 
 .osn-clanice-card__badge svg {
