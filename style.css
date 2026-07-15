@@ -3898,13 +3898,6 @@ section.vc_section.home-page-second-section .wpb_single_image {
     gap: 20px;
   }
 
-  /* Typography overrides */
-  .osn-clanica-single__name {
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 20px;
-  }
-
   .osn-clanica-single__meta-row {
     font-size: 14px;
   }
@@ -7246,6 +7239,44 @@ a.osn-tim-card--linked:hover {
 }
 
 /* End of WS Form */
+
+/* /clanice/name */
+.osn-clanica-single__mobile-header {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .osn-clanica-single__mobile-header {
+    display: block;
+    background-color: #151367;
+    margin: -16px -24px 0px;
+  }
+  .osn-clanica-single__photo-wrap {
+    display: none;
+  }
+  .osn-clanica-single__mobile-header .osn-clanica-single__photo {
+    width: 154px;
+    height: 154px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    border: 2px solid #c6b08a;
+    border-radius: 50%;
+  }
+  .osn-clanica-single__info {
+    display: none;
+  }
+  .osn-clanica-single__name {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 20px;
+    text-align: center;
+    color: #fdfdfd;
+    padding: 15.5px 0;
+    line-height: 120%;
+  }
+}
 
 /* /clanice mobile */
 @media (max-width: 767px) {
