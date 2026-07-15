@@ -3207,7 +3207,7 @@ section.vc_section.home-page-second-section .wpb_single_image {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid white;
+  border: 1px solid #f3edd9;
 }
 
 .osn-clanice-card__badge svg {
@@ -7270,6 +7270,9 @@ a.osn-tim-card--linked:hover {
     justify-content: center;
   }
   .osn-clanice-grid__pagination {
+    padding-left: 0;
+    padding-right: 0;
+    gap: clamp(8px, 2vw, 22px);
     box-shadow: none;
   }
   .osn-clanice-pag__num.is-active {
