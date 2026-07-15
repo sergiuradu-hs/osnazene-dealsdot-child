@@ -1708,6 +1708,7 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
 @media (max-width: 991px) {
   #home-page-hero-section-round-image {
     width: 75% !important;
+    transform: translateX(25%) !important;
   }
 }
 
