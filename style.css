@@ -1559,6 +1559,126 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
   text-transform: uppercase;
   border: 0;
 }
+
+.osn-hero-trophy-badges {
+   display: flex;
+   gap: 3vw;
+   width: 100%;
+}
+
+.osn-hero-trophy-badges__badge {
+   display: flex;
+   align-items: center;
+   gap: 2vw;
+   flex: 1 1 0;
+   min-width: 0;
+   min-height: 12vw;
+   padding: 2vw;
+   border: 3px solid var(--osn-color-secondary);
+   border-radius: 12px;
+   background: rgba(255, 255, 255, 0.20);
+   color: var(--osn-color-secondary);
+}
+
+.osn-hero-trophy-badges__media {
+   display: flex;
+   flex: 0 0 32%;
+   min-width: 0;
+   flex-direction: column;
+   align-items: center;
+   gap: 1vw;
+   text-transform: uppercase;
+}
+
+.osn-hero-trophy-badges__icon {
+   width: 7vw;
+   height: 7vw;
+   object-fit: contain;
+}
+
+.osn-hero-trophy-badges__winner {
+   font-family: var(--osn-font-main);
+   font-size: 0.1vw;
+   font-weight: 400;
+   line-height: 1.05;
+   white-space: nowrap;
+}
+
+.osn-hero-trophy-badges__content {
+   display: flex;
+   flex: 1 1 auto;
+   min-width: 0;
+   flex-direction: column;
+   text-transform: uppercase;
+}
+
+.osn-hero-trophy-badges__top {
+   font-family: var(--osn-font-main);
+   font-size: 1.8vw;
+   font-weight: 700;
+   line-height: 1.1;
+   letter-spacing: 0.04em;
+}
+
+.osn-hero-trophy-badges__large,
+.osn-hero-trophy-badges__bottom {
+   font-family: var(--osn-font-main);
+   font-size: 3.2vw;
+   font-weight: 700;
+   line-height: 1.05;
+   letter-spacing: 0.04em;
+}
+
+.osn-hero-trophy-badges__bottom {
+   display: flex;
+   gap: 2vw;
+}
+
+@media (max-width: 991px) {
+   .osn-hero-trophy-badges {
+      gap: 12px;
+   }
+
+   .osn-hero-trophy-badges__badge {
+      gap: 8px;
+      min-height: 24vw;
+      padding: 8px;
+      border-width: 1px;
+      border-radius: 6px;
+   }
+
+   .osn-hero-trophy-badges__media {
+      gap: 4px;
+   }
+
+   .osn-hero-trophy-badges__icon {
+      width: 8vw;
+      height: 8vw;
+   }
+
+   .osn-hero-trophy-badges__winner {
+      font-size: 3vw;
+   }
+
+   .osn-hero-trophy-badges__top {
+      font-size: 2.4vw;
+   }
+
+   .osn-hero-trophy-badges__large,
+   .osn-hero-trophy-badges__bottom {
+      font-size: 4vw;
+   }
+
+   .osn-hero-trophy-badges__bottom {
+      gap: 8px;
+   }
+}
+
+@media (max-width: 420px) {
+   .osn-hero-trophy-badges {
+      flex-direction: column;
+   }
+}
 /* End of Custom widgets */
 
 /* Tax Grid (drzava) */
@@ -1783,20 +1903,6 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
   }
 }
 
-
-.home-page-hero-section-trophy-badge {
-   padding: 12px;
-   border: 0;
-   background: transparent;
-   box-sizing: border-box;
-}
-
-.home-page-hero-section-trophy-badge > .vc_column-inner {
-   height: 100%;
-   border: 1px solid var(--osn-color-secondary);
-   border-radius: 4px;
-   background: rgba(255, 255, 255, 0.20);
-}
 
 .home-page-2-btn-cta {
   position: absolute;
