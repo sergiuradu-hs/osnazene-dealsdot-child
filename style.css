@@ -1484,6 +1484,40 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
 /* End of custom fonts */
 
 /* Custom widgets */
+
+
+/* WPBakery Statistics Box */
+.osn-statistics-box {
+  display: flex;
+  width: 100%;
+  height: 200px;
+  padding: 28px 20px;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  border: 2px solid var(--osn-color-text);
+  border-radius: 20px;
+  background: #b8bfd3;
+  color: var(--osn-color-text);
+  text-align: center;
+}
+
+.osn-statistics-box__heading {
+  font-family: var(--osn-font-main);
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.osn-statistics-box__text {
+  font-family: var(--osn-font-main);
+  font-size: clamp(20px, 2.1vw, 28px);
+  font-weight: 500;
+  line-height: 1.15;
+}
+
 .wpb-cta.wpb-osnazene-cta-2bttn-wrapper-outer {
   display: flex;
 }
