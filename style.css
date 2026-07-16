@@ -1925,16 +1925,18 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
 /* Page specific rules below */
 
 /* Home page rules */
-
-#homepage-hero-section-h1 {
-}
-
 #home-page-thin-stripe-section {
   display: flex;
   padding: 16px 0px;
   justify-content: center;
   align-items: center;
   gap: 46px;
+}
+
+@media (max-width: 991px) {
+  #home-page-thin-stripe-section {
+    display: none;
+  }
 }
 
 .home-page-thin-stripe-column .vc_column-inner .wpb_wrapper {
