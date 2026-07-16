@@ -7598,3 +7598,9 @@ a.osn-tim-card--linked:hover {
     display: none !important;
   }
 }
+
+@media (min-width: 992px) {
+  .osn-hide-above-992 {
+    display: none !important;
+  }
+}
