@@ -9,8 +9,27 @@
  * - $btn1 (array: url, title, target)
  * - $btn2 (array: url, title, target)
  */
+
+// Strip empty paragraphs from the editor text; fall back to the default copy.
+if ( ! empty( $text ) ) {
+    $text_clean = preg_replace_callback(
+        '/<p\b[^>]*>(.*?)<\/p>/is',
+        static function ( $m ) {
+            $inner = html_entity_decode( wp_strip_all_tags( $m[1] ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+            $inner = preg_replace( '/[\s\x{00A0}]+/u', '', $inner );
+            return $inner === '' ? '' : $m[0];
+        },
+        wp_kses_post( $text )
+    );
+} else {
+    $text_clean = '<p>Mi smo pokretač razvoja ženskog preduzetništva — tu da vas podržimo u svakom izazovu, pružimo prave informacije, omogućimo edukaciju, osnažimo, povežemo i pomognemo vam da ostvarite svoje najveće ciljeve.<br /><br />Prijavi se sa svojim biznisom već danas i počni da prodaješ kao deo zajednice i rasta Osnaženih!<br /><br /><strong>Dobrodošla u zajednicu u kojoj se ženski glas vidi, čuje i vrednuje.</strong></p>';
+}
+
+$headings = array_filter( [ $heading1, $heading2, $heading3 ], static function ( $h ) {
+    return ! empty( $h );
+} );
 ?>
-<div class="wpb-cta wpb-osnazene-cta-2bttn-wrapper-outer dark osn-hide-under-992">
+<div class="wpb-cta wpb-osnazene-cta-2bttn-wrapper-outer dark">
     <div class="wpb-cta wpb-osnazene-cta-2bttn-wrapper-inner vc_col-xl-12 vc_col-lg-12 vc_col-md-12 vc_col-sm-12 vc_col-xs-12">
     <?php if ( ! empty( $heading1 ) || ! empty( $heading2 ) || ! empty( $heading3 ) ) : ?>
         <h3 class="wpb-cta__heading wpb-osnazene-cta-2bttn-heading">
@@ -24,25 +43,7 @@
         </h3>
     <?php endif; ?>
 
-    <?php if ( ! empty( $text ) ) : ?>
-        <?php $text1 = wp_kses_post( $text ); ?>
-        <?php
-            $text_clean = preg_replace_callback(
-                '/<p\b[^>]*>(.*?)<\/p>/is',
-                static function ( $m ) {
-                    $inner = html_entity_decode( wp_strip_all_tags( $m[1] ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
-                    $inner = preg_replace( '/[\s\x{00A0}]+/u', '', $inner );
-                    return $inner === '' ? '' : $m[0];
-                },
-                $text1
-            );
-        ?>
-        <div class="wpb-cta__text wpb-osnazene-cta-2bttn-text"><?php echo $text_clean; ?></div>
-    <?php else: ?>
-        <div class="wpb-cta__text wpb-osnazene-cta-2bttn-text">
-            <p>Mi smo pokretač razvoja ženskog preduzetništva — tu da vas podržimo u svakom izazovu, pružimo prave informacije, omogućimo edukaciju, osnažimo, povežemo i pomognemo vam da ostvarite svoje najveće ciljeve.<br /><br />Prijavi se sa svojim biznisom već danas i počni da prodaješ kao deo zajednice i rasta Osnaženih!<br /><br /><strong>Dobrodošla u zajednicu u kojoj se ženski glas vidi, čuje i vrednuje.</strong></p>
-        </div>
-    <?php endif; ?>
+    <div class="wpb-cta__text wpb-osnazene-cta-2bttn-text"><?php echo $text_clean; ?></div>
 
     <div class="wpb-cta__buttons wpb-osnazene-cta-2bttn-buttons">
         <?php if ( ! empty( $btn1['url'] ) ) : ?>
@@ -57,5 +58,31 @@
         </a>
         <?php endif; ?>
     </div>
+    </div>
+
+    <div class="wpb-cta wpb-osnazene-cta-2bttn-mobile">
+        <?php if ( ! empty( $headings ) ) : ?>
+        <ul class="wpb-osnazene-cta-2bttn-mobile__headings">
+            <?php foreach ( $headings as $heading ) : ?>
+            <li class="wpb-osnazene-cta-2bttn-mobile__heading"><?php echo esc_html( $heading ); ?></li>
+            <?php endforeach; ?>
+        </ul>
+        <?php endif; ?>
+
+        <div class="wpb-osnazene-cta-2bttn-mobile__text"><?php echo $text_clean; ?></div>
+
+        <div class="wpb-osnazene-cta-2bttn-mobile__buttons">
+            <?php if ( ! empty( $btn1['url'] ) ) : ?>
+            <a class="btn wpb-osnazene-cta-2bttn-mobile__btn" href="<?php echo esc_url( $btn1['url'] ); ?>"<?php echo ! empty( $btn1['target'] ) ? ' target="' . esc_attr( $btn1['target'] ) . '" rel="noopener"' : ''; ?>>
+                <?php echo esc_html( isset( $btn1['title'] ) && $btn1['title'] !== '' ? $btn1['title'] : 'Button 1' ); ?>
+            </a>
+            <?php endif; ?>
+
+            <?php if ( ! empty( $btn2['url'] ) ) : ?>
+            <a class="btn wpb-osnazene-cta-2bttn-mobile__btn" href="<?php echo esc_url( $btn2['url'] ); ?>"<?php echo ! empty( $btn2['target'] ) ? ' target="' . esc_attr( $btn2['target'] ) . '" rel="noopener"' : ''; ?>>
+                <?php echo esc_html( isset( $btn2['title'] ) && $btn2['title'] !== '' ? $btn2['title'] : 'Button 2' ); ?>
+            </a>
+            <?php endif; ?>
+        </div>
     </div>
 </div>

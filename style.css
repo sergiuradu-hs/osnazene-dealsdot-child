@@ -1560,6 +1560,91 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
   border: 0;
 }
 
+/* Two Button CTA - mobile layout (< 992px) */
+.wpb-osnazene-cta-2bttn-mobile {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  .wpb-cta.wpb-osnazene-cta-2bttn-wrapper-inner {
+    display: none;
+  }
+
+  .wpb-osnazene-cta-2bttn-mobile {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 24px;
+    padding: 32px 24px;
+    font-family: var(--osn-font-main);
+    background: var(--osn-color-secondary);
+    color: var(--osn-color-text);
+  }
+
+  .wpb-osnazene-cta-2bttn-mobile__headings {
+    margin: 0;
+    padding-left: 28px;
+    list-style: disc;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-self: center;
+  }
+
+  /* Extra specificity to beat the theme's `.dark li` / `.dark p` white text */
+  .wpb-osnazene-cta-2bttn-mobile .wpb-osnazene-cta-2bttn-mobile__heading {
+    color: var(--osn-color-text);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 1.92px;
+  }
+
+  .wpb-osnazene-cta-2bttn-mobile__text {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.45;
+  }
+
+  .wpb-osnazene-cta-2bttn-mobile .wpb-osnazene-cta-2bttn-mobile__text p {
+    margin: 0 0 16px;
+    color: var(--osn-color-text);
+  }
+
+  .wpb-osnazene-cta-2bttn-mobile__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .wpb-osnazene-cta-2bttn-mobile__buttons {
+    display: flex;
+    /* Design shows button 2 ("Postani osnažena") on top on mobile */
+    flex-direction: column-reverse;
+    gap: 32px;
+  }
+
+  .wpb-osnazene-cta-2bttn-mobile .btn.wpb-osnazene-cta-2bttn-mobile__btn,
+  .wpb-osnazene-cta-2bttn-mobile .btn.wpb-osnazene-cta-2bttn-mobile__btn:hover,
+  .wpb-osnazene-cta-2bttn-mobile .btn.wpb-osnazene-cta-2bttn-mobile__btn:focus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 24px 16px;
+    background: var(--osn-color-text);
+    color: var(--osn-color-white);
+    font-family: var(--osn-font-main);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 0;
+    border-radius: 0;
+  }
+}
+
+/* End of Two Button CTA - mobile layout (< 992px) */
+
 .osn-hero-trophy-badges {
   display: flex;
   gap: 3vw;
@@ -1907,18 +1992,18 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
   }
 }
 
-.home-page-2-btn-cta {
-  position: absolute;
-  bottom: -321px;
-  left: 0;
-  width: 100%;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
 @media (min-width: 992px) {
   section.vc_section.home-page-second-section {
     padding-top: 420px !important;
+  }
+
+  .home-page-2-btn-cta {
+    position: absolute;
+    bottom: -321px;
+    left: 0;
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 }
 
