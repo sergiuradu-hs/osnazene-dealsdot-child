@@ -1847,8 +1847,10 @@ position: absolute;
    padding: 0 !important;
 }
 
-section.vc_section.home-page-second-section {
-   padding-top: 420px;
+@media (min-width: 992px) {
+	section.vc_section.home-page-second-section {
+    padding-top: 420px !important;
+	}
 }
 
 section.vc_section.home-page-second-section .wpb_single_image {
