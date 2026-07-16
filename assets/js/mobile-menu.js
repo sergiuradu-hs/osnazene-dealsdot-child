@@ -35,6 +35,11 @@
       }
    }
 
+   function isPlaceholderLink(anchor) {
+      const href = (anchor.getAttribute('href') || '').trim();
+      return href === '' || href === '#';
+   }
+
    parentItems.forEach((item) => {
       const link = item.querySelector(':scope > a');
       const submenu = item.querySelector(':scope > .sub-menu');
@@ -52,14 +57,26 @@
       submenu.hidden = true;
       link.after(toggle);
 
-      toggle.addEventListener('click', () => {
+      function toggleSubmenu() {
          const willOpen = !item.classList.contains('is-open');
 
          closeSubmenus();
          item.classList.toggle('is-open', willOpen);
          toggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
          submenu.hidden = !willOpen;
-      });
+      }
+
+      toggle.addEventListener('click', toggleSubmenu);
+
+      // Menu items without a real destination should expand their submenu
+      // instead of navigating or closing the menu.
+      if (isPlaceholderLink(link)) {
+         link.setAttribute('role', 'button');
+         link.addEventListener('click', (event) => {
+            event.preventDefault();
+            toggleSubmenu();
+         });
+      }
    });
 
    burger.addEventListener('click', () => {
@@ -69,7 +86,7 @@
    menu.addEventListener('click', (event) => {
       const target = event.target;
 
-      if (target instanceof HTMLAnchorElement) {
+      if (target instanceof HTMLAnchorElement && !isPlaceholderLink(target)) {
          setMenuOpen(false);
       }
    });
