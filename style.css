@@ -4039,7 +4039,8 @@ section.vc_section.home-page-second-section .wpb_single_image {
 
   /* Typography overrides */
   .osn-clanica-single__meta-row {
-    font-size: 14px;
+    font-size: 16px;
+    color: white;
   }
 
   .osn-clanica-single__opis-label,
@@ -7416,6 +7417,44 @@ a.osn-tim-card--linked:hover {
     padding: 15.5px 0;
     line-height: 120%;
     margin-top: 24px;
+    margin-bottom: 24px;
+  }
+  .osn-clanice-single__subheading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3px 0;
+    flex-wrap: wrap;
+  }
+  .osn-clanica-single__meta-row-separator {
+    width: 10px;
+    height: 10px;
+    background: #c6b08a;
+    margin: 0px 18px;
+    border-radius: 50%;
+  }
+  .osn-clanice-single__status-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 24px 0;
+  }
+  .osn-clanica-single__cta-wrap {
+    display: none;
+  }
+  .osn-clanica-single__mobile-header .osn-clanica-single__cta-wrap {
+    display: block;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .osn-clanica-single__cta {
+    margin-bottom: 24px;
+    border: none;
+    background-color: #c6b08a;
+    color: #151367;
+    border-radius: 0;
   }
 }
 

@@ -115,6 +115,44 @@ $display_title = ! empty( $naziv_firme ) ? esc_html( $naziv_firme ) : esc_html( 
                 <?php endif; ?>
             </div>
             <h3 class="osn-clanica-single__name"><?php echo $display_title; ?></h3>
+            <div class="osn-clanice-single__subheading">
+                <?php if ( ! empty( $delatnost_label ) ) : ?>
+                    <p class="osn-clanica-single__meta-row">
+                        <span><?php echo esc_html( $delatnost_label ); ?></span>
+                    </p>
+                <?php endif; ?>
+                <?php if ( ! empty( $delatnost_label ) && ! empty( $lokacija ) ) :?>
+                    <span class="osn-clanica-single__meta-row-separator"></span>
+                 <?php endif; ?>   
+                 <?php if ( ! empty( $lokacija ) ) : ?>
+                    <p class="osn-clanica-single__meta-row">
+                        <span><?php echo esc_html( $lokacija ); ?></span>
+                    </p>
+                <?php endif; ?>
+            </div>
+             <?php if ( ! empty( $status_biznisa ) ) : ?>
+                <div class="osn-clanice-single__status-container">
+                  <span class="osn-clanica-single__status-tag"><?php echo esc_html( $status_biznisa ); ?></span>
+                </div>
+            <?php endif; ?>
+            <!-- Mobile-only CTA button -->
+            <?php if ( ! empty( $email ) || ! empty( $sajt ) || ! empty( $telefon ) ) : ?>
+                <div class="osn-clanica-single__cta-wrap">
+                    <?php if ( ! empty( $email ) ) : ?>
+                    <a class="osn-clanica-single__cta btn btn-primary" href="mailto:<?php echo esc_attr( antispambot( $email ) ); ?>">
+                        <?php esc_html_e( 'Kontaktiraj Članicu', 'dealsdot-child' ); ?>
+                    </a>
+                    <?php elseif ( ! empty( $sajt ) ) : ?>
+                    <a class="osn-clanica-single__cta btn btn-primary" href="<?php echo esc_url( $sajt ); ?>" target="_blank" rel="noopener noreferrer">
+                        <?php esc_html_e( 'Kontaktiraj Članicu', 'dealsdot-child' ); ?>
+                    </a>
+                    <?php else : ?>
+                    <a class="osn-clanica-single__cta btn btn-primary" href="tel:<?php echo esc_attr( preg_replace( '/[^\d+]/', '', $telefon ) ); ?>">
+                        <?php esc_html_e( 'Kontaktiraj Članicu', 'dealsdot-child' ); ?>
+                    </a>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
         </div>
 
         <div class="osn-clanica-single__inner">
@@ -324,24 +362,7 @@ $display_title = ! empty( $naziv_firme ) ? esc_html( $naziv_firme ) : esc_html( 
                 </div><!-- /.osn-clanica-single__links -->
                 <?php endif; ?>
 
-                <!-- Mobile-only CTA button -->
-                <?php if ( ! empty( $email ) || ! empty( $sajt ) || ! empty( $telefon ) ) : ?>
-                <div class="osn-clanica-single__cta-wrap">
-                    <?php if ( ! empty( $email ) ) : ?>
-                    <a class="osn-clanica-single__cta btn btn-primary" href="mailto:<?php echo esc_attr( antispambot( $email ) ); ?>">
-                        <?php esc_html_e( 'Kontaktiraj Članicu', 'dealsdot-child' ); ?>
-                    </a>
-                    <?php elseif ( ! empty( $sajt ) ) : ?>
-                    <a class="osn-clanica-single__cta btn btn-primary" href="<?php echo esc_url( $sajt ); ?>" target="_blank" rel="noopener noreferrer">
-                        <?php esc_html_e( 'Kontaktiraj Članicu', 'dealsdot-child' ); ?>
-                    </a>
-                    <?php else : ?>
-                    <a class="osn-clanica-single__cta btn btn-primary" href="tel:<?php echo esc_attr( preg_replace( '/[^\d+]/', '', $telefon ) ); ?>">
-                        <?php esc_html_e( 'Kontaktiraj Članicu', 'dealsdot-child' ); ?>
-                    </a>
-                    <?php endif; ?>
-                </div>
-                <?php endif; ?>
+                
 
             </div><!-- /.osn-clanica-single__right -->
 
