@@ -156,6 +156,7 @@ $display_title = ! empty( $naziv_firme ) ? esc_html( $naziv_firme ) : esc_html( 
         </div>
 
         <div class="osn-clanica-single__inner">
+           
 
             <!-- ===================== LEFT COLUMN ===================== -->
             <div class="osn-clanica-single__left">
@@ -189,6 +190,17 @@ $display_title = ! empty( $naziv_firme ) ? esc_html( $naziv_firme ) : esc_html( 
                     </div>
                     <?php endif; ?>
                 </div><!-- /.osn-clanica-single__photo-wrap -->
+
+                 <div class="osn-clanice-single__description-mobile">
+                    <?php if ( ! empty( $opis ) ) : ?>
+                        <div class="osn-clanica-single__opis">
+                            <p class="osn-clanica-single__opis-label"><strong><?php esc_html_e( 'Opis:', 'dealsdot-child' ); ?></strong></p>
+                            <div class="osn-clanica-single__opis-text">
+                                <?php echo wp_kses_post( wpautop( $opis ) ); ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </div>
 
                 <?php if ( ! empty( $gallery_ids ) ) : ?>
                 <!-- Gallery thumbnails -->
