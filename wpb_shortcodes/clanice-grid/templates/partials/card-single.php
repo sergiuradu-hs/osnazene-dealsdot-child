@@ -106,9 +106,6 @@ $permalink = get_permalink( $post_id );
                                 </clipPath>
                                 </defs>
                         </svg>
-
-
-
                     <?php elseif ( $zvezdica === 'silver' || $zvezdica === 'srebrna' ) : ?>
                         <svg width="33" height="43" viewBox="0 0 33 43" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M17.2862 26.0214L11.1162 41.2928L8.70326 38.5632L8.52461 38.3614L8.25772 38.399L5.19693 38.837L11.3446 23.6209L17.2862 26.0214Z" fill="#F3EDD9" stroke="#C6B08A"/>
@@ -130,9 +127,7 @@ $permalink = get_permalink( $post_id );
                             <rect width="22" height="15.5833" fill="white" transform="translate(5.29883 7.11499)"/>
                             </clipPath>
                             </defs>
-                            </svg>
-
-
+                        </svg>
                     <?php elseif ( $zvezdica === 'starter' ) : ?>
                      <svg width="33" height="43" viewBox="0 0 33 43" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M17.2872 26.0214L11.1172 41.2928L8.70424 38.5632L8.52559 38.3614L8.2587 38.399L5.19791 38.837L11.3456 23.6209L17.2872 26.0214Z" fill="#DAD4C0" stroke="#BBB5A1"/>
