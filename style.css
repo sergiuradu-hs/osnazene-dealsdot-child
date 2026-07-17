@@ -7516,6 +7516,109 @@ a.osn-tim-card--linked:hover {
   display: none;
 }
 
+/* Preview modal */
+.osn-clanica-single__preview {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 28px;
+  line-height: 1;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+.osn-clanica-single__preview-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.osn-clanica-single__preview-panel {
+  position: relative;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  z-index: 1;
+}
+
+.osn-clanica-single__preview-content {
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.osn-clanica-single__preview-image {
+  max-width: 100%;
+  max-height: 90vh;
+  border-radius: 12px;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.45);
+}
+
+.osn-clanica-single__preview-close {
+  position: absolute;
+  top: -72px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 9999px;
+  color: #ffffff;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+  border: 0.5px solid white;
+  border-radius: 4px;
+  background: transparent;
+}
+
+.osn-clanica-single__preview-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  border-radius: 4px;
+  border: 0.5px solid #bcbcbc;
+  border-radius: 4px;
+  color: black;
+  opacity: 0.36;
+}
+
+.osn-clanica-single__preview-arrow--prev {
+  left: 0px;
+}
+
+.osn-clanica-single__preview-arrow--next {
+  right: 0px;
+}
+
+.osn-clanica-preview-open {
+  overflow: hidden;
+}
+
 @media (max-width: 767px) {
   .osn-clanica-single__mobile-header {
     display: block;

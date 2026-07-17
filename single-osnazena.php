@@ -111,7 +111,7 @@ $display_title = ! empty( $naziv_firme ) ? esc_html( $naziv_firme ) : esc_html( 
             </div>
             <div class="osn-clanica-single__photo">
                 <?php if ($img_url) : ?>
-                    <img id="osn-clanica-main-photo" class="osn-clanica-single__photo" src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($name); ?>" />
+                    <img  class="osn-clanica-single__photo" src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($name); ?>" />
                 <?php else : ?>
                     <div class="osn-clanica-single__photo-placeholder"></div>
                 <?php endif; ?>
@@ -289,6 +289,7 @@ $display_title = ! empty( $naziv_firme ) ? esc_html( $naziv_firme ) : esc_html( 
                             ?>
                             <button class="osn-clanica-single__thumb<?php echo $thumbs_shown === 0 ? ' is-active' : ''; ?>"
                                     data-full="<?php echo esc_url( $full_url ); ?>"
+                                    data-index="<?php echo esc_attr( $thumbs_shown ); ?>"
                                     type="button"
                                     aria-label="<?php esc_attr_e( 'Prikaži sliku', 'dealsdot-child' ); ?>">
                                 <img src="<?php echo esc_url( $thumb_url ); ?>" alt="" loading="lazy" />
@@ -304,6 +305,47 @@ $display_title = ! empty( $naziv_firme ) ? esc_html( $naziv_firme ) : esc_html( 
                         <?php endfor; ?>
                     </div>
                 </div>
+
+                <div class="osn-clanica-single__preview-modal" id="osn-clanica-preview-modal" hidden>
+                    <div class="osn-clanica-single__preview-backdrop" data-action="close"></div>
+                    <div class="osn-clanica-single__preview-panel" role="dialog" aria-modal="true" aria-label="<?php esc_attr_e( 'Preview slike', 'dealsdot-child' ); ?>">
+                        <button type="button" class="osn-clanica-single__preview-close" data-action="close" aria-label="<?php esc_attr_e( 'Zatvori', 'dealsdot-child' ); ?>">×</button>
+                       
+                        <div class="osn-clanica-single__gallery">
+                            <div class="osn-clanica-single__preview">
+                                <img id="osn-clanica-preview-image" class="osn-clanica-main-photo" src="" alt="" loading="lazy" />
+                                 <button type="button" class="osn-clanica-single__preview-arrow osn-clanica-single__preview-arrow--prev" data-action="prev" aria-label="<?php esc_attr_e( 'Prethodna slika', 'dealsdot-child' ); ?>">‹</button>
+                                <button type="button" class="osn-clanica-single__preview-arrow osn-clanica-single__preview-arrow--next" data-action="next" aria-label="<?php esc_attr_e( 'Sledeća slika', 'dealsdot-child' ); ?>">›</button>
+                            </div>
+                            <div class="osn-clanica-single__thumbs">
+                                <?php
+                                $thumbs_shown = 0;
+                                foreach ( $gallery_ids as $gid ) {
+                                    if ( $thumbs_shown >= 3 ) break;
+                                    $thumb_url = wp_get_attachment_image_url( (int) $gid, 'thumbnail' );
+                                    $full_url  = wp_get_attachment_image_url( (int) $gid, 'large' );
+                                    if ( ! $thumb_url ) continue;
+                                    ?>
+                                    <button class="osn-clanica-single__thumb<?php echo $thumbs_shown === 0 ? ' is-active' : ''; ?>"
+                                            data-full="<?php echo esc_url( $full_url ); ?>"
+                                            data-index="<?php echo esc_attr( $thumbs_shown ); ?>"
+                                            type="button"
+                                            aria-label="<?php esc_attr_e( 'Prikaži sliku', 'dealsdot-child' ); ?>">
+                                        <img src="<?php echo esc_url( $thumb_url ); ?>" alt="" loading="lazy" />
+                                    </button>
+                                    <?php
+                                    $thumbs_shown++;
+                                }
+                                ?>
+                            </div>
+                            <div class="osn-clanica-single__dots" aria-hidden="true">
+                                <?php for ( $i = 0; $i < $thumbs_shown; $i++ ) : ?>
+                                    <span class="osn-clanica-single__dot<?php echo $i === 0 ? ' is-active' : ''; ?>"></span>
+                                <?php endfor; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
                 <?php endif; ?>
 
             </div><!-- /.osn-clanica-single__left -->
@@ -457,21 +499,185 @@ $display_title = ! empty( $naziv_firme ) ? esc_html( $naziv_firme ) : esc_html( 
 
 <script>
 (function () {
-    var thumbs = document.querySelectorAll('.osn-clanica-single__thumb');
     var mainPhoto = document.getElementById('osn-clanica-main-photo');
-    var dots = document.querySelectorAll('.osn-clanica-single__dot');
-    if (!thumbs.length || !mainPhoto) return;
+    var modal = document.getElementById('osn-clanica-preview-modal');
+    var mainThumbs = document.querySelectorAll('.osn-clanica-single__left .osn-clanica-single__thumb');
+    var modalThumbs = modal ? modal.querySelectorAll('.osn-clanica-single__thumb') : [];
+    var mainDots = document.querySelectorAll('.osn-clanica-single__left .osn-clanica-single__dot');
+    var modalDots = modal ? modal.querySelectorAll('.osn-clanica-single__dot') : [];
+    var modalImage = document.getElementById('osn-clanica-preview-image');
+    var backdrop = modal ? modal.querySelector('[data-action="close"]') : null;
+    var closeButton = modal ? modal.querySelector('[data-action="close"]') : null;
+    var prevButton = modal ? modal.querySelector('[data-action="prev"]') : null;
+    var nextButton = modal ? modal.querySelector('[data-action="next"]') : null;
+    var currentIndex = 0;
+    var galleryCount = mainThumbs.length;
 
-    thumbs.forEach(function (btn, i) {
-        btn.addEventListener('click', function () {
-            mainPhoto.src = btn.dataset.full;
-            thumbs.forEach(function (b) { b.classList.remove('is-active'); });
-            dots.forEach(function (d) { d.classList.remove('is-active'); });
-            btn.classList.add('is-active');
-            if (dots[i]) dots[i].classList.add('is-active');
+    if (!mainThumbs.length || !mainPhoto) return;
+
+    function openPreview(src, alt) {
+        if (!modal || !modalImage) {
+            return;
+        }
+        modalImage.src = src;
+        modalImage.alt = alt || '';
+        modal.removeAttribute('hidden');
+        document.body.classList.add('osn-clanica-preview-open');
+    }
+
+    function closePreview() {
+        if (!modal) {
+            return;
+        }
+        modal.setAttribute('hidden', '');
+        document.body.classList.remove('osn-clanica-preview-open');
+    }
+
+    if (backdrop) {
+        backdrop.addEventListener('click', closePreview);
+    }
+
+    function showIndex(index) {
+        if (!galleryCount) {
+            return;
+        }
+        currentIndex = (index + galleryCount) % galleryCount;
+        var activeThumb = mainThumbs[currentIndex];
+        if (!activeThumb) {
+            return;
+        }
+        var src = activeThumb.dataset.full;
+        var image = activeThumb.querySelector('img');
+        var altText = image ? image.alt : '';
+
+        mainPhoto.src = src;
+        if (modal && !modal.hasAttribute('hidden')) {
+            modalImage.src = src;
+            modalImage.alt = altText;
+        }
+        setActive(currentIndex);
+    }
+
+    function setActive(index) {
+        mainThumbs.forEach(function (b, idx) { b.classList.toggle('is-active', idx === index); });
+        modalThumbs.forEach(function (b, idx) { b.classList.toggle('is-active', idx === index); });
+        mainDots.forEach(function (d, idx) { d.classList.toggle('is-active', idx === index); });
+        modalDots.forEach(function (d, idx) { d.classList.toggle('is-active', idx === index); });
+    }
+
+    if (prevButton) {
+        prevButton.addEventListener('click', function () {
+            showIndex(currentIndex - 1);
         });
-    });
+    }
+
+    if (nextButton) {
+        nextButton.addEventListener('click', function () {
+            showIndex(currentIndex + 1);
+        });
+    }
+
+    if (closeButton) {
+        closeButton.addEventListener('click', closePreview);
+    }
+
+    function bindThumbs(thumbButtons) {
+        thumbButtons.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var index = Number(btn.dataset.index);
+                if (isNaN(index)) {
+                    return;
+                }
+
+                var src = btn.dataset.full;
+                var image = btn.querySelector('img');
+                var altText = image ? image.alt : '';
+
+                mainPhoto.src = src;
+                setActive(index);
+
+                if (window.matchMedia && window.matchMedia('(max-width: 767px)').matches) {
+                    openPreview(src, altText);
+                }
+            });
+        });
+    }
+
+    bindThumbs(mainThumbs);
+    bindThumbs(modalThumbs);
 }());
 </script>
 
 <?php get_footer(); ?>
+
+
+
+<!-- (function () {
+    var thumbs = document.querySelectorAll('.osn-clanica-single__thumb');
+    var modal = document.getElementById('osn-clanica-preview-modal');
+    var modalImage = document.getElementById('osn-clanica-preview-image');
+    var closeButtons = modal ? modal.querySelectorAll('[data-action="close"]') : [];
+
+    if (!thumbs.length || !modal || !modalImage) {
+        return;
+    }
+
+    function openPreview(src, alt) {
+        modalImage.src = src;
+        modalImage.alt = alt || '';
+        modal.removeAttribute('hidden');
+        document.body.classList.add('osn-clanica-preview-open');
+    }
+
+    function closePreview() {
+        modal.setAttribute('hidden', '');
+        modalImage.src = '';
+        document.body.classList.remove('osn-clanica-preview-open');
+    }
+
+    function bindThumbClick(button) {
+        button.addEventListener('click', function () {
+            var image = button.querySelector('img');
+            var altText = image ? image.alt : '';
+            var src = button.dataset.full;
+            var mainPhoto = document.getElementById('osn-clanica-main-photo');
+            if (mainPhoto) {
+                mainPhoto.src = src;
+            }
+            if (window.matchMedia && window.matchMedia('(max-width: 767px)').matches) {
+                openPreview(src, altText);
+            }
+        });
+    }
+
+    function bindCloseButtons(button) {
+        button.addEventListener('click', closePreview);
+    }
+
+    function bindModalBackdrop() {
+        modal.addEventListener('click', function (event) {
+            if (event.target.closest && event.target.closest('.osn-clanica-single__preview-panel')) {
+                return;
+            }
+            if (event.target.dataset && event.target.dataset.action === 'close') {
+                closePreview();
+            }
+            if (event.target === modal) {
+                closePreview();
+            }
+        });
+    }
+
+    function bindEscapeKey() {
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closePreview();
+            }
+        });
+    }
+
+    thumbs.forEach(bindThumbClick);
+    closeButtons.forEach(bindCloseButtons);
+    bindModalBackdrop();
+    bindEscapeKey();
+}()); -->
