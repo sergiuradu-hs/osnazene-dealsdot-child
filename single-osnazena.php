@@ -309,13 +309,25 @@ $display_title = ! empty( $naziv_firme ) ? esc_html( $naziv_firme ) : esc_html( 
                 <div class="osn-clanica-single__preview-modal" id="osn-clanica-preview-modal" hidden>
                     <div class="osn-clanica-single__preview-backdrop" data-action="close"></div>
                     <div class="osn-clanica-single__preview-panel" role="dialog" aria-modal="true" aria-label="<?php esc_attr_e( 'Preview slike', 'dealsdot-child' ); ?>">
-                        <button type="button" class="osn-clanica-single__preview-close" data-action="close" aria-label="<?php esc_attr_e( 'Zatvori', 'dealsdot-child' ); ?>">×</button>
+                        <button type="button" class="osn-clanica-single__preview-close" data-action="close" aria-label="<?php esc_attr_e( 'Zatvori', 'dealsdot-child' ); ?>">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.4 14L0 12.6L5.6 7L0 1.4L1.4 0L7 5.6L12.6 0L14 1.4L8.4 7L14 12.6L12.6 14L7 8.4L1.4 14Z" fill="white"/>
+                            </svg>
+                        </button>
                        
                         <div class="osn-clanica-single__gallery">
                             <div class="osn-clanica-single__preview">
                                 <img id="osn-clanica-preview-image" class="osn-clanica-main-photo" src="" alt="" loading="lazy" />
-                                 <button type="button" class="osn-clanica-single__preview-arrow osn-clanica-single__preview-arrow--prev" data-action="prev" aria-label="<?php esc_attr_e( 'Prethodna slika', 'dealsdot-child' ); ?>">‹</button>
-                                <button type="button" class="osn-clanica-single__preview-arrow osn-clanica-single__preview-arrow--next" data-action="next" aria-label="<?php esc_attr_e( 'Sledeća slika', 'dealsdot-child' ); ?>">›</button>
+                                 <button type="button" class="osn-clanica-single__preview-arrow osn-clanica-single__preview-arrow--prev" data-action="prev" aria-label="<?php esc_attr_e( 'Prethodna slika', 'dealsdot-child' ); ?>">
+                                    <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7.41 1.41L6 0L0 6L6 12L7.41 10.59L2.83 6L7.41 1.41Z" fill="black"/>
+                                    </svg>
+                                 </button>
+                                <button type="button" class="osn-clanica-single__preview-arrow osn-clanica-single__preview-arrow--next" data-action="next" aria-label="<?php esc_attr_e( 'Sledeća slika', 'dealsdot-child' ); ?>">
+                                    <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4.6 6L0 1.4L1.4 0L7.4 6L1.4 12L0 10.6L4.6 6Z" fill="black"/>
+                                    </svg>
+                                </button>
                             </div>
                             <div class="osn-clanica-single__thumbs">
                                 <?php
@@ -507,7 +519,7 @@ $display_title = ! empty( $naziv_firme ) ? esc_html( $naziv_firme ) : esc_html( 
     var modalDots = modal ? modal.querySelectorAll('.osn-clanica-single__dot') : [];
     var modalImage = document.getElementById('osn-clanica-preview-image');
     var backdrop = modal ? modal.querySelector('[data-action="close"]') : null;
-    var closeButton = modal ? modal.querySelector('[data-action="close"]') : null;
+    var closeButtons = modal ? modal.querySelectorAll('[data-action="close"]') : [];
     var prevButton = modal ? modal.querySelector('[data-action="prev"]') : null;
     var nextButton = modal ? modal.querySelector('[data-action="next"]') : null;
     var currentIndex = 0;
@@ -566,20 +578,25 @@ $display_title = ! empty( $naziv_firme ) ? esc_html( $naziv_firme ) : esc_html( 
     }
 
     if (prevButton) {
-        prevButton.addEventListener('click', function () {
+        prevButton.addEventListener('click', function (event) {
+            event.stopPropagation();
             showIndex(currentIndex - 1);
         });
     }
 
     if (nextButton) {
-        nextButton.addEventListener('click', function () {
+        nextButton.addEventListener('click', function (event) {
+            event.stopPropagation();
             showIndex(currentIndex + 1);
         });
     }
 
-    if (closeButton) {
-        closeButton.addEventListener('click', closePreview);
-    }
+    closeButtons.forEach(function (button) {
+        button.addEventListener('click', function (event) {
+            event.stopPropagation();
+            closePreview();
+        });
+    });
 
     function bindThumbs(thumbButtons) {
         thumbButtons.forEach(function (btn) {
