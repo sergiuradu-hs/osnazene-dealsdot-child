@@ -4112,7 +4112,7 @@ section.vc_section.home-page-second-section .wpb_single_image {
     display: inline-flex;
     align-items: center;
     gap: 16px;
-    color: #BCBCBC;
+    color: #bcbcbc;
     font-family: Montserrat, sans-serif;
     font-size: 16px;
     font-weight: 500;
@@ -4908,6 +4908,12 @@ section.vc_section.home-page-second-section .wpb_single_image {
    Edukacija Archive – Mobile (≤ 767px)
    ========================================================================== */
 @media (max-width: 767px) {
+  .osn-edu-loadmore {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 8px 0 30px 0;
+  }
   .osn-edukacija-archive.vc_section,
   .osn-edukacija-archive.osnazene_section {
     padding: 24px;
@@ -4916,12 +4922,25 @@ section.vc_section.home-page-second-section .wpb_single_image {
 
   .osn-edukacija-archive .osn-edu-block {
     gap: 16px;
+    padding-bottom: 24px;
+    position: relative;
+  }
+
+  .osn-edukacija-archive .osn-edu-block:after {
+    content: "";
+    height: 1px;
+    background: #c6b08a;
+    position: absolute;
+    bottom: 0;
+    left: -24px;
+    right: -24px;
   }
 
   .osn-edukacija-archive .osn-edu-heading {
     font-size: 24px;
     text-align: center;
     letter-spacing: 1.92px;
+    padding: 24px 0 36px 0;
   }
 
   /* Single-column list */
@@ -4968,7 +4987,6 @@ section.vc_section.home-page-second-section .wpb_single_image {
     min-height: 140px;
     gap: 8px;
     padding-top: 0;
-    justify-content: flex-start;
   }
 
   /* Date/format row – muted colour, smaller */
@@ -4982,6 +5000,10 @@ section.vc_section.home-page-second-section .wpb_single_image {
     font-size: 14px;
     font-weight: 600;
     margin: 0;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .osn-edu-card__subtitle {
@@ -4990,6 +5012,8 @@ section.vc_section.home-page-second-section .wpb_single_image {
 
   .osn-edu-card__sponsor {
     gap: 16px;
+    margin-top: auto;
+    margin-bottom: 5px;
   }
 
   .osn-edu-card__sponsor-label,
@@ -7537,6 +7561,8 @@ a.osn-tim-card--linked:hover {
   align-items: center;
   justify-content: center;
   z-index: 2;
+}
+
 .osn-clanica-single__preview-backdrop {
   position: absolute;
   inset: 0;
@@ -7592,7 +7618,7 @@ a.osn-tim-card--linked:hover {
   transform: translateY(-50%);
   width: 40px;
   height: 40px;
-  background: #FAFAFA;
+  background: #fafafa;
   color: #ffffff;
   font-size: 28px;
   line-height: 1;
@@ -7736,6 +7762,16 @@ a.osn-tim-card--linked:hover {
   .osn-clanice-pag__btn--prev,
   .osn-clanice-pag__btn--next {
     color: #151367;
+  }
+}
+
+/* /edukacija */
+@media (max-width: 767px) {
+  .osn-edukacija-archive .osn-edu-block:first-of-type .osn-edu-heading {
+    padding-top: 0;
+  }
+  .osn-edukacija-archive .osn-edu-block:not(:first-of-type) .osn-edu-heading {
+    padding-top: 24px;
   }
 }
 
