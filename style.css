@@ -4105,13 +4105,14 @@ section.vc_section.home-page-second-section .wpb_single_image {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    padding: 16px 24px;
   }
 
   .osn-clanica-single__back {
     display: inline-flex;
     align-items: center;
     gap: 16px;
-    color: var(--osn-color-text);
+    color: #BCBCBC;
     font-family: Montserrat, sans-serif;
     font-size: 16px;
     font-weight: 500;
@@ -4126,10 +4127,10 @@ section.vc_section.home-page-second-section .wpb_single_image {
     width: 40px;
     height: 40px;
     padding: 8px;
-    background: #fff;
     border: 0.5px solid #bcbcbc;
     border-radius: 4px;
     cursor: pointer;
+    background: none;
   }
 
   /* Photo: full width, portrait ratio */
