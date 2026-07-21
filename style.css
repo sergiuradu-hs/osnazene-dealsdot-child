@@ -5866,7 +5866,12 @@ section.vc_section.home-page-second-section .wpb_single_image {
 /* ── Mobile ── */
 @media (max-width: 768px) {
   .osn-sed__title {
-    font-size: 28px;
+    font-size: 24px;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 1.92px;
+    padding: 0 24px;
+    text-transform: none;
   }
 
   .osn-sed__row {
@@ -5901,7 +5906,7 @@ section.vc_section.home-page-second-section .wpb_single_image {
   .osn-sed__content p,
   .osn-sed__content ul li,
   .osn-sed__content ol li {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 
@@ -7772,6 +7777,18 @@ a.osn-tim-card--linked:hover {
   }
   .osn-edukacija-archive .osn-edu-block:not(:first-of-type) .osn-edu-heading {
     padding-top: 24px;
+  }
+}
+
+/* /edukacija/name */
+@media (max-width: 767px) {
+  section.vc_section,
+  section.osnazene_section,
+  .osn-single-edukacije {
+    padding: 24px;
+  }
+  .osn-sed__content {
+    gap: 16px;
   }
 }
 

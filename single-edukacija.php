@@ -33,6 +33,7 @@ if ( have_posts() ) :
     <section class="vc_section osnazene_section osn-single-edukacija">
         <div class="container">
             <h1 class="osn-sed__title"><?php echo esc_html( $title ); ?></h1>
+            <span class="osng-sed__date"><?php echo esc_html( $datum_ts ); ?></span>
 
             <div class="osn-sed__row">
 
