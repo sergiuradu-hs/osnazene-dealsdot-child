@@ -7810,6 +7810,8 @@ a.osn-tim-card--linked:hover {
     display: block !important;
     background: white;
     padding: 24px 16px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
   .osn-sed__content .wsf-form .wsf-tile {
     padding-top: 0;
@@ -7837,6 +7839,55 @@ a.osn-tim-card--linked:hover {
     line-height: normal;
     letter-spacing: 1.92px;
     margin-bottom: 12px;
+  }
+}
+
+/* Award cards */
+
+.template-award-cards {
+  display: flex;
+  gap: 60px;
+  padding: 16px 24px;
+}
+.template-award-cards__wrapper {
+  background-color: #c6b08a;
+}
+.template-award-cards__item {
+  flex: 1;
+}
+.template-award-cards__image {
+  margin-bottom: 24px;
+  min-height: 397px;
+}
+h3.template-award-cards__title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+p.template-award-cards__description {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+@media (max-width: 767px) {
+  .template-award-cards {
+    gap: 16px;
+    padding: 16px 24px;
+  }
+  .template-award-cards__item {
+    flex: 1;
+  }
+  .template-award-cards__image {
+    margin-bottom: 8px;
+    min-height: auto;
+  }
+  h3.template-award-cards__title {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  p.template-award-cards__description {
+    font-size: 12px;
   }
 }
 

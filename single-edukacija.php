@@ -80,14 +80,13 @@ if ( have_posts() ) :
                 <!-- Right: post content -->
                 <div class="osn-sed__content">
                     <?php the_content(); ?>
-                     <div>
-                        awards section
-                    </div>
                 </div>
             </div>
         </div>
        
     </section>
+
+    <?php get_template_part( 'award-cards' ); ?>
 
     <?php if ( $forma || $slika_forme_id ) : ?>
     <section class="vc_section osnazene_section osn-sed-prijava">
