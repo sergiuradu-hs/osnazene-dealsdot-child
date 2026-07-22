@@ -728,7 +728,6 @@ header section.osnazene_section {
   border-radius: 0;
   display: flex;
   height: 43px;
-  line-height: 35px;
   padding: 4px 16px;
   font-family: var(--osn-font-alt);
   font-size: 20px;
@@ -936,12 +935,15 @@ header section.osnazene_section {
     justify-content: center;
     width: min(100%, 360px);
     min-width: 0;
-    height: 56px;
+    min-height: 56px;
+    height: auto;
     padding: 8px 12px;
     box-sizing: border-box;
     font-size: clamp(16px, 3vw, 32px);
     line-height: 1.1;
-    white-space: nowrap;
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 
   .osn-header__cta .header-cta-btn-2 {
@@ -1019,7 +1021,7 @@ header section.osnazene_section {
   .osn-mobile-menu__nav {
     flex: 1 1 auto;
     overflow-y: auto;
-    padding: 40px 24px 24px;
+    padding: 8px 24px 24px;
   }
 
   .osn-mobile-menu__list,
@@ -1257,6 +1259,63 @@ header section.osnazene_section {
     object-fit: contain;
   }
 }
+
+@media (max-width: 767px) {
+  .osn-mobile-menu__social-icon {
+    display: block;
+    width: 32px !important;
+    height: 32px !important;
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 420px) {
+  .osn-mobile-menu {
+    padding-top: 72px !important;
+  }
+
+  .osn-header {
+    grid-template-columns: 48px minmax(0, 1fr) 40px;
+    gap: 8px;
+    height: 72px;
+    padding: 0 16px;
+  }
+
+  header {
+    height: 72px !important;
+  }
+
+  .main-header .osn-header__left.logo-holder .logo img {
+    width: 48px;
+    height: 48px;
+    max-height: 48px;
+    object-fit: contain;
+  }
+
+  .osn-header__cta .header-cta-btn-1 {
+    min-height: 48px;
+  }
+
+  .osn-burger {
+    width: 40px;
+    height: 40px;
+    gap: 5px;
+  }
+
+  .osn-burger__bar {
+    width: 28px;
+    height: 3px;
+  }
+
+  body.osn-menu-open .osn-burger__bar:nth-child(2) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  body.osn-menu-open .osn-burger__bar:nth-child(4) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}
+
 /* End of Header styles */
 
 /* Container styles */
@@ -1755,9 +1814,7 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
     color: var(--osn-color-text);
   }
 
-  #home-page-hero-section
-    .home-page-2-btn-cta
-    .wpb-osnazene-cta-2bttn-mobile {
+  #home-page-hero-section .home-page-2-btn-cta .wpb-osnazene-cta-2bttn-mobile {
     position: relative;
     left: 50%;
     width: 100vw;
