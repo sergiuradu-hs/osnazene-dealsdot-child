@@ -1690,7 +1690,7 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
 .osn-statistics-box {
   display: flex;
   width: 100%;
-  height: 200px;
+  aspect-ratio: 1 / 1;
   padding: 28px 20px;
   box-sizing: border-box;
   flex-direction: column;
@@ -1716,6 +1716,42 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
   font-size: clamp(20px, 2.1vw, 28px);
   font-weight: 500;
   line-height: 1.15;
+}
+
+/* Keep the tablet-portrait column layout of the mobile stats section on
+   phones (< 768px), where WPBakery would otherwise stack columns full-width */
+@media (max-width: 767px) {
+  .home-page-second-section-mobile .vc_row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .home-page-second-section-mobile .vc_col-sm-8 {
+    width: 66.6666%;
+  }
+
+  .home-page-second-section-mobile .vc_col-sm-4 {
+    width: 33.3333%;
+  }
+
+  .home-page-second-section-mobile .vc_col-sm-12 {
+    width: 100%;
+  }
+
+  /* Shrink the statistics boxes so three fit per row on small screens */
+  .home-page-second-section-mobile .osn-statistics-box {
+    padding: 12px 8px;
+    gap: 8px;
+    border-radius: 12px;
+  }
+
+  .home-page-second-section-mobile .osn-statistics-box__heading {
+    font-size: clamp(20px, 6vw, 36px);
+  }
+
+  .home-page-second-section-mobile .osn-statistics-box__text {
+    font-size: clamp(12px, 3.2vw, 20px);
+  }
 }
 
 .wpb-cta.wpb-osnazene-cta-2bttn-wrapper-outer {
