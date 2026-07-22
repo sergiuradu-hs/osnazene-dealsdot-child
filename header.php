@@ -179,14 +179,14 @@
 				'depth'          => 2,
 			] );
 			?>
+			<button class="osn-mobile-menu__language-trigger" type="button" aria-controls="osn-mobile-menu-languages" aria-expanded="false" data-theme-uri="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>" hidden>
+				<span class="osn-mobile-menu__language-trigger-current">
+					<span class="osn-mobile-menu__language-trigger-flag" aria-hidden="true"></span>
+					<span class="osn-mobile-menu__language-trigger-label"><?php esc_html_e( 'Language', 'dealsdot' ); ?></span>
+				</span>
+				<span class="osn-mobile-menu__language-trigger-arrow" aria-hidden="true"></span>
+			</button>
 		</nav>
-		<button class="osn-mobile-menu__language-trigger" type="button" aria-controls="osn-mobile-menu-languages" aria-expanded="false" data-theme-uri="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>" hidden>
-			<span class="osn-mobile-menu__language-trigger-current">
-				<span class="osn-mobile-menu__language-trigger-flag" aria-hidden="true"></span>
-				<span class="osn-mobile-menu__language-trigger-label"><?php esc_html_e( 'Language', 'dealsdot' ); ?></span>
-			</span>
-			<span class="osn-mobile-menu__language-trigger-arrow" aria-hidden="true"></span>
-		</button>
 		<?php if ( ! empty( $mobile_social_text ) || ! empty( $mobile_social_links ) ) : ?>
 		<div class="osn-mobile-menu__social">
 			<?php if ( ! empty( $mobile_social_text ) ) : ?>

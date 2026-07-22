@@ -53,7 +53,7 @@
 
       menu.classList.toggle('is-language-view', isOpen);
       languagePanel.hidden = !isOpen;
-      languageTrigger.hidden = isOpen || languageOptions.length === 0;
+      languageTrigger.hidden = languageOptions.length === 0;
       languageTrigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 
       if (menuNav) {
@@ -278,10 +278,7 @@
    function setGTranslateCookie(code) {
       const value = `/auto/${code}`;
       const maxAge = 60 * 60 * 24 * 365;
-      const host = globalThis.location.hostname;
-
       document.cookie = `googtrans=${value}; path=/; max-age=${maxAge}`;
-      document.cookie = `googtrans=${value}; path=/; domain=.${host}; max-age=${maxAge}`;
    }
 
    function selectLanguage(code) {

@@ -1102,7 +1102,7 @@ header section.osnazene_section {
     background: transparent;
     color: var(--osn-color-text);
     font-family: var(--osn-font-main);
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 600;
     line-height: 1.2;
   }
