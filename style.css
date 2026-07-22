@@ -5769,6 +5769,10 @@ section.vc_section.home-page-second-section .wpb_single_image {
   font-family: var(--osn-font-main);
 }
 
+.osng-sed__date {
+  display: none;
+}
+
 .osn-sed__content p {
   margin: 0;
   font-size: 20px;
@@ -5872,12 +5876,14 @@ section.vc_section.home-page-second-section .wpb_single_image {
     letter-spacing: 1.92px;
     padding: 0 24px;
     text-transform: none;
+    margin-bottom: 16px;
   }
 
   .osn-sed__row {
     flex-direction: column;
     align-items: stretch;
     gap: 32px;
+    margin-top: 32px;
   }
 
   .osn-sed__card {
@@ -7516,7 +7522,7 @@ a.osn-tim-card--linked:hover {
 @media (max-width: 767px) {
   .wsf-form .wsf-button-primary,
   .wsf-form button[type="submit"] {
-    width: fit-content !important;
+    width: 100%;
     max-width: none !important;
   }
 }
@@ -7789,6 +7795,48 @@ a.osn-tim-card--linked:hover {
   }
   .osn-sed__content {
     gap: 16px;
+  }
+  .osn-sed__content > .wp-block-image:first-of-type {
+    display: none;
+  }
+  .osn-sed__content form {
+    background-color: #c6b08a;
+    width: calc(100% + 48px);
+    margin-left: -24px;
+    border-radius: 0;
+    padding: 24px;
+  }
+  .osn-sed__content form > div {
+    display: block !important;
+    background: white;
+    padding: 24px 16px;
+  }
+  .osn-sed__content .wsf-form .wsf-tile {
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 16px;
+    margin-bottom: 0;
+  }
+  .osn-sed__content ul li {
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+  .osn-sed__content ul li::before {
+    margin: 0 8px;
+    display: inline-block;
+  }
+  .osng-sed__date {
+    text-align: center;
+    display: block;
+    color: #151367;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 1.92px;
+    margin-bottom: 12px;
   }
 }
 

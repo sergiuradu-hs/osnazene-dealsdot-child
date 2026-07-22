@@ -33,7 +33,7 @@ if ( have_posts() ) :
     <section class="vc_section osnazene_section osn-single-edukacija">
         <div class="container">
             <h1 class="osn-sed__title"><?php echo esc_html( $title ); ?></h1>
-            <span class="osng-sed__date"><?php echo esc_html( $datum_ts ); ?></span>
+            <span class="osng-sed__date"><?php echo esc_html( $datum_str ); ?></span>
 
             <div class="osn-sed__row">
 
@@ -80,11 +80,13 @@ if ( have_posts() ) :
                 <!-- Right: post content -->
                 <div class="osn-sed__content">
                     <?php the_content(); ?>
+                     <div>
+                        awards section
+                    </div>
                 </div>
-
             </div>
         </div>
-
+       
     </section>
 
     <?php if ( $forma || $slika_forme_id ) : ?>
