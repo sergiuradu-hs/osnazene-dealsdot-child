@@ -180,10 +180,16 @@
 			] );
 			?>
 		</nav>
+		<button class="osn-mobile-menu__language-trigger" type="button" aria-controls="osn-mobile-menu-languages" aria-expanded="false" data-theme-uri="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>" hidden>
+			<span class="osn-mobile-menu__language-trigger-current">
+				<span class="osn-mobile-menu__language-trigger-flag" aria-hidden="true"></span>
+				<span class="osn-mobile-menu__language-trigger-label"><?php esc_html_e( 'Language', 'dealsdot' ); ?></span>
+			</span>
+			<span class="osn-mobile-menu__language-trigger-arrow" aria-hidden="true"></span>
+		</button>
 		<?php if ( ! empty( $mobile_social_text ) || ! empty( $mobile_social_links ) ) : ?>
 		<div class="osn-mobile-menu__social">
 			<?php if ( ! empty( $mobile_social_text ) ) : ?>
-			<div class="osn-mobile-menu__social-text"><?php echo esc_html( $mobile_social_text ); ?></div>
 			<?php endif; ?>
 			<?php if ( ! empty( $mobile_social_links ) ) : ?>
 			<div class="osn-mobile-menu__social-icons">
@@ -214,5 +220,14 @@
 			<?php endif; ?>
 		</div>
 		<?php endif; ?>
+		<section class="osn-mobile-menu__languages" id="osn-mobile-menu-languages" aria-label="<?php esc_attr_e( 'Choose language', 'dealsdot' ); ?>" hidden>
+			<div class="osn-mobile-menu__languages-header">
+				<button class="osn-mobile-menu__languages-back" type="button">
+					<span aria-hidden="true">&lsaquo;</span>
+					<?php esc_html_e( 'Nazad', 'dealsdot' ); ?>
+				</button>
+			</div>
+			<ul class="osn-mobile-menu__languages-list"></ul>
+		</section>
 	</div>
 <div class="body-content" id="top-banner-and-menu">

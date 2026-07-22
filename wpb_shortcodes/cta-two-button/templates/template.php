@@ -34,11 +34,11 @@ $headings = array_filter( [ $heading1, $heading2, $heading3 ], static function (
     <?php if ( ! empty( $heading1 ) || ! empty( $heading2 ) || ! empty( $heading3 ) ) : ?>
         <h3 class="wpb-cta__heading wpb-osnazene-cta-2bttn-heading">
             <div style="width: 100%; height: 100%; justify-content: flex-start; align-items: center; gap: 37px; display: inline-flex">
-                <div><span style="color: white; font-size: 36px; font-family: Montserrat; font-weight: 700; line-height: 22px; letter-spacing: 1.92px; word-wrap: break-word"><?php echo esc_html( $heading1 ); ?></span><span style="color: white; font-size: 36px; font-family: Montserrat; font-weight: 700; line-height: 55.20px; letter-spacing: 1.92px; word-wrap: break-word"> </span></div>
+                <div><span style="color: white; font-size: 36px; font-family: Montserrat; font-weight: 700; letter-spacing: 1.92px; word-wrap: break-word"><?php echo esc_html( $heading1 ); ?></span><span style="color: white; font-size: 36px; font-family: Montserrat; font-weight: 700; line-height: 55.20px; letter-spacing: 1.92px; word-wrap: break-word"> </span></div>
                 <div style="width: 10px; height: 10px; background: white; border-radius: 9999px"></div>
-                <div style="color: white; font-size: 36px; font-family: Montserrat; font-weight: 700; line-height: 22px; letter-spacing: 1.92px; word-wrap: break-word"><?php echo esc_html( $heading2 ); ?></div>
+                <div style="color: white; font-size: 36px; font-family: Montserrat; font-weight: 700; letter-spacing: 1.92px; word-wrap: break-word"><?php echo esc_html( $heading2 ); ?></div>
                 <div style="width: 10px; height: 10px; background: white; border-radius: 9999px"></div>
-                <div><span style="color: white; font-size: 36px; font-family: Montserrat; font-weight: 700; line-height: 22px; letter-spacing: 1.92px; word-wrap: break-word"><?php echo esc_html( $heading3 ); ?></span><span style="color: white; font-size: 36px; font-family: Montserrat; font-weight: 700; line-height: 55.20px; letter-spacing: 1.92px; word-wrap: break-word"> </span></div>
+                <div><span style="color: white; font-size: 36px; font-family: Montserrat; font-weight: 700; letter-spacing: 1.92px; word-wrap: break-word"><?php echo esc_html( $heading3 ); ?></span><span style="color: white; font-size: 36px; font-family: Montserrat; font-weight: 700; line-height: 55.20px; letter-spacing: 1.92px; word-wrap: break-word"> </span></div>
             </div>
         </h3>
     <?php endif; ?>
