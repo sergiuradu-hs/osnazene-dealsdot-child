@@ -1877,7 +1877,7 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
     list-style: disc;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 0px;
     align-self: center;
   }
 
@@ -1888,6 +1888,7 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: 1.92px;
+    margin-bottom: 16px;
   }
 
   .wpb-osnazene-cta-2bttn-mobile__text {
@@ -8052,6 +8053,7 @@ a.osn-tim-card--linked:hover {
   section.osnazene_section,
   .osn-single-edukacije {
     padding: 24px;
+    gap: 36px;
   }
   .osn-sed__content {
     gap: 16px;
