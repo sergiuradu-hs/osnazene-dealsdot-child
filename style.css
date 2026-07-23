@@ -37,6 +37,11 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.header-no-tranformation h2 {
+  text-transform: none;
+}
+
 .cnt-home {
   background-color: unset;
 }
