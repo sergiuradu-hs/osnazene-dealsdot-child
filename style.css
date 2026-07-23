@@ -1759,6 +1759,13 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
   }
 }
 
+@media (max-width: 420px) {
+  .home-page-second-section-mobile .wpb_column > .vc_column-inner {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+
 .wpb-cta.wpb-osnazene-cta-2bttn-wrapper-outer {
   display: flex;
 }
