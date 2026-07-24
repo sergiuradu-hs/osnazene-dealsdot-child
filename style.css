@@ -2059,13 +2059,18 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
 
 /* Tax Grid (drzava) */
 .osn-tax-grid {
-  display: grid;
-  grid-template-columns: repeat(
-    var(--osn-tax-columns, 5),
-    var(--osn-tax-box-size, 275px)
-  );
-  justify-content: center; /* centers last row */
+  /* Flexbox (not grid) so the incomplete last row centers itself */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 16px;
+  /* Cap width to the configured number of columns so rows wrap like a grid */
+  max-width: calc(
+    var(--osn-tax-columns, 5) * var(--osn-tax-box-size, 275px) +
+      (var(--osn-tax-columns, 5) - 1) * 16px
+  );
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .osn-tax-grid-item {
@@ -2089,6 +2094,7 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
+  transition: none; /* prevent theme's global link transition from animating the breakpoint switch */
 }
 
 .osn-tax-grid-item::after {
@@ -2116,6 +2122,53 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
   width: auto;
   aspect-ratio: auto;
   display: inline-block;
+}
+
+.osn-tax-grid-item__chevron {
+  display: none; /* mobile only */
+}
+
+/* Mobile: full-width horizontal country cards */
+@media (max-width: 767px) {
+  #drzave {
+    background-color: var(--osn-color-secondary);
+  }
+
+  .osn-tax-grid {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 12px;
+    max-width: none;
+  }
+
+  .osn-tax-grid-item {
+    width: 100%;
+    height: 96px;
+    padding: 0 16px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    background-color: lightgray;
+    background-position: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .osn-tax-grid-item__label {
+    text-transform: none;
+    font-size: 20px;
+  }
+
+  .osn-tax-grid-item__chevron {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    color: var(--osn-color-white);
+    flex-shrink: 0;
+  }
 }
 
 /* Utility: Equal-width row/columns for WPBakery */
@@ -8163,6 +8216,12 @@ p.template-award-cards__description {
 
 @media (min-width: 992px) {
   .osn-hide-above-992 {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .osn-hide-above-768 {
     display: none !important;
   }
 }
