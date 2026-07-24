@@ -2365,10 +2365,6 @@ section.vc_section.home-page-second-section .wpb_single_image {
 }
 
 #home-page-awards-section h3 {
-  height: 28px;
-  flex-direction: column;
-  justify-content: center;
-  align-self: stretch;
   color: var(--osn-color-text);
   font-family: var(--osn-font-main);
   font-size: 24px;
@@ -2378,6 +2374,12 @@ section.vc_section.home-page-second-section .wpb_single_image {
   max-width: 706px;
   margin: auto;
   text-align: left;
+}
+
+@media (max-width: 767px) {
+  #home-page-awards-section .vc_column_container {
+    margin-bottom: 16px;
+  }
 }
 
 #home-page-awards-section p {
