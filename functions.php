@@ -156,6 +156,14 @@ add_action( 'add_meta_boxes', function () {
         'side',
         'default'
     );
+    add_meta_box(
+        'osn_mentor_opis',
+        __( 'Opis', 'dealsdot-child' ),
+        'osn_mentor_opis_meta_box',
+        'mentor',
+        'normal',
+        'default'
+    );
 } );
 
 if ( ! function_exists( 'osn_edukacija_format_meta_box' ) ) :
@@ -177,6 +185,20 @@ if ( ! function_exists( 'osn_edukacija_format_meta_box' ) ) :
             class="widefat"
         />
         <?php
+    }
+endif;
+
+if ( ! function_exists( 'osn_mentor_opis_meta_box' ) ) :
+    function osn_mentor_opis_meta_box( WP_Post $post ): void {
+        $opis = get_post_meta( $post->ID, 'opis_mentora', true );
+
+        wp_nonce_field( 'osn_save_mentor_opis', 'osn_mentor_opis_nonce' );
+        wp_editor( $opis, 'osn_opis_mentora', [
+            'media_buttons' => true,
+            'textarea_name' => 'opis_mentora',
+            'textarea_rows' => 10,
+            'teeny'         => false,
+        ] );
     }
 endif;
 
@@ -204,6 +226,32 @@ add_action( 'save_post_edukacija', function ( int $post_id ) {
         update_post_meta( $post_id, 'format_edukacije', $format );
     } else {
         delete_post_meta( $post_id, 'format_edukacije' );
+    }
+} );
+
+add_action( 'save_post_mentor', function ( int $post_id ) {
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return;
+    }
+
+    // Save opis_mentora
+    if (
+        isset( $_POST['osn_mentor_opis_nonce'] )
+        && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['osn_mentor_opis_nonce'] ) ), 'osn_save_mentor_opis' )
+    ) {
+        $opis = isset( $_POST['opis_mentora'] )
+            ? wp_kses_post( wp_unslash( $_POST['opis_mentora'] ) )
+            : '';
+
+        if ( $opis !== '' ) {
+            update_post_meta( $post_id, 'opis_mentora', $opis );
+        } else {
+            delete_post_meta( $post_id, 'opis_mentora' );
+        }
     }
 } );
 

@@ -5,9 +5,10 @@
  * Displays a grid of 'mentor' CPT cards with photo, name, role, and action buttons.
  * Below the grid renders two CTA buttons ("Postani mentor" / "Postani menti").
  *
- * ACF fields on each 'mentor' post:
- *   uloga    – text  – optional role/subtitle
- *   cv_link  – URL   – CV download link
+ * ACF & Meta fields on each 'mentor' post:
+ *   uloga         – text     – optional role/subtitle - ACF
+ *   cv_link       – URL      – CV download link - ACF
+ *   opis_mentora  – HTML     – optional description (rich text) - Meta
  */
 
 // ---------- WPBakery map ----------------------------------------
@@ -49,6 +50,7 @@ $render = function( $atts, $content = '' ) use ( $template_rel ) {
                 'uloga'    => get_post_meta( $mid, 'uloga',   true ),
                 'cv_link'  => ! empty( $cv_link ) ? $cv_link : get_post_meta( $mid, 'cv_link', true ),
                 'img_url'  => get_the_post_thumbnail_url( $mid, 'large' ),
+                'opis'     => get_post_meta( $mid, 'opis_mentora', true ),
             ];
         }
         wp_reset_postdata();

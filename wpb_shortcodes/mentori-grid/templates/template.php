@@ -27,16 +27,17 @@
                 <?php if ( ! empty( $mentor['uloga'] ) ) : ?>
                 <p class="osn-mp-card__uloga"><?php echo esc_html( $mentor['uloga'] ); ?></p>
                 <?php endif; ?>
+                <?php if ( ! empty( $mentor['opis'] ) ) : ?>
+                    <div class="osn-mp-card__opis"><?php echo wp_kses_post( $mentor['opis'] ); ?></div>
+                <?php endif; ?>
             </div>
 
             <div class="osn-mp-card__actions">
-                <a href="<?php echo esc_url( $mentor['link'] ); ?>"
-                   class="osn-mp-card__btn">Pogledaj profil</a>
                 <?php if ( ! empty( $mentor['cv_link'] ) ) : ?>
                 <a href="<?php echo esc_url( $mentor['cv_link'] ); ?>"
                    class="osn-mp-card__btn"
                    target="_blank"
-                   rel="noopener noreferrer">CV</a>
+                   rel="noopener noreferrer">Mentorski portfolio</a>
                 <?php endif; ?>
             </div>
 

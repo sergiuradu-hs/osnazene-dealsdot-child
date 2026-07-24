@@ -6286,10 +6286,9 @@ section.vc_section.home-page-second-section .wpb_single_image {
 
 .osn-mp-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 60px 20px;
   width: 100%;
-  max-width: 1200px;
 }
 
 .osn-mp-card {
@@ -6325,8 +6324,6 @@ section.vc_section.home-page-second-section .wpb_single_image {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-top: auto;
 }
 
 .osn-mp-card__name {
@@ -6360,7 +6357,6 @@ section.vc_section.home-page-second-section .wpb_single_image {
   height: 45px;
   padding: 8px 24px;
   background: var(--osn-color-text);
-  border-radius: 4px;
   outline: 2px solid var(--osn-color-secondary);
   outline-offset: -2px;
   color: #fafafa;
@@ -6369,6 +6365,7 @@ section.vc_section.home-page-second-section .wpb_single_image {
   font-weight: 500;
   text-decoration: none;
   white-space: nowrap;
+  width: 100%;
 }
 
 .osn-mp-card__btn:hover,
