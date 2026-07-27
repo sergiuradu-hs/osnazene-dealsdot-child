@@ -2719,18 +2719,20 @@ section.vc_section.home-page-second-section .wpb_single_image {
   font-weight: 600;
 }
 
+/* Home Page Osnazene Clanice section for desktop */
 #osnazene-clanice-row {
   display: flex;
-  align-items: center;
-  gap: 60px;
+  align-items: stretch; /* equal card heights without a fixed height */
+  gap: clamp(16px, 4vw, 60px);
   justify-content: center;
   width: 100%;
 }
 
 #osnazene-clanice-row .wpb_column {
   display: flex;
-  width: 400px;
-  height: 499px;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 400px;
   padding: 32px 24px;
   justify-content: center;
   align-items: flex-start;
@@ -2740,14 +2742,17 @@ section.vc_section.home-page-second-section .wpb_single_image {
   box-shadow: 0 4px 19px 0 #4b4999;
 }
 
+#osnazene-clanice-row .wpb_column > .vc_column-inner {
+  width: 100%;
+}
+
 #osnazene-clanice-row .wpb_column .osn-osnazena-card {
   display: flex;
-  width: 352px;
+  width: 100%;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
   gap: 24px;
-  flex-shrink: 0;
 }
 
 .osn-osnazena-card__image {
@@ -2755,26 +2760,31 @@ section.vc_section.home-page-second-section .wpb_single_image {
   border-radius: 50%;
   background-position: center;
   background-repeat: no-repeat;
-  width: 300px;
-  height: 300px;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1 / 1;
 }
 
 .osn-osnazena-card__name {
+  align-self: stretch; /* full card width, otherwise flex centers the shrink-wrapped box */
   color: var(--osn-color-white);
   font-family: var(--osn-font-main);
   font-size: 32px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  text-align: left;
 }
 
 .osn-osnazena-card__category {
+  align-self: stretch;
   color: var(--osn-color-white);
   font-family: var(--osn-font-main);
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  text-align: left;
 }
 
 #home-female-owned-business .female-business-bttn-row .wpb_wrapper,
