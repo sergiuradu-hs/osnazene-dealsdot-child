@@ -2684,6 +2684,22 @@ section.vc_section.home-page-second-section .wpb_single_image {
   }
 }
 
+/* Home Page Regional Community section for mobile */
+@media (max-width: 767px) {
+  #home-page-regional-community-section {
+    background-color: var(--osn-color-secondary);
+  }
+
+  #home-page-regional-community-section h2 {
+    color: var(--osn-color-text);
+  }
+
+  #home-page-regional-community-section .vc_btn3 {
+    background-color: var(--osn-color-text) !important;
+    color: var(--osn-color-white) !important;
+  }
+}
+
 #home-clanice-section h2 {
   color: var(--osn-color-secondary);
   font-family: var(--osn-font-main);
