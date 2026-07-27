@@ -2625,7 +2625,7 @@ section.vc_section.home-page-second-section .wpb_single_image {
     gap: 24px !important;
   }
 
-  /* Card: full-width gold panel, no border, natural height.
+  /* Card: full-width gold border, natural height.
      flex: none is critical - the desktop flex: 1 1 0 would collapse
      card height to 0 once the row direction is column. */
   #home-business-support-row > .wpb_column {
@@ -2635,9 +2635,8 @@ section.vc_section.home-page-second-section .wpb_single_image {
     height: auto !important;
     min-height: 0 !important;
     padding: 24px !important;
-    border: none !important;
+    border: var(--osn-color-secondary) solid 2px !important;
     border-radius: 12px !important;
-    background: var(--osn-color-secondary) !important;
   }
 
   /* Content flows naturally instead of the desktop grid slots */
