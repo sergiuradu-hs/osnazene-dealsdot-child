@@ -2386,6 +2386,44 @@ section.vc_section.home-page-second-section .wpb_single_image {
   #home-page-awards-section .vc_column_container {
     margin-bottom: 16px;
   }
+
+  .osn-home-page-dark-square-mobile {
+    border-radius: 12px;
+    background: var(--osn-color-text);
+    box-shadow: 0 6px 4px 0 rgba(0, 0, 0, 0.25);
+    padding: 32px 16px;
+  }
+
+  .osn-home-page-dark-square-mobile p {
+    color: var(--osn-color-white);
+    font-family: var(--osn-font-main);
+    font-size: 20px;
+    line-height: 1.5;
+    text-align: left;
+  }
+
+  /* Full-width gold CTA button (overrides WPBakery grey/right-aligned btn3) */
+  .osn-home-page-dark-square-mobile .vc_btn3-container {
+    display: block;
+    width: 100%;
+    margin-top: 24px;
+    margin-bottom: 0;
+  }
+
+  .osn-home-page-dark-square-mobile .vc_btn3-container .vc_btn3 {
+    display: block;
+    width: 100%;
+    padding: 36px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 2px;
+    background-color: var(--osn-color-secondary) !important;
+    color: var(--osn-color-text) !important;
+    font-family: var(--osn-font-main);
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+  }
 }
 
 #home-page-awards-section p {
@@ -2436,15 +2474,17 @@ section.vc_section.home-page-second-section .wpb_single_image {
   gap: 24px !important;
 }
 
-/* Card */
+/* Card: shrinks with the viewport, capped at the 350px design width */
 #home-business-support-row > .wpb_column {
   display: flex !important;
-  width: 350px !important;
-  height: 562px !important;
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  max-width: 350px !important;
+  height: auto !important;
+  min-height: 562px !important;
   padding: 14px 24px 40px 24px !important;
   flex-direction: column !important;
   align-items: center !important;
-  flex-shrink: 0 !important;
   border-radius: 12px !important;
   border: 3px solid var(--osn-color-secondary) !important;
   box-sizing: border-box !important;
@@ -2468,11 +2508,20 @@ section.vc_section.home-page-second-section .wpb_single_image {
   height: 100% !important;
 
   display: grid !important;
-  grid-template-rows: 240px 120px 1fr !important;
+  /* image sizes itself, title row can grow when text wraps on narrow cards */
+  grid-template-rows: auto minmax(120px, auto) 1fr !important;
+  /* minmax(0, 1fr) stops long words from widening the track past the card */
+  grid-template-columns: minmax(0, 1fr) !important;
   row-gap: 16px !important;
 
   align-items: start !important;
   box-sizing: border-box !important;
+}
+
+/* Grid children may not force the track wider than the card */
+#home-business-support-row > .wpb_column > .vc_column-inner > .wpb_wrapper > * {
+  min-width: 0 !important;
+  max-width: 100% !important;
 }
 
 /* Image slot */
@@ -2490,9 +2539,11 @@ section.vc_section.home-page-second-section .wpb_single_image {
   align-items: flex-start !important;
 }
 
-/* Image itself */
+/* Image itself: scales down with the card, never exceeds its 240px source size */
 #home-business-support-row .wpb_single_image img {
   display: block !important;
+  max-width: 100% !important;
+  height: auto !important;
 }
 
 /* Title slot */
@@ -2532,6 +2583,7 @@ section.vc_section.home-page-second-section .wpb_single_image {
   padding: 0 !important;
   text-align: center !important;
   line-height: 1.1 !important;
+  overflow-wrap: break-word !important; /* break long words instead of overflowing */
 }
 
 /* Description slot */
