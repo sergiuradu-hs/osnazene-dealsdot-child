@@ -2609,6 +2609,82 @@ section.vc_section.home-page-second-section .wpb_single_image {
   line-height: normal;
 }
 
+/* ── Business support section: mobile/tablet layout (≤991px) ──
+   Cards become stacked full-width gold panels without images,
+   all text left-aligned, navy CTA button. */
+@media (max-width: 991px) {
+  /* Left-align heading and intro (overrides inline text-align: center) */
+  #home-business-support-section h2,
+  #home-business-support-section p {
+    text-align: left !important;
+  }
+
+  /* Stack the cards vertically */
+  #home-business-support-row {
+    flex-direction: column !important;
+    gap: 24px !important;
+  }
+
+  /* Card: full-width gold panel, no border, natural height.
+     flex: none is critical - the desktop flex: 1 1 0 would collapse
+     card height to 0 once the row direction is column. */
+  #home-business-support-row > .wpb_column {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 24px !important;
+    border: none !important;
+    border-radius: 12px !important;
+    background: var(--osn-color-secondary) !important;
+  }
+
+  /* Content flows naturally instead of the desktop grid slots */
+  #home-business-support-row > .wpb_column > .vc_column-inner > .wpb_wrapper {
+    display: block !important;
+    height: auto !important;
+  }
+
+  /* No circular photos on mobile (selector must match the desktop
+     image-slot rule's specificity to win the !important tie) */
+  #home-business-support-row
+    > .wpb_column
+    > .vc_column-inner
+    > .wpb_wrapper
+    > .wpb_single_image {
+    display: none !important;
+  }
+
+  /* Title slot: natural height with spacing below */
+  #home-business-support-row
+    > .wpb_column
+    > .vc_column-inner
+    > .wpb_wrapper
+    > .wpb_text_column:first-of-type {
+    display: block !important;
+    height: auto !important;
+    margin-bottom: 16px !important;
+  }
+
+  #home-business-support-row .wpb_column h3 {
+    text-align: left !important;
+    color: var(--osn-color-text) !important;
+  }
+
+  #home-business-support-row .wpb_column p {
+    text-align: left !important;
+    color: var(--osn-color-text) !important;
+  }
+
+  /* Navy CTA button with white text */
+  #home-business-support-section .vc_btn3 {
+    background-color: var(--osn-color-text) !important;
+    color: var(--osn-color-white) !important;
+    text-transform: uppercase;
+  }
+}
+
 #home-clanice-section h2 {
   color: var(--osn-color-secondary);
   font-family: var(--osn-font-main);
