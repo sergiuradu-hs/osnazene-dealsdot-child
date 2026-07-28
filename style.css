@@ -3018,19 +3018,21 @@ section.vc_section.home-page-second-section .wpb_single_image {
   display: flex;
   max-width: 1472px;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch; /* equal card heights while shrinking */
+  gap: clamp(16px, 2vw, 32px);
   margin: auto;
 }
 
 #zastupljenost-statistika-row .wpb_column {
   border-radius: 4px;
   display: flex;
-  width: 440px;
-  height: 416px;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 440px;
+  height: auto;
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
-  flex-shrink: 0;
 }
 
 #zastupljenost-statistika-row .wpb_column .vc_column-inner {
@@ -3038,23 +3040,26 @@ section.vc_section.home-page-second-section .wpb_single_image {
   border: 1px solid var(--osn-color-secondary);
   background: var(--osn-color-text);
   display: flex;
-  height: 416px;
+  height: 100%;
   padding: 24px 16px;
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
-  flex-shrink: 0;
   align-self: stretch;
+  box-sizing: border-box;
 }
 
 #zastupljenost-statistika-row .wpb_column .vc_column-inner > .wpb_wrapper {
   display: flex;
-  width: 408px;
-  height: 321px;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
   gap: 35px;
-  flex-shrink: 0;
+}
+
+#zastupljenost-statistika-row .wpb_single_image img {
+  max-width: 100%;
+  height: auto;
 }
 
 #home-zastupljenost-section h2 {
@@ -3149,9 +3154,11 @@ section.vc_section.home-page-second-section .wpb_single_image {
 /* Zastupljenost cards: fixed slots so title never pushes chart down */
 #zastupljenost-statistika-row .wpb_column .vc_column-inner > .wpb_wrapper {
   display: grid !important;
-  grid-template-rows: 76px 123px 1fr;
+  /* title row can grow when it wraps, image row follows the scaled PNG */
+  grid-template-rows: minmax(76px, auto) auto 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 35px !important;
-  width: 408px;
+  width: 100%;
   min-height: 390px;
   align-items: start !important;
 }
