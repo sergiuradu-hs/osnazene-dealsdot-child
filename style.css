@@ -2917,7 +2917,7 @@ section.vc_section.home-page-second-section .wpb_single_image {
 }
 
 /* Home Page Osnazene Clanice: smaller photo on narrow phones (<420px) */
-@media (max-width: 419px) {
+@media (max-width: 420px) {
   #osnazene-clanice-row .osn-osnazena-card__image {
     width: min(120px, 32vw);
   }
@@ -2971,7 +2971,12 @@ section.vc_section.home-page-second-section .wpb_single_image {
   text-transform: uppercase;
 }
 
-#home-female-owned-business button {
+/* Target a/button directly: the global .vc_btn3-container.vc_btn3-inline.vc_do_btn
+   rule colors them --osn-color-text, and inherited white from the container loses */
+#home-female-owned-business .vc_btn3-container :is(a, button),
+#home-female-owned-business
+  .vc_btn3-container
+  :is(a, button):is(:hover, :focus) {
   color: var(--osn-color-white);
   font-family: var(--osn-font-main);
   font-size: 24px;
