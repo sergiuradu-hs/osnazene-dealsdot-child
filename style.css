@@ -42,6 +42,50 @@ body {
   text-transform: none;
 }
 
+.paragraph-no-margin p {
+  margin-bottom: 0 !important;
+}
+
+.list-small-padding li {
+  margin-bottom: 14px;
+}
+
+.checkbox-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.checkbox-list li {
+  position: relative;
+  margin-bottom: 12px;
+  color: #fff;
+  padding-left: 57px !important;
+}
+
+.checkbox-list li::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 0px;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #c7b37a;
+  box-sizing: border-box;
+}
+
+.checkbox-list li::after {
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: 2px;
+  width: 8px;
+  height: 16px;
+  border-right: 2px solid #c7b37a;
+  border-bottom: 2px solid #c7b37a;
+  transform: rotate(45deg);
+}
+
 .cnt-home {
   background-color: unset;
 }
@@ -6538,6 +6582,7 @@ section.vc_section.home-page-second-section .wpb_single_image {
   width: 100%;
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .osn-mp-card__name {
@@ -6546,6 +6591,7 @@ section.vc_section.home-page-second-section .wpb_single_image {
   font-size: 24px;
   font-weight: 500;
   margin: 0;
+  margin-bottom: 16px;
 }
 
 .osn-mp-card__uloga {
@@ -8327,7 +8373,6 @@ a.osn-tim-card--linked:hover {
 }
 
 /* Award cards */
-
 .template-award-cards {
   display: flex;
   gap: 60px;
@@ -8372,6 +8417,40 @@ p.template-award-cards__description {
   }
   p.template-award-cards__description {
     font-size: 12px;
+  }
+}
+
+.wpb_content_element.osn-mb-60-16 {
+  margin-bottom: 60px !important;
+}
+
+.wpb_content_element.osn-p-13-0 {
+  padding-top: 13.5px !important;
+  padding-bottom: 13.5px !important;
+}
+
+.wpb_content_element.osn-mb-32-16 {
+  margin-bottom: 32px !important;
+}
+
+.wpb_content.osn-hmb-32-0 h2 {
+  margin-bottom: 32px !important;
+}
+
+/* /mentorski program responsive */
+@media (max-width: 767px) {
+  .wpb_content_element.osn-mb-60-16 {
+    margin-bottom: 16px !important;
+  }
+  .wpb_content_element.osn-p-13-0 {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .wpb_content_element.osn-mb-32-16 {
+    margin-bottom: 16px !important;
+  }
+  .wpb_content.osn-hmb-32-0 h2 {
+    margin-bottom: 0px !important;
   }
 }
 
