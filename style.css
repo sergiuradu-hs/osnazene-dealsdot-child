@@ -2770,6 +2770,9 @@ section.vc_section.home-page-second-section .wpb_single_image {
   gap: clamp(16px, 4vw, 60px);
   justify-content: center;
   width: 100%;
+  /* WPBakery's negative row margins would shift the fixed-width row left */
+  margin-left: 0;
+  margin-right: 0;
 }
 
 #osnazene-clanice-row .wpb_column {
@@ -2855,6 +2858,78 @@ section.vc_section.home-page-second-section .wpb_single_image {
   font-weight: 500;
   line-height: normal;
   text-align: left;
+}
+
+/* Home Page Osnazene Clanice: mobile horizontal cards (<768px) */
+@media (max-width: 767px) {
+  #osnazene-clanice-row {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* Card panel per Figma */
+  #osnazene-clanice-row .wpb_column {
+    flex: 0 0 auto;
+    max-width: none;
+    padding: 24px 16px;
+    border-radius: 12px;
+    border: 0.5px solid var(--osn-color-secondary);
+    background: var(--osn-color-text);
+    box-shadow:
+      0 4px 4px 0 rgba(21, 19, 103, 0.15),
+      0 8px 12px 6px rgba(75, 73, 153, 0.15);
+  }
+
+  /* Photo left, name + category stacked to the right and vertically centered */
+  #osnazene-clanice-row .wpb_column .osn-osnazena-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    align-items: center;
+    align-content: center;
+    column-gap: 20px;
+    row-gap: 8px;
+  }
+
+  #osnazene-clanice-row .osn-osnazena-card__image {
+    grid-row: 1 / 3;
+    width: min(200px, 42vw);
+  }
+
+  #osnazene-clanice-row .osn-osnazena-card__name {
+    grid-column: 2;
+    align-self: end;
+    font-size: 24px;
+  }
+
+  #osnazene-clanice-row .osn-osnazena-card__category {
+    grid-column: 2;
+    align-self: start;
+    font-size: 16px;
+  }
+
+  /* Badge moves to the photo's lower-left corner */
+  #osnazene-clanice-row .osn-osnazena-card__badge {
+    right: auto;
+    left: 0;
+    bottom: 4%;
+  }
+}
+
+/* Home Page Osnazene Clanice: smaller photo on narrow phones (<420px) */
+@media (max-width: 419px) {
+  #osnazene-clanice-row .osn-osnazena-card__image {
+    width: min(120px, 32vw);
+  }
+  #osnazene-clanice-row .wpb_column {
+    padding: 16px 8px;
+  }
+  #osnazene-clanice-row .osn-osnazena-card__name {
+    font-size: 20px;
+  }
+  #osnazene-clanice-row .osn-osnazena-card__category {
+    font-size: 14px;
+  }
 }
 
 #home-female-owned-business .female-business-bttn-row .wpb_wrapper,
