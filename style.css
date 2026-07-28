@@ -2935,7 +2935,7 @@ section.vc_section.home-page-second-section .wpb_single_image {
 #home-female-owned-business .female-business-bttn-row .wpb_wrapper,
 .wpb_row .dual-bttn-row .wpb_wrapper {
   display: flex;
-  width: 842px;
+  width: 768px;
   justify-content: center;
   align-items: flex-start;
   gap: 16px;
@@ -2984,6 +2984,34 @@ section.vc_section.home-page-second-section .wpb_single_image {
   font-weight: 500;
   line-height: normal;
   text-transform: uppercase;
+}
+
+/* Female-owned business CTAs: stacked, equal-width buttons on mobile */
+@media (max-width: 767px) {
+  #home-female-owned-business .female-business-bttn-row .wpb_wrapper {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  #home-female-owned-business .female-business-bttn-row .vc_btn3-container {
+    width: 65vw;
+    min-width: 260px;
+    height: 56px;
+    padding: 12px 16px;
+    transition: none;
+  }
+
+  #home-female-owned-business
+    .female-business-bttn-row
+    .vc_btn3-container
+    :is(a, button) {
+    font-size: 18px;
+    white-space: nowrap;
+    transition: none;
+  }
 }
 
 #zastupljenost-statistika-row {
