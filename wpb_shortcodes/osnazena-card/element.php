@@ -85,11 +85,24 @@ $render = function( $atts, $content = '' ) use ( $template_rel ) {
     $term_name = $terms[0]->name;
   }
 
+  // Membership badge tier from the 'zvezdica' meta (same logic as clanice-grid)
+  $zvezdica = strtolower( trim( (string) get_post_meta( $post_id, 'zvezdica', true ) ) );
+  if ( in_array( $zvezdica, [ 'zlatna', 'gold' ], true ) ) {
+    $badge = 'gold';
+  } elseif ( in_array( $zvezdica, [ 'srebrna', 'silver' ], true ) ) {
+    $badge = 'silver';
+  } elseif ( 'starter' === $zvezdica ) {
+    $badge = 'starter';
+  } else {
+    $badge = '';
+  }
+
   // Expose variables to template
   $card = [
     'image_url' => $image_url,
     'name'      => $name,
     'category'  => $term_name,
+    'badge'     => $badge,
   ];
 
   ob_start();
