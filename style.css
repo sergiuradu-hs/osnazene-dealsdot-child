@@ -6735,6 +6735,20 @@ section.vc_section.home-page-second-section .wpb_single_image {
   margin-bottom: 16px;
 }
 
+.osn-mp-card__opis {
+  margin-left: 15px;
+}
+
+@media (max-width: 767px) {
+  .osn-mp-card__name {
+    font-size: 16px;
+  }
+  .osn-mp-card__opis li {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+}
+
 .osn-mp-card__uloga {
   color: var(--osn-color-white);
   font-family: var(--osn-font-main);
@@ -8630,6 +8644,18 @@ p.template-award-cards__description {
   margin-top: 80px !important;
 }
 
+.wpb_content_element.osn-h3mb-24-0 h3 {
+  margin-bottom: 24px !important;
+}
+
+.wpb_content_element.osn-mb-32-0 {
+  margin-bottom: 32px !important;
+}
+
+.vc_element.osn-mb-80-24 {
+  margin-bottom: 80px !important;
+}
+
 @media (max-width: 767px) {
   .wpb_content_element.osn-mb-60-16 {
     margin-bottom: 16px !important;
@@ -8683,5 +8709,17 @@ p.template-award-cards__description {
   }
   .wpb_content_element.osn-pt-0-0 {
     padding-top: 0px !important;
+  }
+  .mobile-h3 h3 {
+    font-size: 16px !important;
+  }
+  .wpb_content_element.osn-h3mb-24-0 h3 {
+    margin-bottom: 0px !important;
+  }
+  .wpb_content_element.osn-mb-32-0 {
+    margin-bottom: 0px !important;
+  }
+  .vc_element.osn-mb-80-24 {
+    margin-bottom: 24px !important;
   }
 }
