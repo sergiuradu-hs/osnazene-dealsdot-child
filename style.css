@@ -3218,6 +3218,49 @@ section.vc_section.home-page-second-section .wpb_single_image {
   margin: 0 !important;
 }
 
+/* Zastupljenost statistika: stacked mobile layout (<768px).
+   No card box; blocks separated by thin dividers, per Figma. */
+@media (max-width: 767px) {
+  #zastupljenost-statistika-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 32px;
+  }
+
+  #zastupljenost-statistika-row .wpb_column {
+    flex: 0 0 auto;
+    max-width: none;
+  }
+
+  /* Divider between blocks only, not after the last one */
+  #zastupljenost-statistika-row .wpb_column:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+    padding-bottom: 32px;
+  }
+
+  /* Drop the card chrome: content sits directly on the section background */
+  #zastupljenost-statistika-row .wpb_column .vc_column-inner {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+    height: auto;
+  }
+
+  /* Simple stacked flow instead of the desktop grid slots */
+  #zastupljenost-statistika-row .wpb_column .vc_column-inner > .wpb_wrapper {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px !important;
+    min-height: 0;
+  }
+
+  #zastupljenost-statistika-row h4 {
+    font-size: 20px;
+  }
+}
+
 @media (max-width: 768px) {
   #homepage-hero-section-h1 h1 {
     font-size: 48px !important;
@@ -8673,6 +8716,12 @@ p.template-award-cards__description {
 
 @media (min-width: 768px) {
   .osn-hide-above-768 {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .osn-hide-below-768 {
     display: none !important;
   }
 }
