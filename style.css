@@ -187,7 +187,8 @@ h3 {
 
 /* Responsive styles for headings */
 @media (max-width: 767px) {
-  p, li {
+  p,
+  li {
     font-size: 16px;
   }
   h1 {
@@ -2502,11 +2503,27 @@ section.vc_section.home-page-second-section .wpb_single_image {
   }
 }
 
+#home-page-link-with-underline {
+  margin-top: 64px !important;
+}
+
+@media (max-width: 767px) {
+  #home-page-link-with-underline {
+    margin-top: 16px !important;
+  }
+}
+
 #home-page-awards-section p {
   max-width: 706px;
   margin: auto;
   margin-top: 12px;
   text-align: left;
+}
+
+@media (max-width: 767px) {
+  #home-page-sta-dobijas-section {
+    gap: 0px !important;
+  }
 }
 
 /* Old code
