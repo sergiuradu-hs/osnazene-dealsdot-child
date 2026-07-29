@@ -22,7 +22,7 @@ $query = new WP_Query( [
 ] );
 ?>
 
-<section class="vc_section osnazene_section osn-arc">
+<section class="vc_section osnazene_section osn-arc osn-dogadjaji">
     <div class="container">
         <div class="osn-arc__header osn-arc__header--dogadjaji">
             <h1 class="osn-arc__heading"><?php the_title(); ?></h1>
@@ -36,12 +36,10 @@ $query = new WP_Query( [
                     <?php the_post_thumbnail( 'large', [ 'loading' => 'lazy' ] ); ?>
                 </div>
                 <?php endif; ?>
-
-                <div class="osn-arc__card-date"><?php echo get_the_date( 'd.m.Y.' ); ?></div>
-
-                <h2 class="osn-arc__card-title"><?php the_title(); ?></h2>
-
-                <span class="osn-arc__card-btn">Pročitaj više</span>
+                <div class="osn-arc__card-details">
+                    <div class="osn-arc__card-date"><?php echo get_the_date( 'd.m.Y.' ); ?></div>
+                    <h2 class="osn-arc__card-title"><?php the_title(); ?></h2>
+                </div>
             </a>
             <?php endwhile; ?>
             <?php wp_reset_postdata(); ?>

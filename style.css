@@ -8575,6 +8575,59 @@ p.template-award-cards__description {
   }
 }
 
+/* /dogadjaji */
+.osn-dogadjaji .osn-arc__card-date {
+  margin-bottom: 32px;
+}
+@media (max-width: 767px) {
+  .osn-dogadjaji .osn-arc__card {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 8px;
+    outline-width: 1px;
+    border-radius: 4px;
+    gap: 8px;
+  }
+  .osn-dogadjaji .osn-arc__card-img {
+    width: 50%;
+  }
+  .osn-dogadjaji .osn-arc__card-date {
+    font-size: 12px;
+    margin-bottom: 16px;
+  }
+  .osn-dogadjaji .osn-arc__card-title {
+    text-align: center;
+    font-size: 14px;
+    justify-content: center;
+    align-items: center;
+  }
+  .osn-dogadjaji .osn-arc__card-details {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  /* pagination */
+  .osn-dogadjaji .osn-arc__pagination {
+    box-shadow: none;
+    padding-left: 0;
+    padding-right: 0;
+    gap: clamp(8px, 2vw, 22px);
+  }
+  .osn-dogadjaji .page-numbers.current {
+    background-color: #151367;
+    color: white;
+  }
+  .osn-dogadjaji .page-numbers {
+    min-width: 40px;
+    height: 40px;
+    border: 0.5px solid #bcbcbc;
+  }
+  .osn-dogadjaji .prev,
+  .osn-dogadjaji .next {
+    color: #151367;
+  }
+}
+
 /* Helper classes for responsive design */
 @media (max-width: 991px) {
   .osn-full-under-992 {
