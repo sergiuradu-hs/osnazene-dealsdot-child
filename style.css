@@ -2473,7 +2473,7 @@ section.vc_section.home-page-second-section .wpb_single_image {
   .osn-home-page-dark-square-mobile .vc_btn3-container .vc_btn3 {
     display: block;
     width: 100%;
-    padding: 36px 16px;
+    padding: 24px 8px;
     border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 2px;
     background-color: var(--osn-color-secondary) !important;
@@ -8502,7 +8502,7 @@ a.osn-tim-card--linked:hover {
   section.osnazene_section,
   .osn-single-edukacije {
     padding: 24px;
-    gap: 36px;
+    gap: 24px;
   }
   .osn-sed__content {
     gap: 16px;
