@@ -187,6 +187,9 @@ h3 {
 
 /* Responsive styles for headings */
 @media (max-width: 767px) {
+  p, li {
+    font-size: 16px;
+  }
   h1 {
     font-size: 40px;
   }
@@ -357,6 +360,13 @@ section.gold,
 .wpb_text_column.wpb_content_element p {
   margin-bottom: 32px;
 }
+
+@media (max-width: 767px) {
+  .wpb_text_column.wpb_content_element p {
+    margin-bottom: 16px;
+  }
+}
+
 .wpb_text_column.wpb_content_element:not(:only-child) h1,
 .wpb_text_column.wpb_content_element:not(:only-child) h2,
 .wpb_text_column.wpb_content_element:not(:only-child) h3,
@@ -375,6 +385,13 @@ ul {
 ul li {
   margin-bottom: 24px;
   padding-left: 10px;
+}
+
+@media (max-width: 767px) {
+  ul li {
+    margin-bottom: 16px;
+    padding-left: 4px;
+  }
 }
 
 .wpb_text_column.wpb_content_element ul {
@@ -2457,7 +2474,6 @@ section.vc_section.home-page-second-section .wpb_single_image {
   .osn-home-page-dark-square-mobile p {
     color: var(--osn-color-white);
     font-family: var(--osn-font-main);
-    font-size: 20px;
     line-height: 1.5;
     text-align: left;
   }
@@ -2763,7 +2779,6 @@ section.vc_section.home-page-second-section .wpb_single_image {
 #home-clanice-section h2 {
   color: var(--osn-color-secondary);
   font-family: var(--osn-font-main);
-  font-size: 48px;
   font-style: italic;
   font-weight: 400;
   line-height: normal;
@@ -3108,9 +3123,9 @@ section.vc_section.home-page-second-section .wpb_single_image {
 }
 
 @media (max-width: 767px) {
-	#home-zastupljenost-section h2 {
-  	font-size: 30px;
- }
+  #home-zastupljenost-section h2 {
+    font-size: 30px;
+  }
 }
 
 #zastupljenost-statistika-row h4 {
@@ -3139,7 +3154,6 @@ section.vc_section.home-page-second-section .wpb_single_image {
 #home-partners-section li {
   color: var(--osn-color-text);
   font-family: var(--osn-font-main);
-  font-size: 20px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
