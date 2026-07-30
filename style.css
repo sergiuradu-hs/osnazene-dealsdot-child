@@ -1494,6 +1494,13 @@ header section.osnazene_section {
   margin-top: 60px;
 }
 
+@media (max-width: 767px) {
+  .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child),
+  .vc_btn3-container.vc_btn3-center.vc_do_btn:not(:first-child) {
+    margin-top: 32px;
+  }
+}
+
 .vc_btn3-container.osn-contact-button .vc_general.vc_btn3,
 .vc_btn3-container.osn-contact-button .vc_general.vc_btn3:is(:hover, :focus),
 .vc_general.vc_btn3.osn-contact-button,
@@ -2714,14 +2721,14 @@ section.vc_section.home-page-second-section .wpb_single_image {
 
   /* Stack the cards vertically */
   #home-business-support-row {
-    flex-direction: column !important;
-    gap: 24px !important;
+    display: block !important;
   }
 
   /* Card: full-width gold border, natural height.
      flex: none is critical - the desktop flex: 1 1 0 would collapse
      card height to 0 once the row direction is column. */
   #home-business-support-row > .wpb_column {
+    margin-bottom: 24px !important;
     flex: 0 0 auto !important;
     width: 100% !important;
     max-width: none !important;
