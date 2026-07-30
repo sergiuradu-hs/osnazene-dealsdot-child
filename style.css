@@ -8815,6 +8815,19 @@ p.template-award-cards__description {
   margin-bottom: 80px !important;
 }
 
+.list-medium-padding li {
+  margin-bottom: 24px;
+}
+
+section.vc_section.no-gap,
+section.osnazene_section.no-gap {
+  gap: 0;
+}
+
+.wpb_content_element.osn-mb-80-36 {
+  margin-bottom: 80px !important;
+}
+
 @media (max-width: 767px) {
   .wpb_content_element.osn-mb-60-16 {
     margin-bottom: 16px !important;
@@ -8880,5 +8893,17 @@ p.template-award-cards__description {
   }
   .vc_element.osn-mb-80-24 {
     margin-bottom: 24px !important;
+  }
+  .list-medium-padding li {
+    margin-bottom: 12px;
+  }
+  .list-medium-padding li:last-child {
+    margin-bottom: 0 !important;
+  }
+  .vc_section .osn-mb-0 {
+    padding-bottom: 0 !important;
+  }
+  .wpb_content_element.osn-mb-80-36 {
+    margin-bottom: 36px !important;
   }
 }
