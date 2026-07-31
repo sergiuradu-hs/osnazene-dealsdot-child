@@ -3211,6 +3211,13 @@ section.vc_section.home-page-second-section .wpb_single_image {
   line-height: 135%; /* 32.4px */
 }
 
+@media (max-width: 767px) {
+  #home-page-blog-section .wpb_text_column p {
+    font-size: 16px;
+    text-align: left;
+  }
+}
+
 /* Home business support cards: stretch card boxes only */
 
 /* Align chart images in Zastupljenost cards */
