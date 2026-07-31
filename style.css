@@ -3807,7 +3807,6 @@ section.vc_section.home-page-second-section .wpb_single_image {
   font-size: 28px;
   font-style: normal;
   font-weight: 600;
-  line-height: 36px;
 }
 
 .osn-latest-posts-3__title a {
@@ -3872,10 +3871,13 @@ section.vc_section.home-page-second-section .wpb_single_image {
     width: 100%;
   }
 
+  .osn-latest-posts-3__date {
+    font-size: 14px;
+  }
+
   .osn-latest-posts-3__title {
     min-height: 0;
-    font-size: 24px;
-    line-height: 32px;
+    font-size: 14px;
   }
 
   .osn-latest-posts-3__btn span {
