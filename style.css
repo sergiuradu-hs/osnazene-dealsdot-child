@@ -3859,26 +3859,33 @@ section.vc_section.home-page-second-section .wpb_single_image {
 
   .osn-latest-posts-3__card--featured {
     outline-width: 1px;
+    outline-offset: -1px; /* base -3px leaves the image poking past the line */
     width: 100%;
     max-width: none;
-    padding: 20px 16px 28px;
+    padding: 0 0 28px;
+    overflow: hidden;
   }
 
-  .osn-latest-posts-3__card--featured .osn-latest-posts-3__image {
-    border-radius: 4px 4px 0 0;
+  /* Round the image's own top corners to match the card radius, so the
+     bleed looks clipped even if overflow clipping is unavailable */
+  .osn-latest-posts-3__card--featured .osn-latest-posts-3__image,
+  .osn-latest-posts-3__card--featured .osn-latest-posts-3__image-link {
+    border-radius: 12px 12px 0 0;
   }
 
   .osn-latest-posts-3__card--featured .osn-latest-posts-3__image-link {
     width: 100%;
     max-width: none;
     height: auto;
-    aspect-ratio: 420 / 282;
+    aspect-ratio: 5 / 4;
+    overflow: hidden;
   }
 
+  /* Text content keeps the 16px side inset the card padding used to provide */
   .osn-latest-posts-3__card--featured .osn-latest-posts-3__date,
   .osn-latest-posts-3__card--featured .osn-latest-posts-3__title,
   .osn-latest-posts-3__card--featured .osn-latest-posts-3__btn {
-    width: 100%;
+    width: calc(100% - 32px);
   }
 
   .osn-latest-posts-3__card--featured .osn-latest-posts-3__date {
