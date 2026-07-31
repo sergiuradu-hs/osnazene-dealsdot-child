@@ -63,14 +63,62 @@ $render = function( $atts, $content = '' ) use ( $template_rel ) {
   $prev_url = esc_url( add_query_arg( [ 'cal_year' => $prev_year, 'cal_month' => $prev_month ] ) );
   $next_url = esc_url( add_query_arg( [ 'cal_year' => $next_year, 'cal_month' => $next_month ] ) );
 
-  // Query events for this month
+  // Build flat cell array: pad-before (prev month) + current days + pad-after (next month)
+  $pad_before = $start_dow - 1;
+  $cells = [];
+  for ( $i = $pad_before; $i > 0; $i-- ) {
+    $cell_day = $days_in_prev - $i + 1;
+    $cell_ts  = mktime( 0, 0, 0, $prev_month, $cell_day, $prev_year );
+    $cells[]  = [
+      'day'       => $cell_day,
+      'current'   => false,
+      'timestamp' => $cell_ts,
+      'date_key'  => date( 'Y-n-j', $cell_ts ),
+    ];
+  }
+  for ( $d = 1; $d <= $days_in_month; $d++ ) {
+    $cell_ts = mktime( 0, 0, 0, $month, $d, $year );
+    $cells[] = [
+      'day'       => $d,
+      'current'   => true,
+      'timestamp' => $cell_ts,
+      'date_key'  => date( 'Y-n-j', $cell_ts ),
+    ];
+  }
+  $total_cells = (int) ceil( count( $cells ) / 7 ) * 7;
+  $next_overflow = 1;
+  while ( count( $cells ) < $total_cells ) {
+    $cell_ts = mktime( 0, 0, 0, $next_month, $next_overflow, $next_year );
+    $cells[] = [
+      'day'       => $next_overflow++,
+      'current'   => false,
+      'timestamp' => $cell_ts,
+      'date_key'  => date( 'Y-n-j', $cell_ts ),
+    ];
+  }
+
+  $visible_start_ts = ! empty( $cells ) ? (int) $cells[0]['timestamp'] : $first_ts;
+  $last_cell        = ! empty( $cells ) ? $cells[ count( $cells ) - 1 ] : [ 'timestamp' => mktime( 0, 0, 0, $month, $days_in_month, $year ) ];
+  $visible_end_ts   = mktime(
+    23,
+    59,
+    59,
+    (int) date( 'n', (int) $last_cell['timestamp'] ),
+    (int) date( 'j', (int) $last_cell['timestamp'] ),
+    (int) date( 'Y', (int) $last_cell['timestamp'] )
+  );
+
+  // Query events for the full visible grid so mobile can list overflow-month events.
   $events_raw = get_posts( [
     'post_type'      => 'dogadjaj',
     'post_status'    => 'publish',
     'posts_per_page' => -1,
+    'meta_key'       => 'datum',
+    'orderby'        => 'meta_value_num',
+    'order'          => 'ASC',
     'meta_query'     => [ [
       'key'     => 'datum',
-      'value'   => [ $first_ts, mktime( 23, 59, 59, $month, $days_in_month, $year ) ],
+      'value'   => [ $visible_start_ts, $visible_end_ts ],
       'compare' => 'BETWEEN',
       'type'    => 'NUMERIC',
     ] ],
@@ -78,33 +126,64 @@ $render = function( $atts, $content = '' ) use ( $template_rel ) {
 
   $today_midnight = mktime( 0, 0, 0, (int) date( 'n' ), (int) date( 'j' ), (int) date( 'Y' ) );
 
-  // Index events by day-of-month
-  $events_by_day = [];
+  $weekday_names = [
+    1 => 'Pon',
+    2 => 'Uto',
+    3 => 'Sre',
+    4 => 'Čet',
+    5 => 'Pet',
+    6 => 'Sub',
+    7 => 'Ned',
+  ];
+
+  // Index events by date. Keep desktop $events_by_day limited to current month.
+  $events_by_day  = [];
+  $events_by_date = [];
+  $events_list    = [];
   foreach ( $events_raw as $ev ) {
-    $ts  = (int) get_post_meta( $ev->ID, 'datum', true );
-    $day = (int) date( 'j', $ts );
-    $events_by_day[ $day ][] = [
+    $ts = (int) get_post_meta( $ev->ID, 'datum', true );
+    if ( ! $ts ) {
+      continue;
+    }
+
+    $day      = (int) date( 'j', $ts );
+    $ev_year  = (int) date( 'Y', $ts );
+    $ev_month = (int) date( 'n', $ts );
+    $date_key = date( 'Y-n-j', $ts );
+    $anchor   = 'osn-cal-day-' . date( 'Ymd', $ts ) . '-' . (int) $ev->ID;
+    $event    = [
       'title'   => get_the_title( $ev ),
       'date'    => date( 'd.m.Y.', $ts ),
       'link'    => get_permalink( $ev ),
       'expired' => $ts < $today_midnight,
+      'ts'      => $ts,
+      'anchor'  => $anchor,
+    ];
+
+    $events_by_date[ $date_key ][] = $event;
+    if ( $ev_year === $year && $ev_month === $month ) {
+      $events_by_day[ $day ][] = $event;
+    }
+
+    $events_list[] = [
+      'day'      => $day,
+      'weekday'  => $weekday_names[ (int) date( 'N', $ts ) ],
+      'date'     => $event['date'],
+      'title'    => $event['title'],
+      'link'     => $event['link'],
+      'in_month' => ( $ev_year === $year && $ev_month === $month ),
+      'anchor'   => $anchor,
+      'ts'       => $ts,
     ];
   }
 
-  // Build flat cell array: pad-before (prev month) + current days + pad-after (next month)
-  $pad_before = $start_dow - 1;
-  $cells = [];
-  for ( $i = $pad_before; $i > 0; $i-- ) {
-    $cells[] = [ 'day' => $days_in_prev - $i + 1, 'current' => false ];
+  foreach ( $cells as &$cell ) {
+    $date_key = $cell['date_key'];
+    $cell['has_event'] = ! empty( $events_by_date[ $date_key ] );
+    $cell['anchor']    = $cell['has_event'] ? $events_by_date[ $date_key ][0]['anchor'] : '';
   }
-  for ( $d = 1; $d <= $days_in_month; $d++ ) {
-    $cells[] = [ 'day' => $d, 'current' => true ];
-  }
-  $total_cells = (int) ceil( count( $cells ) / 7 ) * 7;
-  $next_overflow = 1;
-  while ( count( $cells ) < $total_cells ) {
-    $cells[] = [ 'day' => $next_overflow++, 'current' => false ];
-  }
+  unset( $cell );
+
   $weeks = array_chunk( $cells, 7 );
 
   ob_start();

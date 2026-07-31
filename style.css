@@ -3511,6 +3511,227 @@ section.vc_section.home-page-second-section .wpb_single_image {
   font-weight: 700;
   line-height: 1;
 }
+
+.osn-cal-list {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .osn-cal-widget {
+    width: 100%;
+  }
+
+  .osn-cal {
+    width: 100%;
+  }
+
+  .osn-cal__header {
+    height: auto;
+    padding: 0 0 24px;
+    border-radius: 0;
+  }
+
+  .osn-cal__month-label {
+    color: #405184;
+    font-size: 16px;
+    line-height: 1.2;
+  }
+
+  .osn-cal__nav {
+    gap: 24px;
+  }
+
+  .osn-cal__nav-btn {
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .osn-cal__nav-btn::before {
+    border-width: 0 4px 4px 0;
+    width: 14px;
+    height: 14px;
+    border-color: #b8b8b8;
+    border-style: solid;
+  }
+
+  .osn-cal__nav-btn--prev::before {
+    left: 55%;
+    transform: translate(-50%, -50%) rotate(135deg);
+  }
+
+  .osn-cal__nav-btn--next::before {
+    right: 55%;
+    transform: translate(50%, -50%) rotate(-45deg);
+  }
+
+  .osn-cal__days-header {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    height: auto;
+    padding: 0 0 20px;
+    border: 0;
+    border-radius: 0;
+    gap: 0;
+  }
+
+  .osn-cal__day-name {
+    color: var(--osn-color-text);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .osn-cal__body {
+    gap: 10px;
+  }
+
+  .osn-cal__week {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0;
+  }
+
+  .osn-cal__cell {
+    display: flex;
+    width: auto;
+    height: 72px;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    overflow: visible;
+    background: transparent;
+    cursor: default;
+  }
+
+  .osn-cal__cell--last,
+  .osn-cal__cell--overflow {
+    border: 0;
+    background: transparent;
+  }
+
+  .osn-cal__cell--today {
+    outline: 0;
+  }
+
+  .osn-cal__cell--has-event {
+    cursor: pointer;
+  }
+
+  .osn-cal__cell--has-event::before {
+    content: "";
+    position: absolute;
+    inset: 50% auto auto 50%;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #e1cba6;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+  }
+
+  .osn-cal__cell--overflow.osn-cal__cell--has-event::before {
+    background: #f3edd9;
+  }
+
+  .osn-cal__date {
+    position: relative;
+    top: auto;
+    left: auto;
+    z-index: 1;
+    color: var(--osn-color-text);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  .osn-cal__cell--overflow .osn-cal__date {
+    color: #dedede;
+  }
+
+  .osn-cal-event,
+  .osn-cal-event__more {
+    display: none;
+  }
+
+  .osn-cal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 48px;
+  }
+
+  .osn-cal-list__item {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) 24px;
+    column-gap: 10px;
+    align-items: center;
+    min-height: 86px;
+    color: var(--osn-color-text);
+    text-decoration: none;
+  }
+
+  .osn-cal-list__day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #c6b08a;
+    font-family: var(--osn-font-main);
+    line-height: 1;
+  }
+
+  .osn-cal-list__day-number {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .osn-cal-list__weekday {
+    margin-top: 4px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .osn-cal-list__content {
+    display: flex;
+    min-width: 0;
+    padding-left: 10px;
+    flex-direction: column;
+    border-left: 1px solid #c6b08a;
+  }
+
+  .osn-cal-list__date {
+    color: #405184;
+    font-family: var(--osn-font-main);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .osn-cal-list__title {
+    margin-top: 8px;
+    color: var(--osn-color-text);
+    font-family: var(--osn-font-main);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .osn-cal-list__chevron {
+    color: #405184;
+    font-family: Arial, sans-serif;
+    font-size: 34px;
+    line-height: 1;
+    text-align: right;
+  }
+
+  .osn-cal-list__item--outside .osn-cal-list__day,
+  .osn-cal-list__item--outside .osn-cal-list__date,
+  .osn-cal-list__item--outside .osn-cal-list__title,
+  .osn-cal-list__item--outside .osn-cal-list__chevron {
+    color: #b8b8b8;
+  }
+}
 /* End of Dogadjaj Calendar */
 
 /* Latest Posts (3) widget */

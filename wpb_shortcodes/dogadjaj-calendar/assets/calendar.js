@@ -66,4 +66,34 @@
     },
     true
   );
+
+  document.addEventListener(
+    "click",
+    function (event) {
+      const cell = event.target.closest(
+        ".osn-cal-widget .osn-cal__cell--has-event"
+      );
+      if (!cell || !window.matchMedia("(max-width: 767px)").matches) {
+        return;
+      }
+
+      const widget = cell.closest(".osn-cal-widget");
+      const targetId = cell.dataset.osnTarget;
+      if (!widget || !targetId) {
+        return;
+      }
+
+      const target = document.getElementById(targetId);
+      if (!target || !widget.contains(target)) {
+        return;
+      }
+
+      event.preventDefault();
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    },
+    true
+  );
 })();
