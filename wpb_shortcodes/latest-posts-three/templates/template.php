@@ -2,13 +2,19 @@
 /**
  * Template: Latest Posts Three
  * Variables:
- * - $items (array): title, date, url, image_url, image_alt
+ * - $items (array): title, date, url, image_url, image_alt, featured
  */
 ?>
 <?php if ( ! empty( $items ) ) : ?>
 <div class="osn-latest-posts-3" role="list">
   <?php foreach ( $items as $item ) : ?>
-  <article class="osn-latest-posts-3__card" role="listitem">
+    <?php
+      $card_classes = [
+        'osn-latest-posts-3__card',
+        ! empty( $item['featured'] ) ? 'osn-latest-posts-3__card--featured' : 'osn-latest-posts-3__card--compact',
+      ];
+    ?>
+  <article class="<?php echo esc_attr( implode( ' ', $card_classes ) ); ?>" role="listitem">
 
     <?php if ( ! empty( $item['image_url'] ) ) : ?>
       <a class="osn-latest-posts-3__image-link" href="<?php echo esc_url( $item['url'] ); ?>" aria-label="<?php echo esc_attr( $item['title'] ); ?>">

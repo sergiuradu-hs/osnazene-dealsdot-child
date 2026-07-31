@@ -29,6 +29,7 @@ $render = function( $atts, $content = '' ) use ( $template_rel ) {
   foreach ( $posts as $post ) {
     $post_id = (int) $post->ID;
     $image   = get_the_post_thumbnail_url( $post_id, 'large' );
+    $featured = empty( $items );
 
     $items[] = [
       'title'      => get_the_title( $post_id ),
@@ -36,6 +37,7 @@ $render = function( $atts, $content = '' ) use ( $template_rel ) {
       'url'        => get_permalink( $post_id ),
       'image_url'  => $image ? $image : '',
       'image_alt'  => get_post_meta( get_post_thumbnail_id( $post_id ), '_wp_attachment_image_alt', true ),
+      'featured'   => $featured,
     ];
   }
 

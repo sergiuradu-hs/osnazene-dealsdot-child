@@ -3854,34 +3854,115 @@ section.vc_section.home-page-second-section .wpb_single_image {
 @media (max-width: 767px) {
   .osn-latest-posts-3__card {
     width: 100%;
-    max-width: 465px;
+    max-width: none;
+  }
+
+  .osn-latest-posts-3__card--featured {
+    outline-width: 1px;
+    width: 100%;
+    max-width: none;
     padding: 20px 16px 28px;
   }
 
-  .osn-latest-posts-3__image-link {
+  .osn-latest-posts-3__card--featured .osn-latest-posts-3__image {
+    border-radius: 4px 4px 0 0;
+  }
+
+  .osn-latest-posts-3__card--featured .osn-latest-posts-3__image-link {
     width: 100%;
-    max-width: 420px;
+    max-width: none;
     height: auto;
     aspect-ratio: 420 / 282;
   }
 
-  .osn-latest-posts-3__date,
-  .osn-latest-posts-3__title,
-  .osn-latest-posts-3__btn {
+  .osn-latest-posts-3__card--featured .osn-latest-posts-3__date,
+  .osn-latest-posts-3__card--featured .osn-latest-posts-3__title,
+  .osn-latest-posts-3__card--featured .osn-latest-posts-3__btn {
     width: 100%;
   }
 
-  .osn-latest-posts-3__date {
+  .osn-latest-posts-3__card--featured .osn-latest-posts-3__date {
     font-size: 14px;
+    color: var(--osn-color-light-gray);
   }
 
-  .osn-latest-posts-3__title {
+  .osn-latest-posts-3__card--featured .osn-latest-posts-3__title {
     min-height: 0;
     font-size: 14px;
   }
 
-  .osn-latest-posts-3__btn span {
-    font-size: 20px;
+  .osn-latest-posts-3__card--featured .osn-latest-posts-3__btn span {
+    font-size: 16px;
+  }
+
+  .osn-latest-posts-3__card--compact {
+    display: grid;
+    grid-template-columns: minmax(0, 38%) minmax(0, 1fr);
+    column-gap: 20px;
+    row-gap: 12px;
+    align-items: start;
+    max-width: none;
+    padding: 0;
+    outline: 0;
+  }
+
+  /* Absolutely positioned so the image's natural height can't inflate
+     the grid rows; the card height comes from the text column only */
+  .osn-latest-posts-3__card--compact .osn-latest-posts-3__image {
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+  }
+
+  /* Image fills the full card height (set by the right column's content) */
+  .osn-latest-posts-3__card--compact .osn-latest-posts-3__image-link {
+    grid-row: 1 / 4;
+    grid-column: 1;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    min-height: 0;
+    align-self: stretch;
+  }
+
+  .osn-latest-posts-3__card--compact .osn-latest-posts-3__date,
+  .osn-latest-posts-3__card--compact .osn-latest-posts-3__title,
+  .osn-latest-posts-3__card--compact .osn-latest-posts-3__btn {
+    grid-column: 2;
+    width: 100%;
+  }
+
+  .osn-latest-posts-3__card--compact .osn-latest-posts-3__date {
+    color: var(--osn-color-light-gray);
+    font-size: 12px;
+  }
+
+  .osn-latest-posts-3__card--compact .osn-latest-posts-3__title {
+    min-height: 0; /* desktop rule reserves 198px, which left a big gap here */
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  .osn-latest-posts-3__card--compact .osn-latest-posts-3__btn {
+    width: auto;
+    min-height: 0;
+    margin-top: 8px;
+    padding: 8px 28px;
+    border: 1px solid var(--osn-color-secondary);
+    justify-self: end;
+    align-self: end;
+  }
+
+  .osn-latest-posts-3__card--compact .osn-latest-posts-3__btn span {
+    font-size: 16px;
+  }
+
+  .osn-latest-posts-3--dark-button .vc_btn3 {
+    background: var(--osn-color-text) !important;
+    color: var(--osn-color-white) !important;
   }
 }
 /* End of Latest Posts (3) widget */
