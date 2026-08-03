@@ -1459,6 +1459,21 @@ header section.osnazene_section {
   line-height: normal;
   text-transform: uppercase;
 }
+
+@media (max-width: 767px) {
+  .vc_btn3-container.vc_btn3-inline.vc_do_btn :is(a, button),
+  .vc_btn3-container.vc_btn3-inline.vc_do_btn :is(a, button):is(:hover, :focus),
+  :is(.vc_btn3-center, .vc_btn3-right)
+    .vc_general.vc_btn3.vc_btn3-color-grey.vc_btn3-style-modern,
+  :is(.vc_btn3-center, .vc_btn3-right)
+    .vc_general.vc_btn3.vc_btn3-color-grey.vc_btn3-style-modern:is(
+      :focus,
+      :hover
+    ) {
+    font-size: 16px;
+  }
+}
+
 .dark .vc_btn3-container.vc_btn3-inline.vc_do_btn :is(a, button),
 .dark
   .vc_btn3-container.vc_btn3-inline.vc_do_btn
@@ -2011,7 +2026,7 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
     background: var(--osn-color-text);
     color: var(--osn-color-white);
     font-family: var(--osn-font-main);
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     line-height: normal;
     letter-spacing: 1px;
