@@ -115,6 +115,14 @@
 							</div>
 						</div>
 
+						<div class="osn-footer__row osn-footer__row--newsletter osn-hide-above-768">
+							<div class="osn-footer__newsletter">
+								<h3 class="osn-footer__newsletter-title"><?php esc_html_e( 'Newsletter prijava', 'dealsdot-child' ); ?></h3>
+								<p class="osn-footer__newsletter-text"><?php esc_html_e( 'Budite u toku sa najnovijim konkursima, fondovima, događajima i prve saznajte najnovije informacije iz sveta ženskog preduzetništva i savremenog poslovnog sveta', 'dealsdot-child' ); ?></p>
+								<?php echo do_shortcode( '[wpb_newsletter_form]' ); ?>
+							</div>
+						</div>
+
 						<div class="osn-footer__row osn-footer__row--payments">
 							<div class="osn-footer__payments">
 								<?php if ( ! empty( $paymentimage ) ) : ?>

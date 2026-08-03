@@ -1769,15 +1769,155 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
   }
 }
 
+/* Footer for mobile */
 @media (max-width: 767px) {
-  .osn-footer__menus {
-    grid-template-columns: 1fr;
-  }
   .osn-footer__row {
     margin-bottom: 24px;
   }
+
+  /* Stack the brand column above the link menus */
+  .osn-footer__row--top {
+    flex-direction: column;
+    gap: 32px;
+  }
+  .osn-footer__col.osn-footer__col--left {
+    width: 100%;
+    height: auto;
+    gap: 24px;
+  }
+  .osn-footer__col.osn-footer__col--right {
+    width: 100%;
+    padding: 0;
+  }
+
+  .osn-footer__col.osn-footer__col--left .osn-footer__title,
+  .osn-footer__col.osn-footer__col--left
+    .osn-footer__title
+    :is(p, h1, h2, h3, h4, h5) {
+    font-size: 36px;
+  }
+
+  /* Full-width gold CTA (desktop keeps the white button) */
+  .osn-footer .vc_btn3-container.vc_btn3-inline.vc_do_btn {
+    display: block;
+    width: 100%;
+  }
+  footer
+    .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child)
+    a.osn-footer__btn {
+    display: flex;
+    width: 100%;
+    padding: 24px 16px;
+    justify-content: center;
+    background: var(--osn-color-secondary);
+    color: var(--osn-color-text);
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  /* Two columns: left = Događaji + Podrška, right = O platformi */
+  .osn-footer__menus {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    column-gap: 24px;
+    row-gap: 24px;
+  }
+  .osn-footer__menus .osn-footer__menu:first-child,
+  .osn-footer__menus .osn-footer__menu:nth-child(2),
+  .osn-footer__menus .osn-footer__menu:nth-child(3) {
+    width: auto;
+  }
+  .osn-footer__menus .osn-footer__menu:first-child {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .osn-footer__menus .osn-footer__menu:nth-child(2) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .osn-footer__menus .osn-footer__menu:nth-child(3) {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+  .osn-footer__menu-list li {
+    margin-bottom: 16px;
+  }
+
+  /* Newsletter card (mobile only, hidden >=768px via osn-hide-above-768) */
+  .osn-footer__newsletter {
+    border: 1px solid var(--osn-color-secondary);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px 16px;
+    border-radius: 8px;
+    background: #43528b;
+  }
+  .osn-footer__newsletter-title {
+    margin: 0;
+    color: var(--osn-color-secondary) !important;
+    font-family: var(--osn-font-main);
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .osn-footer__newsletter-text {
+    margin: 0;
+    color: #bcbcbc !important;
+    font-family: var(--osn-font-main);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  /* Re-skin the embedded newsletter widget for the dark footer card */
+  .osn-footer .osn-newsletter-widget {
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    max-width: none;
+    overflow: visible;
+  }
+  /* Input and button side by side, button aligned to the input's bottom edge */
+  .osn-footer .osn-newsletter-widget__form {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 12px;
+  }
+  .osn-footer .osn-newsletter-widget__field-group {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+  }
+  .osn-footer .osn-newsletter-widget__field-padding {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .osn-footer .osn-newsletter-widget__label {
+    color: var(--osn-color-white);
+  }
+  .osn-footer .osn-newsletter-widget__actions {
+    align-self: auto;
+    flex: 0 0 auto;
+  }
+  .osn-footer .osn-newsletter-widget__submit,
+  .osn-footer .osn-newsletter-widget__submit:hover,
+  .osn-footer .osn-newsletter-widget__submit:focus {
+    width: auto;
+    height: 44px;
+    padding: 0 20px;
+  }
+  .osn-footer .osn-newsletter-widget .row-success {
+    color: var(--osn-color-white);
+  }
+
   .osn-footer__row--payments {
     margin-top: 28px;
+  }
+  .osn-footer__row--copyright .osn-footer__copyright {
+    text-align: center;
+    font-size: 12px;
   }
 }
 
