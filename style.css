@@ -1921,6 +1921,35 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
   }
 }
 
+/* Very narrow screens: single-column menus and stacked newsletter form */
+@media (max-width: 319px) {
+  .osn-footer__menus {
+    grid-template-columns: 1fr;
+  }
+  .osn-footer__menus .osn-footer__menu:first-child,
+  .osn-footer__menus .osn-footer__menu:nth-child(2),
+  .osn-footer__menus .osn-footer__menu:nth-child(3) {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .osn-footer .osn-newsletter-widget__form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .osn-footer .osn-newsletter-widget__field-group {
+    width: 100%;
+  }
+  .osn-footer .osn-newsletter-widget__actions {
+    align-self: stretch;
+  }
+  .osn-footer .osn-newsletter-widget__submit,
+  .osn-footer .osn-newsletter-widget__submit:hover,
+  .osn-footer .osn-newsletter-widget__submit:focus {
+    width: 100%;
+  }
+}
+
 /* Custom fonts */
 .osn-font-weight-600,
 .osn-font-weight-600 p,
