@@ -7676,7 +7676,7 @@ a.osn-link-list__label:focus {
 /* ── Mobile ── */
 @media (max-width: 767px) {
   .osn-link-list__label {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .osn-link-list__item {
@@ -9428,6 +9428,10 @@ section.osnazene_section.no-gap {
   padding-left: 62.5px !important;
 }
 
+.osn-gap-6-24 {
+  gap: 6px !important;
+}
+
 @media (max-width: 767px) {
   .wpb_content_element.osn-mb-60-16 {
     margin-bottom: 16px !important;
@@ -9572,5 +9576,31 @@ section.osnazene_section.no-gap {
   }
   .osn-centar-za-ravnopravnost__mobile-card li {
     margin-bottom: 6px !important;
+  }
+  .osn-text-column-mb-0 .wpb_text_column {
+    margin-bottom: 0 !important;
+  }
+  .osn-text-column-m-0 .wpb_text_column {
+    margin: 0 !important;
+  }
+  .osn-link-subtitle__mobile {
+    background: #43528b;
+    padding: 4px 24px;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 1.92px;
+  }
+  .osn-link-subtitle__mobile h3 {
+    color: #fff;
+  }
+  .osn-gap-6-24 {
+    gap: 24px !important;
+  }
+  .osn-full-width-image {
+    margin-left: -24px;
+    margin-right: -24px;
   }
 }
