@@ -9278,6 +9278,49 @@ p.template-award-cards__description {
   color: #d9d9d9;
 }
 
+.vc_section.osn-nasa-misija__section {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .vc_section.osn-nasa-misija__section {
+    display: flex;
+  }
+}
+
+.osn-mission__container {
+  margin-bottom: 24px;
+}
+
+h2.osn-mission__title {
+  text-align: center;
+  text-transform: none;
+  color: #c6b08a;
+}
+
+.osn-mission__list {
+  margin-top: 40px;
+  gap: 6px;
+  display: flex;
+  flex-direction: column;
+}
+
+.osn-mission__item {
+  background: #43528b;
+  padding: 16px 24px;
+  border-radius: 8px;
+  color: #d9d9d9;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.osn-centar-za-ravnopravnost__white-section .wpb_wrapper {
+  justify-content: space-between;
+}
+
 /* Helper classes for responsive design */
 @media (max-width: 991px) {
   .osn-full-under-992 {
@@ -9517,5 +9560,8 @@ section.osnazene_section.no-gap {
   }
   .osn-centar-za-ravnopravnost__gold-card {
     min-height: auto !important;
+  }
+  .mobile-h3-24 h3 {
+    font-size: 24px !important;
   }
 }
