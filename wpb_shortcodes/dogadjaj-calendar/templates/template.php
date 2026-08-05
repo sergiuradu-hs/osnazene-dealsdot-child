@@ -15,7 +15,7 @@
  * - $year           (int)      current year
  */
 ?>
-<div class="osn-cal-widget">
+<div class="osn-cal-widget" data-osn-year="<?php echo (int) $year; ?>" data-osn-month="<?php echo (int) $month; ?>">
 <div class="osn-cal">
 
   <div class="osn-cal__header">

@@ -31,12 +31,20 @@ $render = function( $atts, $content = '' ) use ( $template_rel ) {
     true
   );
 
+  // Page caches (plugin/host) would freeze the default month; ask them to skip this page.
+  if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+    define( 'DONOTCACHEPAGE', true );
+  }
+
+  // "Now" in the site's configured timezone (plain date() is UTC in WordPress).
+  $now = (int) current_time( 'timestamp' );
+
   // Sanitize month/year from GET params (cast to int — safe, no injection possible)
-  $year  = isset( $_GET['cal_year'] )  ? (int) $_GET['cal_year']  : (int) date( 'Y' );
-  $month = isset( $_GET['cal_month'] ) ? (int) $_GET['cal_month'] : (int) date( 'n' );
+  $year  = isset( $_GET['cal_year'] )  ? (int) $_GET['cal_year']  : (int) date( 'Y', $now );
+  $month = isset( $_GET['cal_month'] ) ? (int) $_GET['cal_month'] : (int) date( 'n', $now );
   $month = max( 1, min( 12, $month ) );
   if ( $year < 2000 || $year > 2100 ) {
-    $year = (int) date( 'Y' );
+    $year = (int) date( 'Y', $now );
   }
 
   // Calendar math
@@ -124,7 +132,7 @@ $render = function( $atts, $content = '' ) use ( $template_rel ) {
     ] ],
   ] );
 
-  $today_midnight = mktime( 0, 0, 0, (int) date( 'n' ), (int) date( 'j' ), (int) date( 'Y' ) );
+  $today_midnight = mktime( 0, 0, 0, (int) date( 'n', $now ), (int) date( 'j', $now ), (int) date( 'Y', $now ) );
 
   $weekday_names = [
     1 => 'Pon',

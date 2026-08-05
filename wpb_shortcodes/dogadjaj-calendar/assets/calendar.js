@@ -67,6 +67,76 @@
     true
   );
 
+  // Cache self-heal: if the page came from a full-page cache generated in a
+  // previous month, the server-rendered default month is stale. When no
+  // explicit cal_year/cal_month params are present, compare the rendered
+  // month against the device's current month and re-fetch if they differ
+  // (the query-string URL bypasses page caches).
+  function refreshStaleCalendars() {
+    var params = new URLSearchParams(window.location.search);
+    if (params.has("cal_year") || params.has("cal_month")) {
+      return;
+    }
+
+    var now = new Date();
+    var currentYear = now.getFullYear();
+    var currentMonth = now.getMonth() + 1;
+
+    var widgets = Array.prototype.slice.call(
+      document.querySelectorAll(".osn-cal-widget[data-osn-year]")
+    );
+    var stale = widgets.filter(function (widget) {
+      return (
+        parseInt(widget.dataset.osnYear, 10) !== currentYear ||
+        parseInt(widget.dataset.osnMonth, 10) !== currentMonth
+      );
+    });
+
+    if (!stale.length) {
+      return;
+    }
+
+    var url = new URL(window.location.href);
+    url.searchParams.set("cal_year", String(currentYear));
+    url.searchParams.set("cal_month", String(currentMonth));
+
+    fetch(url.toString(), {
+      method: "GET",
+      credentials: "same-origin",
+      headers: {
+        "X-Requested-With": "XMLHttpRequest"
+      }
+    })
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("Calendar refresh failed");
+        }
+        return response.text();
+      })
+      .then(function (html) {
+        var doc = new DOMParser().parseFromString(html, "text/html");
+        var fetched = doc.querySelectorAll(".osn-cal-widget");
+        var all = Array.prototype.slice.call(
+          document.querySelectorAll(".osn-cal-widget")
+        );
+        stale.forEach(function (widget) {
+          var replacement = fetched[all.indexOf(widget)] || fetched[0];
+          if (replacement) {
+            widget.replaceWith(replacement);
+          }
+        });
+      })
+      .catch(function () {
+        // Leave the server-rendered month in place; nav links still work.
+      });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", refreshStaleCalendars);
+  } else {
+    refreshStaleCalendars();
+  }
+
   document.addEventListener(
     "click",
     function (event) {
