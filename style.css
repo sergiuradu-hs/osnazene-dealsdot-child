@@ -1208,9 +1208,9 @@ header section.osnazene_section {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 34px;
-    min-width: 34px;
-    height: 34px;
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
     overflow: hidden;
     border-radius: 999px;
   }
