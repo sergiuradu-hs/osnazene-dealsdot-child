@@ -9564,4 +9564,13 @@ section.osnazene_section.no-gap {
   .mobile-h3-24 h3 {
     font-size: 24px !important;
   }
+  .osn-centar-za-ravnopravnost__mobile-card {
+    padding: 16px !important;
+  }
+  .osn-centar-za-ravnopravnost__mobile-card p {
+    margin-bottom: 6px !important;
+  }
+  .osn-centar-za-ravnopravnost__mobile-card li {
+    margin-bottom: 6px !important;
+  }
 }
