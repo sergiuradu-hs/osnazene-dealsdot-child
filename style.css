@@ -8451,8 +8451,8 @@ a.osn-link-list__label:focus {
   .osn-tim-card__photo {
     top: 5px;
     right: 2px;
-    width: calc(100% - 12px);
-    height: calc(100% - 12px);
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
     object-fit: cover;
     border-radius: 50%;
   }
@@ -8508,10 +8508,58 @@ a.osn-tim-card--linked:hover {
   }
 }
 
-@media (max-width: 600px) {
+/* ── Mobile (<768px): first card horizontal full-width,
+      remaining cards in two columns ─────────────── */
+@media (max-width: 767px) {
+  .osn-tim-grid {
+    justify-content: flex-start;
+    column-gap: 16px;
+    row-gap: 40px;
+  }
+
   .osn-tim-card {
+    width: calc(50% - 8px);
+    max-width: none;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  /* Photo scales down with the column instead of overflowing */
+  .osn-tim-card__photo-wrap {
+    width: min(204px, 100%);
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .osn-tim-card__name {
+    font-size: 16px;
+  }
+
+  .osn-tim-card__name,
+  .osn-tim-card__role {
+    text-align: left;
+  }
+
+  .osn-tim-card__role {
+    font-size: 12px;
+  }
+
+  /* First card: photo on the left, name/role on the right */
+  .osn-tim-grid .osn-tim-card:first-child {
     width: 100%;
-    max-width: 277px;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .osn-tim-grid .osn-tim-card:first-child .osn-tim-card__photo-wrap {
+    width: min(204px, 44vw);
+  }
+
+  .osn-tim-grid .osn-tim-card:first-child .osn-tim-card__name,
+  .osn-tim-grid .osn-tim-card:first-child .osn-tim-card__role {
+    text-align: center;
+    font-size: 16px;
   }
 }
 
