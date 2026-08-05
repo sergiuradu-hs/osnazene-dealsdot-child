@@ -8413,52 +8413,49 @@ a.osn-link-list__label:focus {
   text-decoration: none;
 }
 
-/* ── Photo wrap: 204×204 circle ─────────────────── */
+/* ── Photo wrap: 204×204 circle, the border IS the gold ring
+      so the shadow always follows it exactly ──────── */
 .osn-tim-card__photo-wrap {
   position: relative;
   width: 204px;
   height: 204px;
   flex-shrink: 0;
+  border: 2px solid #c6b08a;
   border-radius: 50%;
+  box-sizing: border-box;
   box-shadow:
     0 1px 3px rgba(198, 176, 138, 0.06),
     0 4px 4px rgba(21, 19, 103, 0.15);
 }
 
-/* Gold outline ring (3px, inset 1.5px) */
-.osn-tim-card__photo-wrap::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  outline: 3px solid #c6b08a;
-  outline-offset: -1.5px;
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* Gold fill circle (background behind photo) */
-.osn-tim-card__photo-wrap::before {
-  content: "";
-  position: absolute;
-  width: 180px;
-  height: 180px;
-  left: 12px;
-  top: 8px;
-  background: #c6b08a;
-  border-radius: 50%;
-  z-index: 0;
-}
-
-/* Photo fills the circular frame */
+/* Photo circle slightly off-center inside the ring: a bit low and left,
+   like the Figma design. Horizontal insets sum = vertical insets sum,
+   so the photo stays perfectly round. */
 .osn-tim-card__photo {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  top: 12px;
+  right: 2px;
+  width: calc(100% - 22px);
+  height: calc(100% - 22px);
   object-fit: cover;
   border-radius: 50%;
-  z-index: 1;
+}
+
+@media (max-width: 767px) {
+  .osn-tim-card__photo-wrap {
+    position: relative;
+    width: 149px;
+    height: 149px;
+  }
+
+  .osn-tim-card__photo {
+    top: 5px;
+    right: 2px;
+    width: calc(100% - 12px);
+    height: calc(100% - 12px);
+    object-fit: cover;
+    border-radius: 50%;
+  }
 }
 
 /* ── Info ──────────────────────────────────────── */
