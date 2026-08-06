@@ -9894,3 +9894,79 @@ section.osnazene_section.no-gap {
     height: auto;
   }
 }
+
+/* ==============================================
+   Benefits section: three equal gold-border cards
+   ============================================== */
+@media (min-width: 768px) {
+  .osn-benefits-cards-row {
+    display: flex;
+    align-items: stretch;
+    gap: 24px;
+  }
+
+  /* clearfix pseudo-elements would become flex items */
+  .osn-benefits-cards-row::before,
+  .osn-benefits-cards-row::after {
+    display: none;
+  }
+
+  .osn-benefits-cards-row > .wpb_column {
+    display: flex;
+    float: none;
+    width: auto;
+    flex: 1 1 0;
+    min-width: 0;
+    height: auto;
+    margin-bottom: 0 !important;
+    border-width: 1px; /* generic gold-border is 3px, design wants thin */
+  }
+
+  .osn-benefits-cards-row > .wpb_column > .vc_column-inner {
+    display: flex;
+    width: 100%;
+    padding: 32px 24px;
+  }
+
+  .osn-benefits-cards-row > .wpb_column > .vc_column-inner > .wpb_wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  /* Image band: identical 240px circle in every card, regardless of the
+     image file's intrinsic dimensions */
+  .osn-benefits-cards-row .wpb_single_image {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  .osn-benefits-cards-row .wpb_single_image .vc_single_image-wrapper,
+  .osn-benefits-cards-row .wpb_single_image img.vc_single_image-img {
+    display: block;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  /* Title band: fixed height that fits a two-line title, so the
+     paragraphs of all three cards start at the same height */
+  .osn-benefits-cards-row .wpb_single_image + .wpb_text_column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 76px;
+    margin-bottom: 16px;
+  }
+
+  .osn-benefits-cards-row .wpb_single_image + .wpb_text_column h3 {
+    margin: 0;
+  }
+
+  /* Paragraphs left-aligned (overrides the inline text-align: center) */
+  .osn-benefits-cards-row .wpb_single_image + .wpb_text_column + .wpb_text_column p {
+    text-align: left !important;
+  }
+}
