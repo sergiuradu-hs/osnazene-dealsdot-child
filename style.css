@@ -1969,6 +1969,12 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
   color: var(--osn-color-secondary) !important;
 }
 
+@media (max-width: 767px) {
+  .osn-mobile-font-size-16-px p {
+    font-size: 16px !important;
+    font-weight: 500 !important;
+  }
+}
 /* End of custom fonts */
 
 /* Custom widgets */
