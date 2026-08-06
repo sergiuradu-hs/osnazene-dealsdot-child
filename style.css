@@ -8544,23 +8544,54 @@ a.osn-tim-card--linked:hover {
     font-size: 12px;
   }
 
-  /* First card: photo on the left, name/role on the right */
-  .osn-tim-grid .osn-tim-card:first-child {
+  /* Featured mode (checkbox checked, default):
+     first card is a horizontal full-width card, rest stay in two columns */
+  .osn-tim-grid:not(.osn-tim-grid--stacked-mobile) .osn-tim-card:first-child {
     width: 100%;
     flex-direction: row;
     align-items: center;
     gap: 24px;
   }
 
-  .osn-tim-grid .osn-tim-card:first-child .osn-tim-card__photo-wrap {
+  .osn-tim-grid:not(.osn-tim-grid--stacked-mobile) .osn-tim-card:first-child .osn-tim-card__photo-wrap {
     width: min(204px, 44vw);
   }
 
-  .osn-tim-grid .osn-tim-card:first-child .osn-tim-card__name,
-  .osn-tim-grid .osn-tim-card:first-child .osn-tim-card__role {
+  .osn-tim-grid:not(.osn-tim-grid--stacked-mobile) .osn-tim-card:first-child .osn-tim-card__name,
+  .osn-tim-grid:not(.osn-tim-grid--stacked-mobile) .osn-tim-card:first-child .osn-tim-card__role {
     text-align: center;
     font-size: 16px;
   }
+
+  /* Stacked mode (checkbox unchecked):
+     every card is a horizontal full-width card, stacked vertically */
+  .osn-tim-grid--stacked-mobile {
+    row-gap: 24px;
+  }
+
+  .osn-tim-grid--stacked-mobile .osn-tim-card {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .osn-tim-grid--stacked-mobile .osn-tim-card__photo-wrap {
+    width: min(204px, 44vw);
+  }
+
+  .osn-tim-grid--stacked-mobile .osn-tim-card__name,
+  .osn-tim-grid--stacked-mobile .osn-tim-card__role {
+    text-align: left;
+  }
+
+  .osn-tim-grid--stacked-mobile .osn-tim-card__name {
+    font-size: 16px;
+  }
+  .osn-tim-grid--stacked-mobile .osn-tim-card__role {
+    font-size: 12px;
+  }
+
 }
 
 /* End of Tim Grid Widget */

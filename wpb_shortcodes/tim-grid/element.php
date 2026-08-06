@@ -98,6 +98,14 @@ $map = [
             'value'       => '',
             'description' => '',
         ],
+        [
+            'type'        => 'checkbox',
+            'heading'     => __( 'Feature first row for mobile display', 'dealsdot-child' ),
+            'param_name'  => 'feature_first_mobile',
+            'value'       => [ __( 'Da', 'dealsdot-child' ) => 'yes' ],
+            'std'         => 'yes',
+            'description' => __( 'Uključeno: prva kartica je istaknuta (horizontalna), ostale u dve kolone. Isključeno: sve kartice su horizontalne, naslagane jedna ispod druge. Važi samo za mobilni prikaz (<768px).', 'dealsdot-child' ),
+        ],
     ],
 ];
 
@@ -119,7 +127,18 @@ $_extract_link = function ( $raw ) {
 
 $render = function ( $atts, $content = '' ) use ( $template_rel, $_extract_link ) {
 
-    $atts = shortcode_atts( [ 'member_ids' => '' ], $atts, 'wpb_tim_grid' );
+    $atts = shortcode_atts(
+        [
+            'member_ids'           => '',
+            // Default 'yes' keeps the featured-first mobile layout for grids
+            // saved before this option existed.
+            'feature_first_mobile' => 'yes',
+        ],
+        $atts,
+        'wpb_tim_grid'
+    );
+
+    $feature_first_mobile = ! in_array( (string) $atts['feature_first_mobile'], [ '', 'false', '0' ], true );
 
     $selected_ids = array_values(
         array_filter( array_map( 'intval', explode( ',', (string) $atts['member_ids'] ) ) )

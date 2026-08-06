@@ -3,10 +3,12 @@
  * Template: Tim Grid
  *
  * Variables (from element.php render callback):
- *   $members – array of [ name, role, link, img_url ]
+ *   $members              – array of [ name, role, link, img_url ]
+ *   $feature_first_mobile – bool: featured first card on mobile (true)
+ *                           or all cards stacked horizontally (false)
  */
 ?>
-<div class="osn-tim-grid">
+<div class="osn-tim-grid<?php echo $feature_first_mobile ? '' : ' osn-tim-grid--stacked-mobile'; ?>">
     <?php foreach ( $members as $member ) :
         $tag       = ! empty( $member['link'] ) ? 'a' : 'div';
         $link_attr = $tag === 'a' ? ' href="' . esc_url( $member['link'] ) . '"' : '';
