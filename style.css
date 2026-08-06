@@ -7699,15 +7699,21 @@ a.osn-link-list__label:focus {
 
 /* End of Link List Widget */
 
-/* Link with underline: text in --osn-color-text, underline in --osn-color-secondary */
-.osn-link-with-underline,
-.osn-link-with-underline p,
-.osn-link-with-underline a {
+/* Link with gold underline */
+.osn-link-with-gold-underline a {
   color: var(--osn-color-text);
   text-decoration: underline;
   text-decoration-color: var(--osn-color-secondary);
   text-decoration-thickness: 2px;
-  text-underline-offset: 10px;
+  text-underline-offset: 0.3em;
+}
+
+.osn-link-with-underline a {
+  color: var(--osn-color-text);
+  text-decoration: underline;
+  text-decoration-color: var(--osn-color-text);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
 }
 
 /* ==============================================
