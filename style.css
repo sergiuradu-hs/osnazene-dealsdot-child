@@ -9970,3 +9970,36 @@ section.osnazene_section.no-gap {
     text-align: left !important;
   }
 }
+
+/* Benefits cards on mobile: stacked bordered cards without images */
+@media (max-width: 767px) {
+  .osn-benefits-circle-image {
+    display: none !important;
+  }
+
+  .osn-benefits-cards-row {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .osn-benefits-cards-row > .wpb_column {
+    width: 100%;
+    height: auto;
+    margin-bottom: 0 !important;
+    border: 1px solid var(--osn-color-secondary);
+    border-radius: 8px;
+  }
+
+  .osn-benefits-cards-row > .wpb_column > .vc_column-inner {
+    padding: 24px 16px !important;
+  }
+
+  .osn-benefits-cards-row h3 {
+    margin: 0 0 16px;
+  }
+
+  .osn-benefits-cards-row .wpb_text_column p {
+    text-align: left !important;
+  }
+}
