@@ -9490,6 +9490,20 @@ section.osnazene_section.no-gap {
   gap: 6px !important;
 }
 
+.banke-podrska-title-row {
+  padding: 20px 24px;
+  font-size: 40px;
+}
+
+.banke-podrska-title-row p {
+  color: #fff;
+  font-family: Montserrat;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
+}
+
 @media (max-width: 767px) {
   .wpb_content_element.osn-mb-60-16 {
     margin-bottom: 16px !important;
@@ -9660,5 +9674,11 @@ section.osnazene_section.no-gap {
   .osn-full-width-image {
     margin-left: -24px;
     margin-right: -24px;
+  }
+  .banke-podrska-title-row p {
+    font-size: 24px;
+  }
+  .banke-podrska-title-row {
+    padding: 15.5px 10px;
   }
 }
