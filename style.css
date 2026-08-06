@@ -8786,6 +8786,80 @@ a.osn-tim-card--linked:hover {
   }
 }
 
+/* CF7 mobile card variant — scope by adding the 'osn-cf7-mobile-card' class
+   to the WPBakery wrapper around the form. White rounded card with the
+   submit button placed below the card, on the section background. */
+@media (max-width: 767px) {
+  .osn-cf7-mobile-card .wpcf7-form {
+    position: relative;
+    /* reserve space for the absolutely-positioned submit button */
+    padding-bottom: 96px;
+  }
+
+  .osn-cf7-mobile-card .wpcf7-form .row {
+    padding: 16px;
+    border-radius: 16px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* The stray <br> tags between fields become empty flex rows that
+     add phantom height — drop them */
+  .osn-cf7-mobile-card .wpcf7-form .row p > br {
+    display: none;
+  }
+
+  .osn-cf7-mobile-card .wpcf7-form .row label {
+    padding: 16px 0;
+    font-size: 12px;
+  }
+
+  /* No dead space between the textarea and the card's bottom padding */
+  .osn-cf7-mobile-card .wpcf7-form .row label:last-of-type {
+    padding-bottom: 0;
+  }
+
+  .osn-cf7-mobile-card .wpcf7-form .row input[type="text"],
+  .osn-cf7-mobile-card .wpcf7-form .row input[type="email"],
+  .osn-cf7-mobile-card .wpcf7-form .row textarea {
+    height: 56px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+
+  .osn-cf7-mobile-card .wpcf7-form .row textarea {
+    height: 140px;
+  }
+
+  .osn-cf7-mobile-card .wpcf7-form .row ::placeholder {
+    color: #b3b3be;
+  }
+
+  /* Submit sits below the white card, centered on the tan background */
+  .osn-cf7-mobile-card .wpcf7-form .row input[type="submit"] {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    height: auto;
+    padding: 18px 40px;
+    outline: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* CF7's spinner placeholder reserves a row inside the card; move it
+     next to the button instead (still visible while submitting) */
+  .osn-cf7-mobile-card .wpcf7-form .row .wpcf7-spinner {
+    position: absolute;
+    left: 50%;
+    bottom: 64px;
+    transform: translateX(-50%);
+    margin: 0;
+  }
+}
+
 /* End of CF7 Contact Form */
 
 /* ==============================================
