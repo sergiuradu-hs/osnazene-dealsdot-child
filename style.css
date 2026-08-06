@@ -9681,4 +9681,10 @@ section.osnazene_section.no-gap {
   .banke-podrska-title-row {
     padding: 15.5px 10px;
   }
+
+  .osn-mobile-text-align-to-right h3,
+  .osn-mobile-text-align-to-right p,
+  .osn-mobile-text-align-to-right li {
+    text-align: right;
+  }
 }
