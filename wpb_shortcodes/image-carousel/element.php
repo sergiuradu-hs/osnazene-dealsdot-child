@@ -27,6 +27,13 @@ $map = [
 		],
 		[
 			'type'        => 'textfield',
+			'heading'     => __( 'Mobile display image height (px)', 'dealsdot-child' ),
+			'param_name'  => 'mobile_height',
+			'value'       => '',
+			'description' => __( 'Image height on screens narrower than 768px. Leave empty to use the regular height.', 'dealsdot-child' ),
+		],
+		[
+			'type'        => 'textfield',
 			'heading'     => __( 'Scroll speed (px/s)', 'dealsdot-child' ),
 			'param_name'  => 'speed',
 			'value'       => '80',
@@ -40,9 +47,10 @@ $template_rel = 'wpb_shortcodes/image-carousel/templates/template.php';
 $render = function( $atts, $content = '' ) use ( $template_rel ) {
 	$atts = shortcode_atts(
 		[
-			'images' => '',
-			'height' => '125',
-			'speed'  => '80',
+			'images'        => '',
+			'height'        => '125',
+			'mobile_height' => '',
+			'speed'         => '80',
 		],
 		$atts
 	);

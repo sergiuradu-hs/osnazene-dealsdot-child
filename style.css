@@ -4424,6 +4424,19 @@ section.vc_section.home-page-second-section .wpb_single_image {
   object-fit: contain;
 }
 
+/* Optional per-element mobile height (set via the WPBakery
+   "Mobile display image height" field as an inline CSS variable) */
+@media (max-width: 767px) {
+  .osn-image-carousel--mobile-height .osn-image-carousel__item {
+    height: var(--osn-carousel-mobile-height);
+    width: auto;
+  }
+
+  .osn-image-carousel {
+    margin-top: 24px;
+  }
+}
+
 @keyframes osn-carousel-scroll {
   from {
     transform: translateX(0);
@@ -9732,6 +9745,16 @@ section.osnazene_section.no-gap {
   .osn-mobile-text-align-to-right p,
   .osn-mobile-text-align-to-right li {
     text-align: right;
+  }
+}
+
+.osn-desktop-margin-top-60-px {
+  margin-top: 60px !important;
+}
+
+@media (max-width: 767px) {
+  .osn-mobile-margin-top-24-px {
+    margin-top: 24px !important;
   }
 }
 
