@@ -10037,6 +10037,8 @@ section.osnazene_section.no-gap {
   }
 
   .osn-benefits-cards-row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -10060,5 +10062,11 @@ section.osnazene_section.no-gap {
 
   .osn-benefits-cards-row .wpb_text_column p {
     text-align: left !important;
+  }
+
+  .osn-gold-border > .wpb_wrapper,
+  .osn-gold-border > .vc_column-inner > .wpb_wrapper {
+    border-radius: 4px;
+    border: 1px solid var(--osn-color-secondary);
   }
 }
