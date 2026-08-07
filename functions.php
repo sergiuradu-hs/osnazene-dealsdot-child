@@ -328,3 +328,131 @@ add_action( 'vc_after_init', function () {
     }
   }
 }, 20 );
+
+/* -----------------------------------------------------------------------
+ * Blog archive: Sort posts - every 1st, 5th, 10th, 15th etc. is tag-nagrade
+ * ----------------------------------------------------------------------- */
+add_action( 'pre_get_posts', function ( WP_Query $query ) {
+    if ( ! is_admin() && ( $query->is_home() || $query->is_archive( 'post' ) ) && $query->is_main_query() ) {
+        // Get all post IDs with tag-nagrade
+        $nagrade_term = get_term_by( 'slug', 'nagrade', 'post_tag' );
+        if ( ! $nagrade_term ) {
+            return;
+        }
+
+        $nagrade_posts = get_posts( [
+            'numberposts' => -1,
+            'tax_query'   => [
+                [
+                    'taxonomy' => 'post_tag',
+                    'field'    => 'term_id',
+                    'terms'    => $nagrade_term->term_id,
+                ],
+            ],
+            'fields'      => 'ids',
+            'orderby'     => 'date',
+            'order'       => 'DESC',
+        ] );
+
+        if ( empty( $nagrade_posts ) ) {
+            return;
+        }
+
+        // Get all OTHER posts (without tag-nagrade)
+        $other_posts = get_posts( [
+            'numberposts' => -1,
+            'tax_query'   => [
+                [
+                    'taxonomy' => 'post_tag',
+                    'field'    => 'term_id',
+                    'terms'    => $nagrade_term->term_id,
+                    'operator' => 'NOT IN',
+                ],
+            ],
+            'fields'      => 'ids',
+            'orderby'     => 'date',
+            'order'       => 'DESC',
+        ] );
+
+        // Intersperse: 1st nagrade, then 4 others, then 1 nagrade, then 4 others, etc.
+        $ordered_posts = [];
+        $nagrade_index = 0;
+        $other_index   = 0;
+        $position      = 0;
+
+        while ( $nagrade_index < count( $nagrade_posts ) || $other_index < count( $other_posts ) ) {
+            $position++;
+            
+            // Every 1st, 5th, 10th, 15th position (1, 5, 10, 15, 20...)
+            if ( $position % 5 == 1 && $nagrade_index < count( $nagrade_posts ) ) {
+                $ordered_posts[] = $nagrade_posts[ $nagrade_index ];
+                $nagrade_index++;
+            } elseif ( $other_index < count( $other_posts ) ) {
+                $ordered_posts[] = $other_posts[ $other_index ];
+                $other_index++;
+            } elseif ( $nagrade_index < count( $nagrade_posts ) ) {
+                $ordered_posts[] = $nagrade_posts[ $nagrade_index ];
+                $nagrade_index++;
+            }
+        }
+
+        $query->set( 'post__in', $ordered_posts );
+        $query->set( 'orderby', 'post__in' );
+    }
+} );
+
+/* -----------------------------------------------------------------------
+ * Mobile only: Sort archive cards so tag-nagrade appears at 1st, 5th, 10th positions
+ * ----------------------------------------------------------------------- */
+add_action( 'wp_enqueue_scripts', function () {
+    if ( is_home() || is_archive( 'post' ) ) {
+        wp_add_inline_script( 'dealsdot-scripts', "
+document.addEventListener( 'DOMContentLoaded', function() {
+    function sortArchiveCardsOnMobile() {
+        if ( window.innerWidth > 767 ) return;
+        
+        const grid = document.querySelector( '.osn-arc__grid' );
+        if ( ! grid ) return;
+        
+        const cards = Array.from( grid.querySelectorAll( '.osn-arc__card' ) );
+        const nagradeCards = [];
+        const otherCards = [];
+        
+        // Separate tag-nagrade cards from others
+        cards.forEach( card => {
+            if ( card.classList.contains( 'tag-nagrade' ) ) {
+                nagradeCards.push( card );
+            } else {
+                otherCards.push( card );
+            }
+        } );
+        
+        // Rebuild grid: every 1st, 5th, 10th position gets tag-nagrade
+        const orderedCards = [];
+        let nagradeIdx = 0;
+        let otherIdx = 0;
+        let position = 0;
+        
+        while ( nagradeIdx < nagradeCards.length || otherIdx < otherCards.length ) {
+            position++;
+            if ( position % 5 === 1 && nagradeIdx < nagradeCards.length ) {
+                orderedCards.push( nagradeCards[nagradeIdx++] );
+            } else if ( otherIdx < otherCards.length ) {
+                orderedCards.push( otherCards[otherIdx++] );
+            } else if ( nagradeIdx < nagradeCards.length ) {
+                orderedCards.push( nagradeCards[nagradeIdx++] );
+            }
+        }
+        
+        // Reorder DOM
+        orderedCards.forEach( card => {
+            grid.appendChild( card );
+        } );
+    }
+    
+    sortArchiveCardsOnMobile();
+    window.addEventListener( 'resize', sortArchiveCardsOnMobile );
+} );
+        " );
+    }
+}, 20 );

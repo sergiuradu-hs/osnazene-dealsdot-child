@@ -12,7 +12,14 @@
 get_header();
 ?>
 
-<section class="vc_section osnazene_section osn-arc">
+<?php
+$archive_class = 'osn-arc';
+if ( is_home() || is_archive( 'post' ) ) {
+    $archive_class .= ' osn-arc--blog';
+}
+?>
+
+<section class="vc_section osnazene_section <?php echo esc_attr( $archive_class ); ?>">
     <div class="container">
         <?php /* ----------------------------------------------------------------
         * Heading + description
@@ -49,8 +56,40 @@ get_header();
         * -------------------------------------------------------------- */
         if ( have_posts() ) : ?>
         <div class="osn-arc__grid margin-top-60">
-            <?php while ( have_posts() ) : the_post(); ?>
-            <a href="<?php the_permalink(); ?>" class="osn-arc__card">
+            <?php while ( have_posts() ) : the_post();
+                $tag_classes = '';
+                $tags = get_the_tags();
+                if ( $tags ) {
+                    foreach ( $tags as $tag ) {
+                        $tag_classes .= ' tag-' . sanitize_html_class( $tag->slug );
+                    }
+                }
+                $is_blog = is_home() || is_archive( 'post' );
+            ?>
+            
+            <?php if ( $is_blog ) : /* Blog kartice */ ?>
+            <a href="<?php the_permalink(); ?>" class="osn-arc__card osn-arc__card--blog<?php echo esc_attr( $tag_classes ); ?>">
+                <?php if ( has_post_thumbnail() ) : ?>
+                <div class="osn-arc__card-img">
+                    <?php the_post_thumbnail( 'large', [ 'loading' => 'lazy' ] ); ?>
+                </div>
+                <?php endif; ?>
+
+                <div class="osn-arc__card-meta">
+                    <span class="osn-arc__card-date"><?php echo get_the_date( 'd.m.Y.' ); ?></span>
+                </div>
+
+                <h2 class="osn-arc__card-title"><?php the_title(); ?></h2>
+
+                <?php if ( has_excerpt() ) : ?>
+                <div class="osn-arc__card-excerpt"><?php echo wp_kses_post( get_the_excerpt() ); ?></div>
+                <?php endif; ?>
+
+                <span class="osn-arc__card-btn">Pročitaj više</span>
+            </a>
+            
+            <?php else : /* Ostale kartice */ ?>
+            <a href="<?php the_permalink(); ?>" class="osn-arc__card<?php echo esc_attr( $tag_classes ); ?>">
                 <?php if ( has_post_thumbnail() ) : ?>
                 <div class="osn-arc__card-img">
                     <?php the_post_thumbnail( 'large', [ 'loading' => 'lazy' ] ); ?>
@@ -63,6 +102,8 @@ get_header();
 
                 <span class="osn-arc__card-btn">Pročitaj više</span>
             </a>
+            <?php endif; ?>
+            
             <?php endwhile; ?>
         </div>
 
