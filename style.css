@@ -1975,9 +1975,8 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
     font-weight: 500 !important;
   }
   .osn-font-muted-navy p {
-    color: #43528B !important;
-    }
-    
+    color: #43528b !important;
+  }
 }
 /* End of custom fonts */
 
@@ -6721,6 +6720,26 @@ section.vc_section.home-page-second-section .wpb_single_image {
   text-decoration: none;
 }
 
+/* Divider sa tekstom */
+.osn-arc__divider {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 32px 0;
+  border-top: 2px solid var(--osn-color-secondary);
+  border-bottom: 2px solid var(--osn-color-secondary);
+}
+
+.osn-arc__divider-text {
+  font-family: var(--osn-font-main), sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--osn-color-text);
+  text-transform: capitalize;
+}
+
 /* Pagination */
 .osn-arc__pagination {
   display: flex;
@@ -6806,6 +6825,17 @@ section.vc_section.home-page-second-section .wpb_single_image {
   }
 
   .osn-arc__card-btn {
+    font-size: 18px;
+  }
+
+  .osn-arc__divider {
+    padding: 24px 0;
+    gap: 12px;
+    border-top: 1px solid var(--osn-color-secondary);
+    border-bottom: 1px solid var(--osn-color-secondary);
+  }
+
+  .osn-arc__divider-text {
     font-size: 18px;
   }
 
@@ -8591,12 +8621,18 @@ a.osn-tim-card--linked:hover {
     gap: 24px;
   }
 
-  .osn-tim-grid:not(.osn-tim-grid--stacked-mobile) .osn-tim-card:first-child .osn-tim-card__photo-wrap {
+  .osn-tim-grid:not(.osn-tim-grid--stacked-mobile)
+    .osn-tim-card:first-child
+    .osn-tim-card__photo-wrap {
     width: min(204px, 44vw);
   }
 
-  .osn-tim-grid:not(.osn-tim-grid--stacked-mobile) .osn-tim-card:first-child .osn-tim-card__name,
-  .osn-tim-grid:not(.osn-tim-grid--stacked-mobile) .osn-tim-card:first-child .osn-tim-card__role {
+  .osn-tim-grid:not(.osn-tim-grid--stacked-mobile)
+    .osn-tim-card:first-child
+    .osn-tim-card__name,
+  .osn-tim-grid:not(.osn-tim-grid--stacked-mobile)
+    .osn-tim-card:first-child
+    .osn-tim-card__role {
     text-align: center;
     font-size: 16px;
   }
@@ -8629,7 +8665,6 @@ a.osn-tim-card--linked:hover {
   .osn-tim-grid--stacked-mobile .osn-tim-card__role {
     font-size: 12px;
   }
-
 }
 
 /* End of Tim Grid Widget */
@@ -9579,6 +9614,75 @@ h2.osn-mission__title {
     line-height: normal;
     margin-bottom: 24px;
   }
+
+  .osn-arc__card.osn-arc__card--blog:not(.tag-nagrade) {
+    flex-direction: row;
+    gap: 8px;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 8px;
+    border-radius: 4px;
+    outline-width: 1px;
+  }
+
+  .osn-arc__card.osn-arc__card--blog:not(.tag-nagrade) .osn-arc__card-img {
+    width: 114px;
+    height: 100%;
+    min-height: 140px;
+  }
+
+  .osn-arc__card.osn-arc__card--blog:not(.tag-nagrade) .osn-arc__card-img img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .osn-arc__card.osn-arc__card--blog:not(.tag-nagrade) .osn-arc__card-meta {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .osn-arc__card.osn-arc__card--blog:not(.tag-nagrade) .osn-arc__card-date {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .osn-arc__card.osn-arc__card--blog:not(.tag-nagrade) .osn-arc__card-title {
+    font-size: 14px;
+    line-height: normal;
+  }
+
+  .osn-arc__card.osn-arc__card--blog:not(.tag-nagrade) .osn-arc__card-btn {
+    background: transparent;
+    color: #c6b08a;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    gap: 8px;
+  }
+  .osn-arc__divider {
+    width: 100%;
+    background: #c6b08a;
+    height: 1px;
+    margin: 12px 0;
+  }
+  .osn-arc__najnovije {
+    color: #151367;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
 }
 
 /* Helper classes for responsive design */
@@ -9933,7 +10037,11 @@ section.osnazene_section.no-gap {
 
 /* Logo stays at the top; the caption takes all remaining space as
    top margin, bottom-aligning it across the three columns */
-.osn-ambassadors-row > .vc_col-sm-4 > .vc_column-inner > .wpb_wrapper > .wpb_text_column {
+.osn-ambassadors-row
+  > .vc_col-sm-4
+  > .vc_column-inner
+  > .wpb_wrapper
+  > .wpb_text_column {
   margin-top: auto;
   margin-bottom: 0;
 }
@@ -10030,7 +10138,11 @@ section.osnazene_section.no-gap {
   }
 
   /* Paragraphs left-aligned (overrides the inline text-align: center) */
-  .osn-benefits-cards-row .wpb_single_image + .wpb_text_column + .wpb_text_column p {
+  .osn-benefits-cards-row
+    .wpb_single_image
+    + .wpb_text_column
+    + .wpb_text_column
+    p {
     text-align: left !important;
   }
 }

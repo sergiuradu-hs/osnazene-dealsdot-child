@@ -56,12 +56,18 @@ if ( is_home() || is_archive( 'post' ) ) {
         * -------------------------------------------------------------- */
         if ( have_posts() ) : ?>
         <div class="osn-arc__grid margin-top-60">
-            <?php while ( have_posts() ) : the_post();
+            <?php 
+            $nagrade_counter = 0;
+            while ( have_posts() ) : the_post();
                 $tag_classes = '';
                 $tags = get_the_tags();
+                $has_nagrade_tag = false;
                 if ( $tags ) {
                     foreach ( $tags as $tag ) {
                         $tag_classes .= ' tag-' . sanitize_html_class( $tag->slug );
+                        if ( $tag->slug === 'nagrade' ) {
+                            $has_nagrade_tag = true;
+                        }
                     }
                 }
                 $is_blog = is_home() || is_archive( 'post' );
@@ -77,15 +83,23 @@ if ( is_home() || is_archive( 'post' ) ) {
 
                 <div class="osn-arc__card-meta">
                     <span class="osn-arc__card-date"><?php echo get_the_date( 'd.m.Y.' ); ?></span>
+                    <h2 class="osn-arc__card-title"><?php the_title(); ?></h2>
+
+                    <?php if ( has_excerpt() ) : ?>
+                        <div class="osn-arc__card-excerpt"><?php echo wp_kses_post( get_the_excerpt() ); ?></div>
+                    <?php endif; ?>
+
+                    <span class="osn-arc__card-btn">
+                        Pročitaj više
+                        <?php if ( ! $has_nagrade_tag ) : ?>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="#C6B08A"/>
+                            </svg>
+                        <?php endif; ?>
+                    </span>
+
                 </div>
 
-                <h2 class="osn-arc__card-title"><?php the_title(); ?></h2>
-
-                <?php if ( has_excerpt() ) : ?>
-                <div class="osn-arc__card-excerpt"><?php echo wp_kses_post( get_the_excerpt() ); ?></div>
-                <?php endif; ?>
-
-                <span class="osn-arc__card-btn">Pročitaj više</span>
             </a>
             
             <?php else : /* Ostale kartice */ ?>
@@ -100,7 +114,6 @@ if ( is_home() || is_archive( 'post' ) ) {
 
                 <h2 class="osn-arc__card-title"><?php the_title(); ?></h2>
 
-                <span class="osn-arc__card-btn">Pročitaj više</span>
             </a>
             <?php endif; ?>
             

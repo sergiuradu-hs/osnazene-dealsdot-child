@@ -407,52 +407,64 @@ add_action( 'pre_get_posts', function ( WP_Query $query ) {
 add_action( 'wp_enqueue_scripts', function () {
     if ( is_home() || is_archive( 'post' ) ) {
         wp_add_inline_script( 'dealsdot-scripts', "
-document.addEventListener( 'DOMContentLoaded', function() {
-    function sortArchiveCardsOnMobile() {
-        if ( window.innerWidth > 767 ) return;
-        
-        const grid = document.querySelector( '.osn-arc__grid' );
-        if ( ! grid ) return;
-        
-        const cards = Array.from( grid.querySelectorAll( '.osn-arc__card' ) );
-        const nagradeCards = [];
-        const otherCards = [];
-        
-        // Separate tag-nagrade cards from others
-        cards.forEach( card => {
-            if ( card.classList.contains( 'tag-nagrade' ) ) {
-                nagradeCards.push( card );
-            } else {
-                otherCards.push( card );
-            }
-        } );
-        
-        // Rebuild grid: every 1st, 5th, 10th position gets tag-nagrade
-        const orderedCards = [];
-        let nagradeIdx = 0;
-        let otherIdx = 0;
-        let position = 0;
-        
-        while ( nagradeIdx < nagradeCards.length || otherIdx < otherCards.length ) {
-            position++;
-            if ( position % 5 === 1 && nagradeIdx < nagradeCards.length ) {
-                orderedCards.push( nagradeCards[nagradeIdx++] );
-            } else if ( otherIdx < otherCards.length ) {
-                orderedCards.push( otherCards[otherIdx++] );
-            } else if ( nagradeIdx < nagradeCards.length ) {
-                orderedCards.push( nagradeCards[nagradeIdx++] );
-            }
-        }
-        
-        // Reorder DOM
-        orderedCards.forEach( card => {
-            grid.appendChild( card );
-        } );
-    }
+            document.addEventListener( 'DOMContentLoaded', function() {
+                function sortArchiveCardsOnMobile() {
+                    if ( window.innerWidth > 767 ) return;
+                    
+                    const grid = document.querySelector( '.osn-arc__grid' );
+                    if ( ! grid ) return;
+                    
+                    const cards = Array.from( grid.querySelectorAll( '.osn-arc__card' ) );
+                    const nagradeCards = [];
+                    const otherCards = [];
+                    
+                    // Separate tag-nagrade cards from others
+                    cards.forEach( card => {
+                        if ( card.classList.contains( 'tag-nagrade' ) ) {
+                            nagradeCards.push( card );
+                        } else {
+                            otherCards.push( card );
+                        }
+                    } );
+                    
+                    // Rebuild grid: every 1st, 5th, 10th position gets tag-nagrade
+                    const orderedCards = [];
+                    let nagradeIdx = 0;
+                    let otherIdx = 0;
+                    let position = 0;
+                    
+                    while ( nagradeIdx < nagradeCards.length || otherIdx < otherCards.length ) {
+                        position++;
+                        if ( position % 5 === 1 && nagradeIdx < nagradeCards.length ) {
+                            orderedCards.push( nagradeCards[nagradeIdx++] );
+                        } else if ( otherIdx < otherCards.length ) {
+                            orderedCards.push( otherCards[otherIdx++] );
+                        } else if ( nagradeIdx < nagradeCards.length ) {
+                            orderedCards.push( nagradeCards[nagradeIdx++] );
+                        }
+                    }
+                    
+                    // Reorder DOM
+                    orderedCards.forEach((card, index) => {
+                        grid.appendChild( card );
+
+                         if (card.classList.contains('tag-nagrade')) {
+                            const divider = document.createElement('div');
+                            divider.className = 'osn-arc__divider';
+                            grid.appendChild(divider);
+                            if(index === 0){
+                                const latest = document.createElement('span');
+                                latest.textContent = 'Najnovije';
+                                latest.className = 'osn-arc__najnovije';
+                                grid.appendChild(latest);
+                            }
+                        }
+                    } );
+                }
     
-    sortArchiveCardsOnMobile();
-    window.addEventListener( 'resize', sortArchiveCardsOnMobile );
-} );
-        " );
+            sortArchiveCardsOnMobile();
+        window.addEventListener( 'resize', sortArchiveCardsOnMobile );
+    } );
+" );
     }
 }, 20 );
