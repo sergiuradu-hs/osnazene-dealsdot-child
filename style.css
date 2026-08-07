@@ -9899,6 +9899,11 @@ section.osnazene_section.no-gap {
   .osn-mobile-margin-top-24-px {
     margin-top: 24px !important;
   }
+
+  .osn-mobile-text-align-center h1,
+  .osn-mobile-text-align-center h2 {
+    text-align: center !important;
+  }
 }
 
 /* ==============================================
@@ -10032,6 +10037,10 @@ section.osnazene_section.no-gap {
 
 /* Benefits cards on mobile: stacked bordered cards without images */
 @media (max-width: 767px) {
+  .osn-benefits-section {
+    gap: 0px !important;
+  }
+
   .osn-benefits-circle-image {
     display: none !important;
   }
