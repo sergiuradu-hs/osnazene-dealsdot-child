@@ -1974,9 +1974,19 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
     font-size: 16px !important;
     font-weight: 500 !important;
   }
-  .osn-font-muted-navy p {
+  .osn-font-muted-navy p,
+  .osn-font-muted-navy h4 {
     color: #43528b !important;
   }
+}
+
+.osn-prijava-title h1,
+.osn-prijava-title h2 {
+  text-transform: none;
+}
+
+.osn-prijava-title h2 {
+  font-weight: 500;
 }
 /* End of custom fonts */
 
@@ -10022,9 +10032,9 @@ section.osnazene_section.no-gap {
     margin-top: 24px !important;
   }
 
-.osn-desktop-margin-top-16-px {
-  margin-top: 16px !important;
-}
+  .osn-desktop-margin-top-16-px {
+    margin-top: 16px !important;
+  }
 
   .osn-mobile-text-align-center h1,
   .osn-mobile-text-align-center h2 {
