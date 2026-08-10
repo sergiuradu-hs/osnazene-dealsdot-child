@@ -8,6 +8,7 @@
  * Editable fields:
  *   - Package name, subtitle, price
  *   - Header background color
+ *   - Three payment-detail lines
  *   - Optional intro text (shown above bullets)
  *   - Bullet points (param_group – add/remove/reorder)
  *   - Number of CTA buttons (1 or 2)
@@ -60,6 +61,32 @@ $map = [
             'group'       => __( 'Header', 'dealsdot-child' ),
         ],
 
+        /* ── Payment details ─────────────────────────────────── */
+        [
+            'type'        => 'textfield',
+            'heading'     => __( 'Monthly payment text', 'dealsdot-child' ),
+            'param_name'  => 'payment_monthly',
+            'value'       => __( '1.000 dinara mesečno', 'dealsdot-child' ),
+            'description' => __( 'Displayed next to the calendar icon.', 'dealsdot-child' ),
+            'group'       => __( 'Payment details', 'dealsdot-child' ),
+        ],
+        [
+            'type'        => 'textfield',
+            'heading'     => __( 'Payment method text', 'dealsdot-child' ),
+            'param_name'  => 'payment_method',
+            'value'       => __( 'Jednokratno ili u 3 rate', 'dealsdot-child' ),
+            'description' => __( 'Displayed next to the payment-card icon.', 'dealsdot-child' ),
+            'group'       => __( 'Payment details', 'dealsdot-child' ),
+        ],
+        [
+            'type'        => 'textfield',
+            'heading'     => __( 'Membership duration text', 'dealsdot-child' ),
+            'param_name'  => 'payment_duration',
+            'value'       => __( '12 meseci od evidentirane prve uplate', 'dealsdot-child' ),
+            'description' => __( 'Displayed next to the clock icon.', 'dealsdot-child' ),
+            'group'       => __( 'Payment details', 'dealsdot-child' ),
+        ],
+
         /* ── Bullets ─────────────────────────────────────────── */
         [
             'type'        => 'textfield',
@@ -105,7 +132,7 @@ $map = [
             'type'        => 'textfield',
             'heading'     => __( 'Button 1 text', 'dealsdot-child' ),
             'param_name'  => 'btn1_text',
-            'value'       => 'RATE',
+            'value'       => __( 'Plati u 3 rate', 'dealsdot-child' ),
             'group'       => __( 'Buttons', 'dealsdot-child' ),
         ],
         [
@@ -119,7 +146,7 @@ $map = [
             'type'        => 'textfield',
             'heading'     => __( 'Button 2 text', 'dealsdot-child' ),
             'param_name'  => 'btn2_text',
-            'value'       => 'Godišnje',
+            'value'       => __( 'Plati godišnje', 'dealsdot-child' ),
             'description' => __( 'Only shown when "2 buttons" is selected above.', 'dealsdot-child' ),
             'group'       => __( 'Buttons', 'dealsdot-child' ),
             'dependency'  => [ 'element' => 'button_count', 'value' => [ '2' ] ],
@@ -153,12 +180,15 @@ $render = function( $atts ) use ( $template_rel ) {
         'package_subtitle'=> '(godišnja članarina)',
         'package_price'   => '12.000 din',
         'header_bg'       => '#E1CBA6',
+        'payment_monthly' => '1.000 dinara mesečno',
+        'payment_method'  => 'Jednokratno ili u 3 rate',
+        'payment_duration'=> '12 meseci od evidentirane prve uplate',
         'intro_text'      => '',
         'bullets'         => '',
         'button_count'    => '2',
-        'btn1_text'       => 'RATE',
+        'btn1_text'       => 'Plati u 3 rate',
         'btn1_link'       => '',
-        'btn2_text'       => 'Godišnje',
+        'btn2_text'       => 'Plati godišnje',
         'btn2_link'       => '',
         'footer_text'     => '',
     ], $atts, 'wpb_package_card' );
@@ -168,6 +198,9 @@ $render = function( $atts ) use ( $template_rel ) {
     $package_subtitle = sanitize_text_field( $atts['package_subtitle'] );
     $package_price    = sanitize_text_field( $atts['package_price'] );
     $header_bg        = sanitize_hex_color( $atts['header_bg'] ) ?: '#E1CBA6';
+    $payment_monthly  = sanitize_text_field( $atts['payment_monthly'] );
+    $payment_method   = sanitize_text_field( $atts['payment_method'] );
+    $payment_duration = sanitize_text_field( $atts['payment_duration'] );
     $intro_text       = sanitize_text_field( $atts['intro_text'] );
     $button_count     = in_array( $atts['button_count'], [ '1', '2' ], true ) ? (int) $atts['button_count'] : 2;
     $footer_text      = sanitize_text_field( $atts['footer_text'] );
