@@ -9006,7 +9006,7 @@ a.osn-tim-card--linked:hover {
 
 /* Each field wrapper: vertical stack with 12px padding top/bottom */
 .wsf-form .wsf-field-wrapper {
-  display: flex !important;
+  display: flex;
   flex-direction: column;
   gap: 6px;
   padding: 12px 0;
@@ -9022,7 +9022,37 @@ a.osn-tim-card--linked:hover {
   font-weight: 400 !important;
   line-height: 18px !important;
   color: #000 !important;
+  margin: 0 0 4px 0 !important;
+}
+
+/* Checkbox / radio rows: 16px gap between the control and its label */
+.wsf-form [data-row-checkbox],
+.wsf-form [data-row-radio] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.wsf-form [data-row-checkbox] input.wsf-field,
+.wsf-form [data-row-radio] input.wsf-field {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  float: none !important;
+  flex-shrink: 0;
   margin: 0 !important;
+}
+
+.wsf-form [data-row-checkbox] .wsf-label,
+.wsf-form [data-row-radio] .wsf-label {
+  padding-left: 0 !important;
+  margin: 0 !important;
+}
+
+.wsf-form [data-row-checkbox] .wsf-invalid-feedback,
+.wsf-form [data-row-radio] .wsf-invalid-feedback {
+  flex-basis: 100%;
 }
 
 /* Text inputs & email */
@@ -9067,8 +9097,15 @@ a.osn-tim-card--linked:hover {
   box-sizing: border-box !important;
 }
 
-/* Submit button */
+/* Submit button. The wrapper carries wsf-medium-9 (75% grid column),
+   so force it full width and center the button via flex. */
 .wsf-form .wsf-field-wrapper[data-type="submit"] {
+  width: 100% !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  align-items: center !important;
+  justify-content: center !important;
   text-align: center;
 }
 
@@ -9099,6 +9136,28 @@ a.osn-tim-card--linked:hover {
 }
 
 @media (max-width: 767px) {
+  /* Postani OsnaŽena — white box (#nalog row) side padding only */
+  .vc_row:has(> #nalog) {
+    padding-left: 16px;
+    padding-right: 16px;
+    box-sizing: border-box;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  form.wsf-form[data-id="4"] {
+    padding: 0 !important;
+  }
+
+  form.wsf-form[data-id="4"] .wsf-extra-small-12 {
+    padding: 0 !important;
+  }
+
+  form.wsf-form[data-id="4"] .select2-container {
+    width: 100% !important;
+    max-width: 100%;
+  }
+
   .wsf-form .wsf-button-primary,
   .wsf-form button[type="submit"] {
     width: 100%;
