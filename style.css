@@ -9663,7 +9663,13 @@ h2.osn-mission__title {
 }
 
 /* /blog archive */
+.osn-arc__card-btn svg {
+  display: none;
+}
 @media (max-width: 767px) {
+  .osn-arc__card-btn svg {
+    display: block;
+  }
   .osn-arc--blog .osn-arc__header {
     align-items: flex-start;
   }
@@ -9774,6 +9780,11 @@ h2.osn-mission__title {
     line-height: normal;
     gap: 8px;
   }
+
+  .osn-arc__card-btn svg {
+    display: none;
+  }
+
   .osn-arc__divider {
     width: 100%;
     background: #c6b08a;
@@ -9787,6 +9798,61 @@ h2.osn-mission__title {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+  }
+}
+
+/* /blog single */
+@media (max-width: 767px) {
+  .osn-single-post .osn-sp__sidebar {
+    display: none;
+  }
+  .osn-single-post .osn-sp__title {
+    color: #151367;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 1.92px;
+    margin-bottom: 16px;
+  }
+  .osn-single-post .osng-sed__date {
+    margin-bottom: 36px;
+  }
+  .osn-single-post .size-full {
+    margin-left: -24px;
+    margin-right: -24px;
+    margin-bottom: 24px;
+  }
+
+  .osn-single-post p {
+    color: #151367;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  .osn-single-post .wp-block-list li {
+    display: list-item;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .osn-single-post .osn-sp__content ul li::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    min-width: 10px;
+    background: var(--osn-color-secondary);
+    border-radius: 50%;
+    flex-shrink: 0;
+    width: 10px;
+    position: absolute;
+    left: 0;
+    top: 10px;
   }
 }
 
@@ -9913,6 +9979,14 @@ section.osnazene_section.no-gap {
   font-style: normal;
   font-weight: 600;
   line-height: 120%;
+}
+
+.mobile-h3fs-40-24 h3 {
+  font-size: 40px !important;
+}
+
+.osn-h3-mb-0 h3 {
+  margin-bottom: 0;
 }
 
 @media (max-width: 767px) {
@@ -10098,6 +10172,9 @@ section.osnazene_section.no-gap {
   .osn-mobile-text-align-to-right li {
     text-align: right;
   }
+  .mobile-h3fs-40-24 h3 {
+    font-size: 24px !important;
+  }
 }
 
 .osn-desktop-margin-top-60-px {
@@ -10120,6 +10197,17 @@ section.osnazene_section.no-gap {
   .osn-mobile-text-align-center h1,
   .osn-mobile-text-align-center h2 {
     text-align: center !important;
+  }
+}
+
+/* /contact */
+
+@media (max-width: 767px) {
+  .osn-contact__email-phone {
+    padding-top: 0;
+  }
+  .osn-contact__email-phone .vc_col-sm-6 {
+    width: 100%;
   }
 }
 

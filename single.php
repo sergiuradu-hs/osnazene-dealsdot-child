@@ -18,12 +18,15 @@ while ( have_posts() ) : the_post();
     $date_str = get_the_date( 'd.m.Y.' );
 ?>
 
-<section class="vc_section osnazene_section osn-sp">
+<section class="vc_section osnazene_section osn-sp osn-single-<?php echo esc_attr( get_post_type() ); ?>">
     <div class="container">
         <h1 class="osn-sp__title margin-bottom-60"><?php the_title(); ?></h1>
+        <?php if ( get_post_type() === 'post' ) : ?>
+            <span class="osng-sed__date"><?php echo esc_html( $date_str ); ?></span>
+        <?php endif; ?>
+        
 
         <div class="osn-sp__layout">
-
             <!-- Left info card -->
             <aside class="osn-sp__sidebar">
                 <div class="osn-sp__card">
