@@ -8034,6 +8034,10 @@ a.osn-link-list__label:focus {
 
 /* ── Mobile ── */
 @media (max-width: 767px) {
+
+  .osn-pkg-row-title h3 {
+    font-size: 24px;
+  }
   .osn-pkg-card {
     gap: 40px;
     padding: 16px 16px 28px;
@@ -8041,6 +8045,10 @@ a.osn-link-list__label:focus {
 
   .osn-package-cards-row > .wpb_column + .wpb_column {
     margin-top: 24px;
+  }
+
+  .osn-pkg-card__bullet {
+    font-size: 14px;
   }
 }
 
