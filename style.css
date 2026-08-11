@@ -821,6 +821,7 @@ header section.osnazene_section {
   font-style: normal;
   font-weight: 400;
   text-transform: uppercase;
+  align-items: center;
 }
 .osn-header__cta .header-cta-buttons .btn-block {
   display: inline-flex;
@@ -1958,6 +1959,10 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
 .osn-font-weight-600 span,
 .osn-font-weight-600 div {
   font-weight: 600 !important;
+}
+
+.osn-text-no-transform h2 {
+  text-transform: none;
 }
 
 .title-gold-color h1,
