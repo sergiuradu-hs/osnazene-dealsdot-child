@@ -410,14 +410,20 @@ add_action( 'wp_enqueue_scripts', function () {
             document.addEventListener( 'DOMContentLoaded', function() {
                 function sortArchiveCardsOnMobile() {
                     if ( window.innerWidth > 767 ) return;
-                    
                     const grid = document.querySelector( '.osn-arc__grid' );
-                    if ( ! grid ) return;
-                    
-                    const cards = Array.from( grid.querySelectorAll( '.osn-arc__card' ) );
+                    if ( !grid ) return;
+
+                    // Remove previously generated elements
+                    grid.querySelectorAll(
+                        '.osn-arc__divider, .osn-arc__najnovije'
+                    ).forEach( element => element.remove() );
+
+                    const cards = Array.from(
+                        grid.querySelectorAll( '.osn-arc__card' )
+                    );
+
                     const nagradeCards = [];
                     const otherCards = [];
-                    
                     // Separate tag-nagrade cards from others
                     cards.forEach( card => {
                         if ( card.classList.contains( 'tag-nagrade' ) ) {
@@ -426,45 +432,64 @@ add_action( 'wp_enqueue_scripts', function () {
                             otherCards.push( card );
                         }
                     } );
-                    
-                    // Rebuild grid: every 1st, 5th, 10th position gets tag-nagrade
+                    // Rebuild grid
                     const orderedCards = [];
                     let nagradeIdx = 0;
                     let otherIdx = 0;
                     let position = 0;
-                    
-                    while ( nagradeIdx < nagradeCards.length || otherIdx < otherCards.length ) {
+
+                    while (
+                        nagradeIdx < nagradeCards.length ||
+                        otherIdx < otherCards.length
+                    ) {
                         position++;
-                        if ( position % 5 === 1 && nagradeIdx < nagradeCards.length ) {
-                            orderedCards.push( nagradeCards[nagradeIdx++] );
+
+                        if (
+                            position % 5 === 1 &&
+                            nagradeIdx < nagradeCards.length
+                        ) {
+                            orderedCards.push(
+                                nagradeCards[nagradeIdx++]
+                            );
                         } else if ( otherIdx < otherCards.length ) {
-                            orderedCards.push( otherCards[otherIdx++] );
+                            orderedCards.push(
+                                otherCards[otherIdx++]
+                            );
                         } else if ( nagradeIdx < nagradeCards.length ) {
-                            orderedCards.push( nagradeCards[nagradeIdx++] );
+                            orderedCards.push(
+                                nagradeCards[nagradeIdx++]
+                            );
                         }
                     }
-                    
+
                     // Reorder DOM
-                    orderedCards.forEach((card, index) => {
+                    orderedCards.forEach( ( card, index ) => {
                         grid.appendChild( card );
 
-                         if (card.classList.contains('tag-nagrade')) {
-                            const divider = document.createElement('div');
+                        if ( card.classList.contains( 'tag-nagrade' ) ) {
+
+                            const divider = document.createElement( 'div' );
                             divider.className = 'osn-arc__divider';
-                            grid.appendChild(divider);
-                            if(index === 0){
-                                const latest = document.createElement('span');
+                            grid.appendChild( divider );
+
+                            if ( index === 0 ) {
+                                const latest = document.createElement( 'span' );
                                 latest.textContent = 'Najnovije';
                                 latest.className = 'osn-arc__najnovije';
-                                grid.appendChild(latest);
+                                grid.appendChild( latest );
                             }
                         }
                     } );
                 }
-    
-            sortArchiveCardsOnMobile();
-        window.addEventListener( 'resize', sortArchiveCardsOnMobile );
-    } );
-" );
+
+                sortArchiveCardsOnMobile();
+
+                window.addEventListener(
+                    'resize',
+                    sortArchiveCardsOnMobile
+                );
+
+            } );
+        " );
     }
 }, 20 );

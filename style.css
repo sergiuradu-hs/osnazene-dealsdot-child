@@ -10002,6 +10002,10 @@ section.osnazene_section.no-gap {
   margin-bottom: 0;
 }
 
+.wpb_content_element.osn-mt-54-0 {
+  margin-top: 54px !important;
+}
+
 @media (max-width: 767px) {
   .wpb_content_element.osn-mb-60-16 {
     margin-bottom: 16px !important;
@@ -10051,6 +10055,9 @@ section.osnazene_section.no-gap {
     margin-top: 24px !important;
   }
   .wpb_content_element.osn-mt-80-0 {
+    margin-top: 0px !important;
+  }
+  .wpb_content_element.osn-mt-54-0 {
     margin-top: 0px !important;
   }
   .wpb_content_element.osn-pt-0-0 {
@@ -10214,13 +10221,43 @@ section.osnazene_section.no-gap {
 }
 
 /* /contact */
+.osn-contact__socials {
+  margin-bottom: 80px;
+}
+
+.osn-contact__socials .wpb_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 74px;
+}
+
+.osn-contact__socials .osn-social-button {
+  margin: 0 !important;
+}
 
 @media (max-width: 767px) {
   .osn-contact__email-phone {
     padding-top: 0;
+    gap: 16px;
+    margin-bottom: 20px;
   }
   .osn-contact__email-phone .vc_col-sm-6 {
     width: 100%;
+  }
+  .osn-contact__socials .wpb_wrapper {
+    gap: unset;
+    justify-content: space-around;
+  }
+  .osn-contact__socials
+    .vc_btn3-container.osn-social-button
+    .vc_general.vc_btn3 {
+    flex-direction: column;
+    padding: 8px !important;
+    min-width: 99px;
+  }
+  .osn-contact__socials {
+    margin-bottom: 48px;
   }
 }
 
