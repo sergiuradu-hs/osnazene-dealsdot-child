@@ -1993,6 +1993,12 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
 .osn-prijava-title h2 {
   font-weight: 500;
 }
+
+@media (min-width: 768px) {
+  .osn-text-desktop-font-size-40-px {
+    font-size: 40px;
+  }
+}
 /* End of custom fonts */
 
 /* Custom Buttons */
@@ -9004,10 +9010,6 @@ a.osn-tim-card--linked:hover {
   --wsf-button-primary-font-family: "Montserrat", sans-serif;
   --wsf-button-primary-font-size: 16px;
   --wsf-button-primary-font-weight: 500;
-  /* Display */
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 }
 
 /* Remove grid/tile default spacing */
@@ -9019,12 +9021,8 @@ a.osn-tim-card--linked:hover {
 
 /* Each field wrapper: vertical stack with 12px padding top/bottom */
 .wsf-form .wsf-field-wrapper {
-  display: flex;
-  flex-direction: column;
   gap: 6px;
   padding: 12px 0;
-  width: 100% !important;
-  float: none !important;
 }
 
 /* Labels */
@@ -9151,8 +9149,8 @@ a.osn-tim-card--linked:hover {
 @media (max-width: 767px) {
   /* Postani OsnaŽena — white box (#nalog row) side padding only */
   .vc_row:has(> #nalog) {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
     box-sizing: border-box;
     margin-left: 0px;
     margin-right: 0px;
