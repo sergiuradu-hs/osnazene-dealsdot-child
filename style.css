@@ -8045,7 +8045,6 @@ a.osn-link-list__label:focus {
 
 /* ── Mobile ── */
 @media (max-width: 767px) {
-
   .osn-pkg-row-title h3 {
     font-size: 24px;
   }
@@ -10004,7 +10003,18 @@ section.osnazene_section.no-gap {
   margin-top: 54px !important;
 }
 
+.osn-mt-60-24 {
+  margin-top: 60px !important;
+}
+
+.wpb_content_element.osn-mb-24-0 {
+  margin-bottom: 24px !important;
+}
+
 @media (max-width: 767px) {
+  .osn-mt-60-24 {
+    margin-top: 24px !important;
+  }
   .wpb_content_element.osn-mb-60-16 {
     margin-bottom: 16px !important;
   }
@@ -10070,6 +10080,9 @@ section.osnazene_section.no-gap {
   .wpb_content_element.osn-mb-32-0 {
     margin-bottom: 0px !important;
   }
+  .wpb_content_element.osn-mb-24-0 {
+    margin-bottom: 0px !important;
+  }
   .vc_element.osn-mb-80-24 {
     margin-bottom: 24px !important;
   }
@@ -10092,6 +10105,10 @@ section.osnazene_section.no-gap {
     display: flex;
     flex-direction: column-reverse;
   }
+  .swap-on-mobile-inside-wrapper .wpb_wrapper {
+    display: flex;
+    flex-direction: column-reverse;
+  }
   .osn-h4mb-8 h4 {
     margin-bottom: 8px !important;
   }
@@ -10107,6 +10124,10 @@ section.osnazene_section.no-gap {
   .osn-gap-24 {
     gap: 24px;
   }
+  .osn-wrapper-gap-24 .wpb_wrapper {
+    gap: 24px;
+  }
+
   .osn-gap-0 {
     gap: 0px !important;
   }
@@ -10256,6 +10277,31 @@ section.osnazene_section.no-gap {
   }
   .osn-contact__socials {
     margin-bottom: 48px;
+  }
+}
+
+/* /press */
+.osn-press__video {
+  margin: 24px 0;
+}
+@media (max-width: 767px) {
+  .osn-press__video {
+    margin: 16px 0;
+  }
+}
+
+/* /fransiza */
+@media (max-width: 767px) {
+  .osn-fransiza__quote h3 {
+    color: #151367;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+  }
+  .osn-fransiza__form form {
+    padding: 16px;
   }
 }
 
