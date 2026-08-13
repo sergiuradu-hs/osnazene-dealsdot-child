@@ -1847,6 +1847,10 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
     margin-bottom: 16px;
   }
 
+  .osn-footer__menu-list a {
+    font-size: 14px;
+  }
+
   /* Newsletter card (mobile only, hidden >=768px via osn-hide-above-768) */
   .osn-footer__newsletter {
     border: 1px solid var(--osn-color-secondary);
@@ -1861,7 +1865,7 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
     margin: 0;
     color: var(--osn-color-secondary) !important;
     font-family: var(--osn-font-main);
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     text-align: center;
   }
@@ -1881,6 +1885,8 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
     border-radius: 0;
     max-width: none;
     overflow: visible;
+    margin: 0;
+    height: auto;
   }
   /* Input and button side by side, button aligned to the input's bottom edge */
   .osn-footer .osn-newsletter-widget__form {
@@ -1916,11 +1922,25 @@ footer .vc_btn3-container.vc_btn3-inline.vc_do_btn:not(:first-child) a {
   }
 
   .osn-footer__row--payments {
-    margin-top: 28px;
+    margin-top: 16px;
+    margin-bottom: 16px;
   }
+
+  .osn-footer__payments {
+    margin-top: 0px;
+  }
+
   .osn-footer__row--copyright .osn-footer__copyright {
     text-align: center;
     font-size: 12px;
+  }
+
+  .osn-footer__text,
+  .osn-footer__text p {
+    font-size: 14px;
+  }
+  .osn-footer__menu h3 {
+    font-size: 16px;
   }
 }
 
@@ -4244,6 +4264,7 @@ section.vc_section.home-page-second-section .wpb_single_image {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 12px;
+  margin-top: 12px;
 }
 
 .osn-newsletter-widget__form {
