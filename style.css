@@ -8978,6 +8978,8 @@ a.osn-tim-card--linked:hover {
   --wsf-form-border-radius: 12px;
   --wsf-form-padding-vertical: 34px;
   --wsf-form-padding-horizontal: 100px;
+  --wsf-form-padding-vertical-mobile: 16px;
+  --wsf-form-padding-horizontal-mobile: 16px;
   --wsf-form-font-family: "Montserrat", sans-serif;
   --wsf-form-font-size: 14px;
   --wsf-form-font-weight: 300;
@@ -9146,6 +9148,15 @@ a.osn-tim-card--linked:hover {
 }
 
 @media (max-width: 767px) {
+  .wsf-form {
+    padding: var(--wsf-form-padding-vertical-mobile)
+      var(--wsf-form-padding-horizontal-mobile) !important;
+  }
+
+  .wsf-form .wsf-field-wrapper {
+    margin-bottom: 0px !important;
+  }
+
   /* Postani OsnaŽena — white box (#nalog row) side padding only */
   .vc_row:has(> #nalog) {
     padding-left: 24px;
