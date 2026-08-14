@@ -62,6 +62,8 @@
         self.page = data.data.page;
         if (results) {
           results.innerHTML = data.data.html;
+          // Reapply current view after HTML update
+          self.setView(self.view);
           // Scroll results into view on mobile (if not in viewport)
           if (window.innerWidth < 768) {
             var top = results.getBoundingClientRect().top + window.scrollY - 16;

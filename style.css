@@ -5011,6 +5011,12 @@ section.vc_section.home-page-second-section .wpb_single_image {
    ========================================================================== */
 @media (max-width: 767px) {
   /* Hide desktop sidebar */
+  .osn-clanice-grid__modal-actions .btn-primary {
+  background: var(--osn-color-text);
+  color: var(--osn-color-white);
+  padding: 0 8px;
+}
+
   .osn-clanice-grid__sidebar {
     display: none;
   }
@@ -5134,6 +5140,13 @@ section.vc_section.home-page-second-section .wpb_single_image {
     height: 396px;
   }
 
+  .osn-clanice-card__tag{
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 2.1;
+  }
+
   .osn-clanice-card__badge {
     top: 126px; /* 164 - 38px overlap */
     right: 12px;
@@ -5236,6 +5249,9 @@ section.vc_section.home-page-second-section .wpb_single_image {
 }
 
 /* Gallery */
+#osn-clanica-preview-image{
+  max-height: 50vh;
+}
 .osn-clanica-single__gallery {
   display: flex;
   flex-direction: column;
