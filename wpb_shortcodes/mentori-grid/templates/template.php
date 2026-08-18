@@ -6,7 +6,7 @@
  *   $mentors – array of mentor data (id, name, link, uloga, cv_link, img_url)
  */
 ?>
-<section class="vc_section osnazene_section dark osn-mp-mentori">
+<section class="vc_section osnazene_section dark osn-mp-mentori osn-plr-0">
 
     <?php if ( ! empty( $mentors ) ) : ?>
     <div class="osn-mp-grid">

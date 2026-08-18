@@ -5012,10 +5012,10 @@ section.vc_section.home-page-second-section .wpb_single_image {
 @media (max-width: 767px) {
   /* Hide desktop sidebar */
   .osn-clanice-grid__modal-actions .btn-primary {
-  background: var(--osn-color-text);
-  color: var(--osn-color-white);
-  padding: 0 8px;
-}
+    background: var(--osn-color-text);
+    color: var(--osn-color-white);
+    padding: 0 8px;
+  }
 
   .osn-clanice-grid__sidebar {
     display: none;
@@ -5140,7 +5140,7 @@ section.vc_section.home-page-second-section .wpb_single_image {
     height: 396px;
   }
 
-  .osn-clanice-card__tag{
+  .osn-clanice-card__tag {
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -5249,7 +5249,7 @@ section.vc_section.home-page-second-section .wpb_single_image {
 }
 
 /* Gallery */
-#osn-clanica-preview-image{
+#osn-clanica-preview-image {
   max-height: 50vh;
 }
 .osn-clanica-single__gallery {
@@ -7450,6 +7450,18 @@ section.vc_section.home-page-second-section .wpb_single_image {
   width: 100%;
 }
 
+@media (max-width: 1560px) {
+  .osn-mp-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1152px) {
+  .osn-mp-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .osn-mp-card {
   background: var(--osn-color-text);
   box-shadow: 0 4px 19px #4b4999;
@@ -7734,7 +7746,7 @@ section.vc_section.home-page-second-section .wpb_single_image {
   }
 
   .osn-mp-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
 
   .osn-mp-card__photo-wrap {
@@ -7748,12 +7760,6 @@ section.vc_section.home-page-second-section .wpb_single_image {
 
   .osn-mp-cta-row {
     flex-direction: column;
-  }
-}
-
-@media (max-width: 480px) {
-  .osn-mp-grid {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -10059,9 +10065,39 @@ section.osnazene_section.no-gap {
   margin-bottom: 24px !important;
 }
 
+.osn-mtb-60-24 {
+  margin-top: 60px !important;
+  margin-bottom: 60px !important;
+}
+
+.osn-mb-32-24 {
+  margin-bottom: 32px !important;
+}
+
+.osn-btn-mb-80-24 {
+  margin-bottom: 80px !important;
+}
+
 @media (max-width: 767px) {
+  .osn-pl-15 ol {
+    padding-left: 15px !important;
+  }
+  .osn-pl-0 ul {
+    padding-left: 0px !important;
+  }
+  .osn-plr-0 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .osn-mb-32-24 {
+    margin-bottom: 24px !important;
+  }
   .osn-mt-60-24 {
     margin-top: 24px !important;
+  }
+  .osn-mtb-60-24 {
+    margin-top: 24px !important;
+    margin-bottom: 24px !important;
   }
   .wpb_content_element.osn-mb-60-16 {
     margin-bottom: 16px !important;
@@ -10132,6 +10168,9 @@ section.osnazene_section.no-gap {
     margin-bottom: 0px !important;
   }
   .vc_element.osn-mb-80-24 {
+    margin-bottom: 24px !important;
+  }
+  .osn-btn-mb-80-24 {
     margin-bottom: 24px !important;
   }
   .list-medium-padding li {
